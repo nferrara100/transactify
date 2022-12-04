@@ -9,12 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if the request is valid
     if (isset($_POST["username"]) && isset($_POST["password"])) {
         // Check if username and password match the username and password in .env
-        if ($_POST["username"] == getenv('USERNAME') && $_POST["username"] == getenv('PASSWORD')) {
+        if ($_POST["username"] == getenv('exampleUserEmail') && $_POST["password"] == getenv('exampleUserPassword')) {
             http_response_code(200);
+            // Set logged in cookie for 30 days
             setcookie("authToken", "true", time() + (86400 * 30), "/");
         } else {
             // If the username and password don't match return a status 401
-            echo json_encode($response);
             http_response_code(401);
         }
     }

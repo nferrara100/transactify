@@ -1,6 +1,16 @@
 "use strict";
 
+function cookieIsTrue(cookieName) {
+    const cookies = document.cookie.split(";");
+    return cookies.some((cookie) => cookie.trim() === cookieName + "=true");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    // if cookie authToken is set to true, then hide the login form
+    if (cookieIsTrue("authToken")) {
+        document.getElementById("login-form").classList.add("hidden");
+    }
+
     const form = document.querySelector("form.ajax");
     form.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -14,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         request.onload = function () {
             if (request.status == 200) {
-                window.location.href = "/";
+                form.classList.add("hidden");
             } else {
                 form.querySelector(".response").innerHTML =
                     "<p class='error'>Login failed.</p>";
@@ -23,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         request.onerror = function () {
+            form.querySelector(".response").innerHTML =
+                "<p class='error'>An error ocurred. Please try again.</p>";
             submitButton.disabled = false;
         };
     });
