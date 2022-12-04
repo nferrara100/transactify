@@ -1,13 +1,15 @@
 "use strict";
 
-function cookieIsTrue(cookieName) {
-    const cookies = document.cookie.split(";");
-    return cookies.some((cookie) => cookie.trim() === cookieName + "=true");
+function cookieExists(cookieName) {
+    // return true if cookie exists, false otherwise
+    return document.cookie.split(";").some(function (item) {
+        return item.trim().indexOf(cookieName + "=") == 0;
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     // if cookie authToken is set to true, then hide the login form
-    if (cookieIsTrue("authToken")) {
+    if (cookieExists("authToken")) {
         document.getElementById("login-form").classList.add("hidden");
     }
 

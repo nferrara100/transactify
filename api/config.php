@@ -1,13 +1,9 @@
 <?php
 
 $GLOBALS['config'] = array(
-    'password_algorithm' => PASSWORD_DEFAULT,
-    'user' => array(
-        'email' => getenv('exampleUserEmail'),
-        'password_hash' => getenv('exampleUserPasswordHash'),
-    ),
+    'partnerName' => getenv('partnerName'),
+    'partnerPassword' => getenv('partnerPassword'),
     'auth_cookie' => array(
-        'name' => 'authToken',
         'expiry' => 86400 * 30
     ),
 );
