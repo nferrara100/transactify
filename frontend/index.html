@@ -3,11 +3,18 @@
     <head>
         <meta charset="UTF-8" />
         <title>Expensify Take-Home Challenge</title>
-        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <link rel="stylesheet" type="text/css" href="/frontend/styles.css" />
     </head>
     <body>
-        <div id="loginContent">
-            <!-- Add your login form here -->
+        <div class="page">
+            <form action="/api/login.php" method="POST" class="ajax">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" autofocus />
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" />
+                <button type="submit">Login</button>
+                <div class="response"></div>
+            </form>
         </div>
 
         <div id="transactionTable">

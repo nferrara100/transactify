@@ -1,0 +1,18 @@
+/* pretty default text styling */
+body {
+    color: #333;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+/* pretty button styling */
+button {
+    background-color: #333;
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 0.5em 1em;
+}
