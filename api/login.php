@@ -1,4 +1,6 @@
 <?php
+require_once 'config.php';
+
 // Enable CORS
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -9,16 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if the request is valid
     if (isset($_POST["username"]) && isset($_POST["password"])) {
         // Check if username and password match the username and password in .env
-        if ($_POST["username"] == getenv('exampleUserEmail') && $_POST["password"] == getenv('exampleUserPassword')) {
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $passwordHash = password_hash($_POST["password"], $GLOBALS['config']['password_algorithm']);
+        if ($email == $GLOBALS['config']['user']["email"] && $passwordHash == $GLOBALS['config']['user']["password_hash"]) {
             http_response_code(200);
-            // Set logged in cookie for 30 days
-            setcookie("authToken", "true", time() + (86400 * 30), "/");
+            // Set logged in cookie
+            setcookie($GLOBALS['config']['auth_cookie']["name"], "true", time() + ($GLOBALS['config']['auth_cookie']["expiry"]), "/");
         } else {
             // If the username and password don't match return a status 401
             http_response_code(401);
         }
-    }
-    else {
+    } else {
         http_response_code(400);
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
