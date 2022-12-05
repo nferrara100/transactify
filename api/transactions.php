@@ -6,6 +6,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Content-Type: application/json; charset=UTF-8");
+
 // Handle the request
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_COOKIE["authToken"])) {
@@ -39,12 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         // Decode the response
         $json_response = json_decode($response, true);
-        if ($json_response["jsonCode"] === 403) {
-            http_response_code(403);
+
+        if ($json_response["jsonCode"] === 407) {
+            http_response_code(401);
             echo json_encode(
                 array(
-                    "error" => "Forbidden",
-                    "message" => "You cannot call this endpoint without logging in."
+                    "error" => "Auth token not valid",
+                    "message" => "Please log in again."
                 )
             );
             exit();
