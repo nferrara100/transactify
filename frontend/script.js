@@ -8,36 +8,38 @@ function cookieExists(cookieName) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // if cookie authToken is set to true, then hide the login form
+    // if cookie authToken exists, then hide the login form
     if (cookieExists("authToken")) {
         document.getElementById("login-form").classList.add("hidden");
     }
 
-    const form = document.querySelector("form.ajax");
-    form.addEventListener("submit", function (event) {
+    const loginForm = document.querySelector("form.ajax");
+    loginForm.addEventListener("submit", function (event) {
         event.preventDefault();
-        const submitButton = form.querySelector('button[type="submit"]');
+        const submitButton = loginForm.querySelector('button[type="submit"]');
         submitButton.disabled = true;
 
-        const formData = new FormData(form);
-        const request = new XMLHttpRequest();
-        request.open("POST", "/api/login.php", true);
-        request.send(formData);
-
-        request.onload = function () {
-            if (request.status == 200) {
-                form.classList.add("hidden");
-            } else {
-                form.querySelector(".response").innerHTML =
-                    "<p class='error'>Login failed.</p>";
-                submitButton.disabled = false;
-            }
-        };
-
-        request.onerror = function () {
-            form.querySelector(".response").innerHTML =
-                "<p class='error'>An error ocurred. Please try again.</p>";
+        const triggerError = () => {
+            loginForm.querySelector(".response").innerHTML =
+                "<p class='error'>Something went wrong. Please try again.</p>";
             submitButton.disabled = false;
         };
+
+        fetch("/api/login.php", {
+            method: "POST",
+            body: new FormData(loginForm),
+        })
+            .then((data) => {
+                if (data.status === 200) {
+                    loginForm.classList.add("hidden");
+                } else if (data.status === 401) {
+                    loginForm.querySelector(".response").innerHTML =
+                        "<p class='error'>Login failed.</p>";
+                    submitButton.disabled = false;
+                } else {
+                    triggerError();
+                }
+            })
+            .catch(triggerError);
     });
 });
