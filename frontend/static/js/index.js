@@ -14,15 +14,21 @@ if (cookieExists("authToken")) {
             console.log(data.transactions);
             for (const transaction of data.transactions) {
                 const tr = document.createElement("tr");
-                const td1 = document.createElement("td");
-                td1.innerHTML = transaction.created;
-                const td2 = document.createElement("td");
-                td2.innerHTML = transaction.merchant;
-                const td3 = document.createElement("td");
-                td3.innerHTML = transaction.amount;
-                tr.appendChild(td1);
-                tr.appendChild(td2);
-                tr.appendChild(td3);
+                const date = document.createElement("td");
+                date.innerHTML = transaction.created;
+                const merchant = document.createElement("td");
+                merchant.innerHTML = transaction.merchant;
+                const amount = document.createElement("td");
+                const formattedAmount = (transaction.amount / 100).toLocaleString(
+                    undefined,
+                    {
+                        minimumFractionDigits: 2,
+                    },
+                );
+                amount.innerHTML = formattedAmount + " " + transaction.currency;
+                tr.appendChild(date);
+                tr.appendChild(merchant);
+                tr.appendChild(amount);
                 document.getElementById("transactionTableBody").appendChild(tr);
             }
             document.querySelectorAll(".loading-ring").forEach((element) => {
