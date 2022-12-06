@@ -1,5 +1,7 @@
 "use strict";
 
+import {addTransactionDetailsClick} from "./transaction_details.js";
+
 function cookieExists(cookieName) {
     // return true if cookie exists, false otherwise
     return document.cookie.split(";").some(function (item) {
@@ -8,6 +10,11 @@ function cookieExists(cookieName) {
 }
 
 const transactions = {};
+
+function getTransaction(transactionID) {
+    return transactions[transactionID];
+}
+addTransactionDetailsClick(getTransaction);
 
 if (cookieExists("authToken")) {
     fetch("/api/transactions.php")
