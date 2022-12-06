@@ -18,8 +18,15 @@
         </div>
 
         <div id="transactionTable">
-            <h1>Transactions:</h1>
-            <table>
+            <h1>Transactions</h1>
+
+            <div class="loading-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <table id="transactions" class="hidden">
                 <thead>
                     <tr>
                         <th>Transaction Date</th>
@@ -28,9 +35,7 @@
                     </tr>
                 </thead>
 
-                <tbody id="transactionTableBody">
-                    <!-- Add the transaction rows here -->
-                </tbody>
+                <tbody id="transactionTableBody"></tbody>
             </table>
         </div>
 

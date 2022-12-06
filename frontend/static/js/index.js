@@ -7,6 +7,31 @@ function cookieExists(cookieName) {
     });
 }
 
+if (cookieExists("authToken")) {
+    fetch("/api/transactions.php")
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data.transactions);
+            for (const transaction of data.transactions) {
+                const tr = document.createElement("tr");
+                const td1 = document.createElement("td");
+                td1.innerHTML = transaction.created;
+                const td2 = document.createElement("td");
+                td2.innerHTML = transaction.merchant;
+                const td3 = document.createElement("td");
+                td3.innerHTML = transaction.amount;
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                document.getElementById("transactionTableBody").appendChild(tr);
+            }
+            document.querySelectorAll(".loading-ring").forEach((element) => {
+                element.classList.add("hidden");
+            });
+            document.getElementById("transactions").classList.remove("hidden");
+        });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     // if cookie authToken exists, then hide the login form
     if (cookieExists("authToken")) {
