@@ -7,13 +7,16 @@ function cookieExists(cookieName) {
     });
 }
 
+const transactions = {};
+
 if (cookieExists("authToken")) {
     fetch("/api/transactions.php")
         .then((response) => response.json())
         .then((data) => {
-            console.log(data.transactions);
             for (const transaction of data.transactions) {
+                transactions[transaction.transactionID] = transaction;
                 const tr = document.createElement("tr");
+                tr.setAttribute("key", transaction.transactionID);
                 const date = document.createElement("td");
                 date.innerHTML = transaction.created;
                 const merchant = document.createElement("td");
