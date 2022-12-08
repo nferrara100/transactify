@@ -34,9 +34,7 @@ class LoginEndpoint extends ProxyEndpoint
             exit();
         }
 
-        $expiry = time() * $GLOBALS['config']['auth_cookie']["expiry"];
-        $authToken = $json_response["authToken"];
-        setcookie("authToken", $authToken, $expiry, "/");
+        $this->updateLogin($json_response["authToken"]);
         http_response_code(200);
     }
 }

@@ -74,4 +74,9 @@ class ProxyEndpoint extends Endpoint
         return $json_response;
     }
 
+    protected function updateLogin($authToken)
+    {
+        $expiry = time() * $GLOBALS['config']['auth_cookie']["expiry"];
+        setcookie("authToken", $authToken, $expiry, "/");
+    }
 }
