@@ -9,6 +9,10 @@ function cookieExists(cookieName) {
     });
 }
 
+function deleteCookie(cookieName) {
+    document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+}
+
 const transactions = {};
 
 function getTransaction(transactionID) {
@@ -52,7 +56,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // if cookie authToken exists, then hide the login form
     if (cookieExists("authToken")) {
         document.getElementById("login-form").classList.add("hidden");
+        document.getElementById("logout").classList.remove("hidden");
     }
+
+    const logoutButton = document.querySelector("#logout-button");
+    logoutButton.addEventListener("click", function (event) {
+        deleteCookie("authToken");
+        loginForm.classList.remove("hidden");
+        transactions = {};
+        document.getElementById("transactionTableBody").innerHTML = "";
+        document.querySelectorAll(".loading-ring").forEach((element) => {
+            element.classList.remove("hidden");
+        });
+        document.getElementById("transactions").classList.add("hidden");
+        document.getElementById("logout").classList.add("hidden");
+    });
 
     const loginForm = document.querySelector("form.ajax");
     loginForm.addEventListener("submit", function (event) {
@@ -71,12 +89,12 @@ document.addEventListener("DOMContentLoaded", () => {
             body: new FormData(loginForm),
         })
             .then((data) => {
+                submitButton.disabled = false;
                 if (data.status === 200) {
                     loginForm.classList.add("hidden");
                 } else if (data.status === 401) {
                     loginForm.querySelector(".response").innerHTML =
                         "<p class='error'>Login failed.</p>";
-                    submitButton.disabled = false;
                 } else {
                     triggerError();
                 }
