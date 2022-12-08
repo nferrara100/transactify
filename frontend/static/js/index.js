@@ -2,17 +2,7 @@
 
 import {addTransactionDetailsClick} from "./transaction_details.js";
 import {Transactions} from "./transactions.js";
-
-function cookieExists(cookieName) {
-    // return true if cookie exists, false otherwise
-    return document.cookie.split(";").some(function (item) {
-        return item.trim().indexOf(cookieName + "=") == 0;
-    });
-}
-
-function deleteCookie(cookieName) {
-    document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-}
+import {cookieExists, deleteCookie} from "./cookies.js";
 
 const transactions = new Transactions();
 
