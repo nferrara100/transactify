@@ -1,6 +1,7 @@
 "use strict";
 
 import {addTransactionDetailsClick} from "./transaction_details.js";
+import {Transactions} from "./transactions.js";
 
 function cookieExists(cookieName) {
     // return true if cookie exists, false otherwise
@@ -13,19 +14,16 @@ function deleteCookie(cookieName) {
     document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 }
 
-const transactions = {};
+const transactions = new Transactions();
 
-function getTransaction(transactionID) {
-    return transactions[transactionID];
-}
-addTransactionDetailsClick(getTransaction);
+addTransactionDetailsClick(transactions.getTransaction);
 
 if (cookieExists("authToken")) {
     fetch("/api/transactions.php")
         .then((response) => response.json())
         .then((data) => {
             for (const transaction of data.transactions) {
-                transactions[transaction.transactionID] = transaction;
+                transactions.setTransaction(transaction);
                 const tr = document.createElement("tr");
                 tr.setAttribute("key", transaction.transactionID);
                 const date = document.createElement("td");
@@ -63,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutButton.addEventListener("click", function (event) {
         deleteCookie("authToken");
         loginForm.classList.remove("hidden");
-        transactions = {};
+        transactions.setTransactions({});
         document.getElementById("transactionTableBody").innerHTML = "";
         document.querySelectorAll(".loading-ring").forEach((element) => {
             element.classList.remove("hidden");
