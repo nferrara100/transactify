@@ -5,7 +5,6 @@ import {Transactions} from "./transactions.js";
 import {cookieExists, deleteCookie} from "./cookies.js";
 
 const transactions = new Transactions();
-
 addTransactionDetailsClick(transactions.getTransaction);
 
 if (cookieExists("authToken")) {
@@ -13,7 +12,7 @@ if (cookieExists("authToken")) {
         .then((response) => response.json())
         .then((data) => {
             for (const transaction of data.transactions) {
-                transactions.setTransaction(transaction);
+                transactions.addTransaction(transaction);
                 const tr = document.createElement("tr");
                 tr.setAttribute("key", transaction.transactionID);
                 const date = document.createElement("td");
