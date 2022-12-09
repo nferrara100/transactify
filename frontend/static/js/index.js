@@ -65,9 +65,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const submitButton = loginForm.querySelector('button[type="submit"]');
         submitButton.disabled = true;
 
-        const triggerError = () => {
-            loginForm.querySelector(".response").innerHTML =
-                "<p class='error'>Something went wrong. Please try again.</p>";
+        const triggerError = (message) => {
+            const text = message || "Something went wrong. Please try again.";
+            loginForm.querySelector(
+                ".response",
+            ).innerHTML = `<p class='error'>${text}</p>`;
             submitButton.disabled = false;
         };
 
@@ -80,8 +82,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (data.status === 200) {
                     loginForm.classList.add("hidden");
                 } else if (data.status === 401) {
-                    loginForm.querySelector(".response").innerHTML =
-                        "<p class='error'>Login failed.</p>";
+                    triggerError(
+                        "We couldn't recognize that username and password combination. Please try again.",
+                    );
+                } else if (data.status === 403) {
+                    data.json().then((json) => {
+                        if (json.cloudflare_error) {
+                            triggerError(
+                                "It's not presently possible to access the Expensify API because of a Cloudflare error. Please try again later.",
+                            );
+                        } else {
+                            triggerError();
+                        }
+                    });
                 } else {
                     triggerError();
                 }
