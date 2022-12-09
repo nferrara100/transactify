@@ -34,7 +34,6 @@ class LoginEndpoint extends ProxyEndpoint
             exit();
         }
 
-        $this->updateLogin($json_response["authToken"]);
         http_response_code(200);
     }
 }

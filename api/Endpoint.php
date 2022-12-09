@@ -57,7 +57,7 @@ class Endpoint
             exit();
         }
     }
-    
+
     protected function requirePOSTParameters($parameters)
     {
         foreach ($parameters as $parameter) {

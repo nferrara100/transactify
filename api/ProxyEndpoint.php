@@ -14,6 +14,7 @@ class ProxyEndpoint extends Endpoint
         CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => $method,
+        CURLOPT_COOKIEFILE => "",
         );
 
         $ch = curl_init();
@@ -32,6 +33,7 @@ class ProxyEndpoint extends Endpoint
             exit();
         }
 
+        $this->updateLogin($this->getCurlCookie($ch, "authToken"));
         $httpStatusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
@@ -95,8 +97,32 @@ class ProxyEndpoint extends Endpoint
         return $json_response;
     }
 
+    protected function getCurlCookie($ch, $cookieName)
+    {
+        // Get the cookie list from the most recent cURL response
+        $cookieData = curl_getinfo($ch, CURLINFO_COOKIELIST);
+
+        // Loop through the cookie list to find the cookie with the specified name
+        foreach ($cookieData as $cookie) {
+            // Split the cookie string into its component parts (name, value, etc.)
+            $parts = explode("\t", $cookie);
+
+            // Check if the cookie name matches the specified name
+            if ($parts[5] == $cookieName) {
+                // Return the value of the cookie
+                return $parts[6];
+            }
+        }
+
+        // If the cookie was not found, return null
+        return null;
+    }
+
     protected function updateLogin($authToken)
     {
+        if (!$authToken) {
+            return;
+        }
         $expiry = time() + $GLOBALS['config']['auth_cookie']["expiry"];
         setcookie("authToken", $authToken, $expiry, "/");
     }
