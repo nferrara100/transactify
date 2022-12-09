@@ -1,4 +1,4 @@
-export function addTransactionDetailsClick(getTransaction) {
+export function addTransactionDetailsClick(transactions) {
     const observer = new MutationObserver(function (mutations) {
         mutations.forEach(function (mutation) {
             const addedNodes = mutation.addedNodes;
@@ -7,7 +7,7 @@ export function addTransactionDetailsClick(getTransaction) {
                 if (node.nodeType === Node.ELEMENT_NODE) {
                     node.addEventListener("click", function (event) {
                         const transactionID = event.currentTarget.getAttribute("key");
-                        const transaction = getTransaction(transactionID);
+                        const transaction = transactions.getTransaction(transactionID);
                         const details = document.createElement("div");
                         details.classList.add("transaction-details");
                         details.innerHTML = getDetails(transaction);

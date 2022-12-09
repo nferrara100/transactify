@@ -5,7 +5,7 @@ import {Transactions} from "./transactions.js";
 import {cookieExists, deleteCookie} from "./cookies.js";
 
 const transactions = new Transactions();
-addTransactionDetailsClick(transactions.getTransaction);
+addTransactionDetailsClick(transactions);
 
 if (cookieExists("authToken")) {
     fetch("/api/transactions.php")
