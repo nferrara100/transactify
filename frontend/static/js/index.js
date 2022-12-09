@@ -99,6 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     triggerError();
                 }
             })
-            .catch(triggerError);
+            .catch(() => triggerError());
     });
 });
