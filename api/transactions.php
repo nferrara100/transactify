@@ -13,7 +13,12 @@ class TransactionsEndpoint extends ProxyEndpoint
             "authToken" => $_COOKIE["authToken"],
             "returnValueList" => "transactionList",
         );
-        $json_response = $this->fetch("GET", $onwardParameters);
+        if ($GLOBALS['config']['localTest']) {
+            $response = file_get_contents("../fixtures/get_success.json");
+            $json_response = json_decode($response, true);
+        } else {
+            $json_response = $this->fetch("GET", $onwardParameters);
+        }
 
         echo json_encode(
             array(
@@ -41,7 +46,12 @@ class TransactionsEndpoint extends ProxyEndpoint
             "amount" => $_POST["amount"],
             "merchant" => $_POST["merchant"],
         );
-        $json_response = $this->fetch("POST", $onwardParameters);
+        if ($GLOBALS['config']['localTest']) {
+            $response = file_get_contents("../fixtures/create_transaction_success.json");
+            $json_response = json_decode($response, true);
+        } else {
+            $json_response = $this->fetch("POST", $onwardParameters);
+        }
 
         echo json_encode(
             array(

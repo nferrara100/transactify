@@ -19,7 +19,13 @@ class LoginEndpoint extends ProxyEndpoint
             "partnerUserID" => filter_input(INPUT_POST, 'username', FILTER_SANITIZE_EMAIL),
             "partnerUserSecret" => $_POST["password"],
         );
-        $json_response = $this->fetch("POST", $onwardParameters);
+        if ($GLOBALS['config']['localTest']) {
+            $response = file_get_contents("../fixtures/authenticate_success.json");
+            $json_response = json_decode($response, true);
+            $this->updateLogin($json_response["authToken"]);
+        } else {
+            $json_response = $this->fetch("POST", $onwardParameters);
+        }
 
         // Return the same error regardless of why the login failed for security reasons
         // https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html#authentication-responses
