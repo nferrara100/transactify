@@ -6,12 +6,12 @@ export class NotFoundView extends BaseView {
         this.setTitle("Page Not Found");
     }
 
-    async getHtml() {
-        return `
+    async handleHtml() {
+        this.fillPage(`
             <h1>We could not find that page</h1>
             <p>
                 Please try again.
             </p>
-        `;
+        `);
     }
 }

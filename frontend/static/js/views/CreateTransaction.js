@@ -6,12 +6,12 @@ export class CreateTransaction extends BaseView {
         this.setTitle("Create Transaction");
     }
 
-    async getHtml() {
-        return `
+    async handleHtml() {
+        this.fillPage(`
             <h1>Create Transaction</h1>
             <p>
                 Form goes here.
             </p>
-        `;
+        `);
     }
 }

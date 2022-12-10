@@ -13,8 +13,8 @@ export class Login extends BaseView {
 
     endpoint = "/api/login.php";
 
-    async getHtml() {
-        return `
+    async handleHtml() {
+        this.fillPage(`
             <h1>Login</h1>
             <form action="/api/login.php" method="POST" class="ajax" id="login-form">
                 <label for="username">Username</label>
@@ -24,7 +24,7 @@ export class Login extends BaseView {
                 <button type="submit">Login</button>
                 <div class="response"></div>
             </form>
-        `;
+        `);
     }
 
     async execute() {

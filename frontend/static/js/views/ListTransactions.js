@@ -8,9 +8,9 @@ export class ListTransactions extends BaseView {
         this.setTitle("Home");
     }
 
-    async getHtml() {
+    async handleHtml() {
         const logoutButton = new LogoutButton(this.navigateTo, this.transaction);
-        return `
+        this.fillPage(`
             ${logoutButton.getHtml()}
             <div id="transactionTable">
                 <h1>Transactions</h1>
@@ -33,7 +33,7 @@ export class ListTransactions extends BaseView {
                     <tbody id="transactionTableBody"></tbody>
                 </table>
             </div>
-        `;
+        `);
     }
 
     async execute() {

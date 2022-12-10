@@ -12,12 +12,11 @@ export class BaseView {
     async show(navigateTo, transactions) {
         this.navigateTo = navigateTo;
         this.transactions = transactions;
-        const html = await this.getHtml();
-        this.fillPage(html);
+        await this.handleHtml();
         await this.execute();
     }
 
-    async getHtml() {
+    async handleHtml() {
         return "";
     }
 
