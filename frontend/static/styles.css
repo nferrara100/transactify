@@ -91,7 +91,6 @@ table td {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 2%; /* Vertical modal displacement of the modal */
     left: 0;
     top: 0;
     width: 100%;
@@ -102,7 +101,7 @@ table td {
 
 .modal-foreground {
     background-color: var(--almost-white);
-    margin: auto;
+    margin: 2% auto 2% auto;
     padding: 20px;
     border: 1px solid var(--border-grey);
     width: 80%;
