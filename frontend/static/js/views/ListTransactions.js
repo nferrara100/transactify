@@ -36,13 +36,13 @@ export class ListTransactions extends BaseView {
                     </table>
                 </div>
             `);
-            this.addTransactionObserver();
+            this.setObserver();
             await this.loadTransactions();
         }
     }
 
     async loadTransactions() {
-        const transactions = await this.transactions.listTransactions();
+        const transactions = await this.transactions.list();
         for (const transaction of Object.values(transactions)) {
             const tr = document.createElement("tr");
             tr.setAttribute("key", transaction.transactionID);
@@ -69,7 +69,7 @@ export class ListTransactions extends BaseView {
         document.getElementById("transactions").classList.remove("hidden");
     }
 
-    addTransactionObserver() {
+    setObserver() {
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
                 const addedNodes = mutation.addedNodes;

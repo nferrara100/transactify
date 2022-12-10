@@ -57,7 +57,7 @@ export class Login extends BaseView {
     onSubmitResult(data) {
         this.submitButton.disabled = false;
         if (data.status === 200) {
-            this.transactions.fetchTransactions();
+            this.transactions.fetch();
             this.navigateTo("/");
         } else if (data.status === 401) {
             this.triggerError(

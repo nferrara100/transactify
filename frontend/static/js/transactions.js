@@ -3,10 +3,10 @@ import {cookieExists} from "./cookies.js";
 export class Transactions {
     constructor() {
         this.transactions = {};
-        this.fetchTransactions();
+        this.fetch();
     }
 
-    async getTransaction(transactionID) {
+    async get(transactionID) {
         await Promise.race([this.fetchPromise]);
         if (this.transactions[transactionID] !== undefined) {
             return this.transactions[transactionID];
@@ -14,26 +14,26 @@ export class Transactions {
         throw new Error(`Transaction ${transactionID} not found`);
     }
 
-    async listTransactions() {
+    async list() {
         await Promise.race([this.fetchPromise]);
         return this.transactions;
     }
 
-    setTransactions(newTransactions) {
-        this.transactions = newTransactions;
+    wipe() {
+        this.transactions = {};
     }
 
-    addTransaction(transaction) {
+    set(transaction) {
         this.transactions[transaction.transactionID] = transaction;
     }
 
-    fetchTransactions() {
+    fetch() {
         if (cookieExists("authToken")) {
             this.fetchPromise = fetch("/api/transactions.php")
                 .then((response) => response.json())
                 .then((data) => {
                     for (const transaction of data.transactions) {
-                        this.addTransaction(transaction);
+                        this.set(transaction);
                     }
                 });
         }

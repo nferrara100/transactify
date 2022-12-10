@@ -8,7 +8,7 @@ export class ViewTransaction extends ListTransactions {
     }
 
     async handleHtml() {
-        this.transaction = await this.transactions.getTransaction(this.id);
+        this.transaction = await this.transactions.get(this.id);
         this.fillModal(`
             <h1>View Transaction</h1>
             <table>
