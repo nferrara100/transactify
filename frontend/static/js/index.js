@@ -6,6 +6,7 @@ import {CreateTransaction} from "./views/CreateTransaction.js";
 import {ListTransactions} from "./views/ListTransactions.js";
 import {Login} from "./views/Login.js";
 import {Logout} from "./views/Logout.js";
+import {NotFoundView} from "./views/NotFoundView.js";
 
 const transactions = new Transactions();
 
@@ -53,7 +54,7 @@ const router = async () => {
 
     if (!match) {
         match = {
-            route: routes[0],
+            route: {path: "/404", view: NotFoundView},
             result: [location.pathname],
         };
     }
