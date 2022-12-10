@@ -1,104 +1,80 @@
 "use strict";
 
-import {addTransactionDetailsClick} from "./transaction_details.js";
 import {Transactions} from "./transactions.js";
 import {cookieExists, deleteCookie} from "./cookies.js";
+import {CreateTransaction} from "./views/CreateTransaction.js";
+import {ListTransactions} from "./views/ListTransactions.js";
+import {Login} from "./views/Login.js";
+import {Logout} from "./views/Logout.js";
 
 const transactions = new Transactions();
-addTransactionDetailsClick(transactions);
 
-if (cookieExists("authToken")) {
-    fetch("/api/transactions.php")
-        .then((response) => response.json())
-        .then((data) => {
-            for (const transaction of data.transactions) {
-                transactions.addTransaction(transaction);
-                const tr = document.createElement("tr");
-                tr.setAttribute("key", transaction.transactionID);
-                const date = document.createElement("td");
-                date.innerHTML = transaction.created;
-                const merchant = document.createElement("td");
-                merchant.innerHTML = transaction.merchant;
-                const amount = document.createElement("td");
-                const formattedAmount = (transaction.amount / 100).toLocaleString(
-                    undefined,
-                    {
-                        minimumFractionDigits: 2,
-                    },
-                );
-                amount.innerHTML = formattedAmount + " " + transaction.currency;
-                tr.appendChild(date);
-                tr.appendChild(merchant);
-                tr.appendChild(amount);
-                document.getElementById("transactionTableBody").appendChild(tr);
-            }
-            document.querySelectorAll(".loading-ring").forEach((element) => {
-                element.classList.add("hidden");
-            });
-            document.getElementById("transactions").classList.remove("hidden");
-        });
-}
+const pathToRegex = (path) =>
+    new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
-document.addEventListener("DOMContentLoaded", () => {
-    // if cookie authToken exists, then hide the login form
-    if (cookieExists("authToken")) {
-        document.getElementById("login-form").classList.add("hidden");
-        document.getElementById("logout").classList.remove("hidden");
+const getParams = (match) => {
+    const values = match.result.slice(1);
+    const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map(
+        (result) => result[1],
+    );
+
+    return Object.fromEntries(
+        keys.map((key, i) => {
+            return [key, values[i]];
+        }),
+    );
+};
+
+const navigateTo = (url) => {
+    history.pushState(null, null, url);
+    router();
+};
+
+const router = async () => {
+    const routes = [
+        {path: "/", view: ListTransactions},
+        {path: "/login", view: Login},
+        {path: "/create", view: CreateTransaction},
+        // {path: "/transaction/:id", view: ViewTransaction},
+        {path: "/logout", view: Logout},
+    ];
+
+    // Test each route for potential match
+    const potentialMatches = routes.map((route) => {
+        return {
+            route: route,
+            result: location.pathname.match(pathToRegex(route.path)),
+        };
+    });
+
+    let match = potentialMatches.find(
+        (potentialMatch) => potentialMatch.result !== null,
+    );
+
+    if (!match) {
+        match = {
+            route: routes[0],
+            result: [location.pathname],
+        };
     }
 
-    const logoutButton = document.querySelector("#logout-button");
-    logoutButton.addEventListener("click", function (event) {
-        deleteCookie("authToken");
-        loginForm.classList.remove("hidden");
-        transactions.setTransactions({});
-        document.getElementById("transactionTableBody").innerHTML = "";
-        document.querySelectorAll(".loading-ring").forEach((element) => {
-            element.classList.remove("hidden");
-        });
-        document.getElementById("transactions").classList.add("hidden");
-        document.getElementById("logout").classList.add("hidden");
+    const view = new match.route.view(getParams(match));
+    view.show(navigateTo, transactions);
+};
+
+window.addEventListener("popstate", router);
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.addEventListener("click", (e) => {
+        if (e.target.matches("[ajax-link]")) {
+            e.preventDefault();
+            navigateTo(e.target.href);
+        }
     });
 
-    const loginForm = document.querySelector("form.ajax");
-    loginForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const submitButton = loginForm.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
-
-        const triggerError = (message) => {
-            const text = message || "Something went wrong. Please try again.";
-            loginForm.querySelector(
-                ".response",
-            ).innerHTML = `<p class='error'>${text}</p>`;
-            submitButton.disabled = false;
-        };
-
-        fetch("/api/login.php", {
-            method: "POST",
-            body: new FormData(loginForm),
-        })
-            .then((data) => {
-                submitButton.disabled = false;
-                if (data.status === 200) {
-                    loginForm.classList.add("hidden");
-                } else if (data.status === 401) {
-                    triggerError(
-                        "We couldn't recognize that username and password combination. Please try again.",
-                    );
-                } else if (data.status === 403) {
-                    data.json().then((json) => {
-                        if (json.cloudflare_error) {
-                            triggerError(
-                                "It's not presently possible to access the Expensify API because of a Cloudflare error. Please try again later.",
-                            );
-                        } else {
-                            triggerError();
-                        }
-                    });
-                } else {
-                    triggerError();
-                }
-            })
-            .catch(() => triggerError());
-    });
+    if (!cookieExists("authToken")) {
+        navigateTo("/login");
+    } else {
+        router();
+    }
 });
