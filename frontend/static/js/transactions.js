@@ -3,7 +3,7 @@ import {cookieExists} from "./cookies.js";
 export class Transactions {
     constructor() {
         this.transactions = {};
-        this.fetchPromise = this.fetchTransactions();
+        this.fetchTransactions();
     }
 
     async getTransaction(transactionID) {
@@ -27,9 +27,9 @@ export class Transactions {
         this.transactions[transaction.transactionID] = transaction;
     }
 
-    async fetchTransactions() {
+    fetchTransactions() {
         if (cookieExists("authToken")) {
-            await fetch("/api/transactions.php")
+            this.fetchPromise = fetch("/api/transactions.php")
                 .then((response) => response.json())
                 .then((data) => {
                     for (const transaction of data.transactions) {
