@@ -1,17 +1,18 @@
-import {BaseView} from "./BaseView.js";
+import {ListTransactions} from "./ListTransactions.js";
 
-export class CreateTransaction extends BaseView {
+export class CreateTransaction extends ListTransactions {
     constructor(params) {
         super(params);
         this.setTitle("Create Transaction");
     }
 
     async handleHtml() {
-        this.fillPage(`
+        this.fillModal(`
             <h1>Create Transaction</h1>
             <p>
                 Form goes here.
             </p>
         `);
+        super.handleHtml();
     }
 }

@@ -9,36 +9,37 @@ export class ListTransactions extends BaseView {
     }
 
     async handleHtml() {
-        const logoutButton = new LogoutButton(this.navigateTo, this.transaction);
-        this.fillPage(`
-            ${logoutButton.getHtml()}
-            <div id="transactionTable">
-                <h1>Transactions</h1>
+        if (!document.querySelector("#transactionTable")) {
+            const logoutButton = new LogoutButton(this.navigateTo, this.transaction);
+            this.fillPage(`
+                ${logoutButton.getHtml()}
+                <div id="transactionTable">
+                    <h1>Transactions</h1>
+                    <a href="/create" class="button" ajax-link>Create Transaction</a>
+                    <br /><br />
 
-                <div class="loading-ring">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div class="loading-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <table id="transactions" class="hidden">
+                        <thead>
+                            <tr>
+                                <th>Transaction Date</th>
+                                <th>Merchant</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="transactionTableBody"></tbody>
+                    </table>
                 </div>
-                <table id="transactions" class="hidden">
-                    <thead>
-                        <tr>
-                            <th>Transaction Date</th>
-                            <th>Merchant</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="transactionTableBody"></tbody>
-                </table>
-            </div>
-        `);
-    }
-
-    async execute() {
-        this.transactions.addLoadedCallback(this.onTransactionsLoaded.bind(this));
-        addTransactionDetailsClick(this.transactions);
+            `);
+            this.transactions.addLoadedCallback(this.onTransactionsLoaded.bind(this));
+            addTransactionDetailsClick(this.transactions);
+        }
     }
 
     onTransactionsLoaded() {

@@ -25,9 +25,7 @@ export class Login extends BaseView {
                 <div class="response"></div>
             </form>
         `);
-    }
 
-    async execute() {
         if (cookieExists("authToken")) {
             this.navigateTo("/");
         }

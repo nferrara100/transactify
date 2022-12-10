@@ -1,6 +1,10 @@
 :root {
     --spin-color: #6d2315;
     --text-color: #333;
+    --dimmed: rgba(0, 0, 0, 0.4);
+    --almost-white: #fefefe;
+    --background-grey: #aaaaaa;
+    --border-grey: #888;
 }
 
 body {
@@ -81,3 +85,45 @@ table td {
     }
 }
 /* End loading icon */
+
+/* CSS for the modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 5%; /* Vertical modal displacement of the modal */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--dimmed);
+}
+
+.modal-content {
+    background-color: var(--almost-white);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid var(--border-grey);
+    width: 80%;
+    border-radius: 15px;
+}
+
+.close {
+    color: var(--background-grey);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.block {
+    display: block;
+}
+/* End CSS for the modal */
