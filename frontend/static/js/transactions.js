@@ -3,18 +3,19 @@ import {cookieExists} from "./cookies.js";
 export class Transactions {
     constructor() {
         this.transactions = {};
-        this.loadedCallbacks = [];
-        this.fetchTransactions();
+        this.fetchPromise = this.fetchTransactions();
     }
 
-    getTransaction(transactionID) {
+    async getTransaction(transactionID) {
+        await Promise.race([this.fetchPromise]);
         if (this.transactions[transactionID] !== undefined) {
             return this.transactions[transactionID];
         }
         throw new Error(`Transaction ${transactionID} not found`);
     }
 
-    listTransactions() {
+    async listTransactions() {
+        await Promise.race([this.fetchPromise]);
         return this.transactions;
     }
 
@@ -26,20 +27,13 @@ export class Transactions {
         this.transactions[transaction.transactionID] = transaction;
     }
 
-    addLoadedCallback(callback) {
-        this.loadedCallbacks.push(callback);
-    }
-
-    fetchTransactions() {
+    async fetchTransactions() {
         if (cookieExists("authToken")) {
-            fetch("/api/transactions.php")
+            await fetch("/api/transactions.php")
                 .then((response) => response.json())
                 .then((data) => {
                     for (const transaction of data.transactions) {
                         this.addTransaction(transaction);
-                    }
-                    for (const callback of this.loadedCallbacks) {
-                        callback();
                     }
                 });
         }

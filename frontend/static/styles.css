@@ -127,3 +127,7 @@ table td {
     display: block;
 }
 /* End CSS for the modal */
+
+#transactionTableBody {
+    cursor: pointer;
+}

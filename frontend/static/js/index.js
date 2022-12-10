@@ -7,6 +7,7 @@ import {ListTransactions} from "./views/ListTransactions.js";
 import {Login} from "./views/Login.js";
 import {Logout} from "./views/Logout.js";
 import {NotFoundView} from "./views/NotFoundView.js";
+import {ViewTransaction} from "./views/ViewTransaction.js";
 
 const transactions = new Transactions();
 
@@ -36,7 +37,7 @@ const router = async () => {
         {path: "/", view: ListTransactions},
         {path: "/login", view: Login},
         {path: "/create", view: CreateTransaction},
-        // {path: "/transaction/:id", view: ViewTransaction},
+        {path: "/transaction/:id", view: ViewTransaction},
         {path: "/logout", view: Logout},
     ];
 

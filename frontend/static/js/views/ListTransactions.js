@@ -1,5 +1,4 @@
 import {LogoutButton} from "../LogoutButton.js";
-import {addTransactionDetailsClick} from "../transaction_details.js";
 import {BaseView} from "./BaseView.js";
 
 export class ListTransactions extends BaseView {
@@ -37,13 +36,13 @@ export class ListTransactions extends BaseView {
                     </table>
                 </div>
             `);
-            this.transactions.addLoadedCallback(this.onTransactionsLoaded.bind(this));
-            addTransactionDetailsClick(this.transactions);
+            this.addTransactionObserver();
+            await this.loadTransactions();
         }
     }
 
-    onTransactionsLoaded() {
-        const transactions = this.transactions.listTransactions();
+    async loadTransactions() {
+        const transactions = await this.transactions.listTransactions();
         for (const transaction of Object.values(transactions)) {
             const tr = document.createElement("tr");
             tr.setAttribute("key", transaction.transactionID);
@@ -68,5 +67,28 @@ export class ListTransactions extends BaseView {
             element.classList.add("hidden");
         });
         document.getElementById("transactions").classList.remove("hidden");
+    }
+
+    addTransactionObserver() {
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                const addedNodes = mutation.addedNodes;
+                addedNodes.forEach((node) => {
+                    // If the node is an element (and not text or something else)
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        node.addEventListener("click", (event) => {
+                            const transactionID =
+                                event.currentTarget.getAttribute("key");
+                            this.navigateTo("/transaction/" + transactionID);
+                        });
+                    }
+                });
+            });
+        });
+
+        const tableBody = document.querySelector("#transactionTableBody");
+        observer.observe(tableBody, {
+            childList: true,
+        });
     }
 }
