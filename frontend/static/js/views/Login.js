@@ -1,3 +1,4 @@
+import {cookieExists} from "../cookies.js";
 import {BaseView} from "./BaseView.js";
 
 export class Login extends BaseView {
@@ -27,6 +28,9 @@ export class Login extends BaseView {
     }
 
     async execute() {
+        if (cookieExists("authToken")) {
+            this.navigateTo("/");
+        }
         this.loginForm = document.querySelector("form.ajax");
         this.submitButton = this.loginForm.querySelector('button[type="submit"]');
         this.loginForm.addEventListener("submit", this.onSubmit.bind(this));
