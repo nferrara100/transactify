@@ -21,7 +21,9 @@ export class BaseView {
 
     fillModal(html) {
         document.querySelector("#modal-insert").innerHTML = html;
-        document.querySelector(".close").addEventListener("click", this.dismissModal);
+        document
+            .querySelector(".close")
+            .addEventListener("click", () => this.dismissModal());
         window.onclick = (event) => {
             if (event.target == document.getElementById("modal")) {
                 this.dismissModal();
