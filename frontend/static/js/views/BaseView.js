@@ -35,12 +35,7 @@ export class BaseView {
     dismissModal() {
         document.querySelector("#modal-insert").innerHTML = "";
         document.querySelector(".modal-background").classList.remove("block");
-        const previousState = history.state;
-        if (previousState && previousState.url === "/") {
-            history.go(-1);
-        } else {
-            this.navigateTo("/");
-        }
+        this.navigateTo("/");
     }
 
     fillPage(html) {
