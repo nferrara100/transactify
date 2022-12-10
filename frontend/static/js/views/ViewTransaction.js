@@ -101,9 +101,6 @@ export class ViewTransaction extends ListTransactions {
                 <td>${this.transaction.tag}</td>
             </tr>
             <tr>
-                <td>${this.transaction.transactionID}</td>
-            </tr>
-            <tr>
                 <td>Unverified</td>
                 <td>${this.transaction.unverified}</td>
             </tr>

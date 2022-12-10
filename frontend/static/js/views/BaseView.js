@@ -27,12 +27,12 @@ export class BaseView {
                 this.dismissModal();
             }
         };
-        document.querySelector(".modal").classList.add("block");
+        document.querySelector(".modal-background").classList.add("block");
     }
 
     dismissModal() {
         document.querySelector("#modal-insert").innerHTML = "";
-        document.querySelector(".modal").classList.remove("block");
+        document.querySelector(".modal-background").classList.remove("block");
         const previousState = history.state;
         if (previousState && previousState.url === "/") {
             history.go(-1);

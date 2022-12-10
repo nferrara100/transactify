@@ -87,11 +87,11 @@ table td {
 /* End loading icon */
 
 /* CSS for the modal */
-.modal {
+.modal-background {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 5%; /* Vertical modal displacement of the modal */
+    padding-top: 2%; /* Vertical modal displacement of the modal */
     left: 0;
     top: 0;
     width: 100%;
@@ -100,7 +100,7 @@ table td {
     background-color: var(--dimmed);
 }
 
-.modal-content {
+.modal-foreground {
     background-color: var(--almost-white);
     margin: auto;
     padding: 20px;
