@@ -20,6 +20,8 @@ class TransactionsEndpoint extends ProxyEndpoint
             $json_response = $this->fetch("GET", $onwardParameters);
         }
 
+        $this->check_for_misc_errors($json_response["jsonCode"]);
+
         echo json_encode(
             array(
                 "transactions" => $json_response["transactionList"]
@@ -52,6 +54,8 @@ class TransactionsEndpoint extends ProxyEndpoint
         } else {
             $json_response = $this->fetch("POST", $onwardParameters);
         }
+
+        $this->check_for_misc_errors($json_response["jsonCode"]);
 
         echo json_encode(
             array(

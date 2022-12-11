@@ -80,7 +80,15 @@ class ProxyEndpoint extends Endpoint
             exit();
         }
 
+        // Return the response
+        return $json_response;
+    }
+
+    protected function check_for_misc_errors($jsonCode)
+    {
         // Catch all other unexpected responses
+        // This is a separate method so that it does not override checks specific for
+        // each particular endpoint
         if ($jsonCode !== 200) {
             http_response_code(502);
             echo json_encode(
@@ -92,9 +100,6 @@ class ProxyEndpoint extends Endpoint
             );
             exit();
         }
-
-        // Return the response
-        return $json_response;
     }
 
     protected function getCurlCookie($ch, $cookieName)

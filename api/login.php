@@ -40,6 +40,8 @@ class LoginEndpoint extends ProxyEndpoint
             exit();
         }
 
+        $this->check_for_misc_errors($json_response["jsonCode"]);
+
         # Return something so that there is always a valid json response
         echo json_encode(
             array(
