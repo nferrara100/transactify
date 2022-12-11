@@ -40,6 +40,12 @@ class LoginEndpoint extends ProxyEndpoint
             exit();
         }
 
+        # Return something so that there is always a valid json response
+        echo json_encode(
+            array(
+                "status" => "success"
+            )
+        );
         http_response_code(200);
     }
 }
