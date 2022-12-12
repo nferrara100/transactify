@@ -1,8 +1,10 @@
+import {BaseView} from "./BaseView.js";
 import {ListTransactions} from "./ListTransactions.js";
 
-export class ViewTransaction extends ListTransactions {
+export class ViewTransaction extends BaseView {
     constructor(params) {
         super(params);
+        this.background = new ListTransactions();
         this.id = params.id;
         this.setTitle("View Transaction");
     }
@@ -15,7 +17,6 @@ export class ViewTransaction extends ListTransactions {
                 ${this.getDetails()}
             </table>
         `);
-        super.handleHtml();
     }
 
     getDetails() {

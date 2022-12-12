@@ -7,14 +7,14 @@ export class Login extends BaseFormView {
         this.setTitle("Login");
     }
 
-    formSelector = "#login-form";
+    formId = "#login-form";
 
     endpoint = "/api/login.php";
 
     async handleHtml() {
         this.fillPage(`
             <h1>Login</h1>
-            <form action="/api/login.php" method="POST" id="login-form">
+            <form action="${this.endpoint}" method="POST" id="${this.formId}">
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" autofocus />
                 <label for="password">Password</label>

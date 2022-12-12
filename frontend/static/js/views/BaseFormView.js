@@ -3,14 +3,14 @@ import {BaseView} from "./BaseView.js";
 export class BaseFormView extends BaseView {
     form;
 
-    formSelector;
+    formId;
 
     submitButton;
 
     endpoint;
 
     async handleHtml() {
-        this.form = document.querySelector(this.formSelector);
+        this.form = document.getElementById(this.formId);
         this.submitButton = this.form.querySelector('button[type="submit"]');
         this.form.addEventListener("submit", this.onSubmit.bind(this));
     }

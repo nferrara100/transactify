@@ -5,6 +5,10 @@ export class BaseView {
 
     navigateTo;
 
+    transactions;
+
+    background;
+
     setTitle(title) {
         document.title = title + " - Expensify Take-Home Challenge";
     }
@@ -12,6 +16,7 @@ export class BaseView {
     async show(navigateTo, transactions) {
         this.navigateTo = navigateTo;
         this.transactions = transactions;
+        this.background?.show(navigateTo, transactions);
         await this.handleHtml();
     }
 
