@@ -1,22 +1,20 @@
 import {cookieExists} from "../cookies.js";
-import {BaseView} from "./BaseView.js";
+import {BaseFormView} from "./BaseFormView.js";
 
-export class Login extends BaseView {
+export class Login extends BaseFormView {
     constructor(params) {
         super(params);
         this.setTitle("Login");
     }
 
-    loginForm;
-
-    submitButton;
+    formSelector = "#login-form";
 
     endpoint = "/api/login.php";
 
     async handleHtml() {
         this.fillPage(`
             <h1>Login</h1>
-            <form action="/api/login.php" method="POST" class="ajax" id="login-form">
+            <form action="/api/login.php" method="POST" id="login-form">
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" autofocus />
                 <label for="password">Password</label>
@@ -29,33 +27,11 @@ export class Login extends BaseView {
         if (cookieExists("authToken")) {
             this.navigateTo("/");
         }
-        this.loginForm = document.querySelector("form.ajax");
-        this.submitButton = this.loginForm.querySelector('button[type="submit"]');
-        this.loginForm.addEventListener("submit", this.onSubmit.bind(this));
+        await super.handleHtml();
     }
 
-    onSubmit(event) {
-        event.preventDefault();
-        this.submitButton.disabled = true;
-
-        fetch(this.endpoint, {
-            method: "POST",
-            body: new FormData(this.loginForm),
-        })
-            .then(this.onSubmitResult.bind(this))
-            .catch(() => this.triggerError());
-    }
-
-    triggerError(message) {
-        const text = message || "Something went wrong. Please try again.";
-        this.loginForm.querySelector(
-            ".response",
-        ).innerHTML = `<p class='error'>${text}</p>`;
-        this.submitButton.disabled = false;
-    }
-
-    onSubmitResult(data) {
-        this.submitButton.disabled = false;
+    async onSubmitResult(data) {
+        const json = await data.json();
         if (data.status === 200) {
             this.transactions.fetch();
             this.navigateTo("/");
@@ -63,16 +39,10 @@ export class Login extends BaseView {
             this.triggerError(
                 "We couldn't recognize that username and password combination. Please try again.",
             );
-        } else if (data.status === 403) {
-            data.json().then((json) => {
-                if (json.cloudflare_error) {
-                    this.triggerError(
-                        "It's not presently possible to access the Expensify API because of a Cloudflare error. Please try again later.",
-                    );
-                } else {
-                    this.triggerError();
-                }
-            });
+        } else if (data.status === 403 && json.cloudflare_error) {
+            this.triggerError(
+                "It's not presently possible to access the Expensify API because of a Cloudflare error. Please try again later.",
+            );
         } else {
             this.triggerError();
         }
