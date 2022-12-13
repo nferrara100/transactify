@@ -39,7 +39,7 @@ export class Login extends BaseFormView {
             this.triggerError(
                 "We couldn't recognize that username and password combination. Please try again.",
             );
-        } else if (data.status === 403 && json.cloudflare_error) {
+        } else if (json.cloudflare_error) {
             this.triggerError(
                 "It's not presently possible to access the Expensify API because of a Cloudflare error. Please try again later.",
             );
