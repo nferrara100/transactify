@@ -8,4 +8,4 @@ run:
 USERNAME = nferraradev
 HOST = 35.212.171.103
 deploy:
-	rsync -avz --delete --files-from <(git ls-files) . $(USERNAME)@$(HOST):/var/www/html/
+	rsync -avz --delete --files-from <(git ls-files) . $(USERNAME)@$(HOST):/var/www/expensify/
