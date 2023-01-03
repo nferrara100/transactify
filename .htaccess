@@ -1,30 +1,20 @@
 RewriteEngine On
 
-#Add trailing slash automatically
-RewriteCond %{REQUEST_URI} !(/$|\.)
-RewriteRule (.*) %{REQUEST_URI}/ [R=301,L]
+# Index SPA pages
+RewriteRule    ^login/?$            /index.php    [NC,L]
+RewriteRule    ^create/?$           /index.php    [NC,L]
+RewriteRule    ^transaction/?$      /index.php    [NC,L]
+RewriteRule    ^logout/?$           /index.php    [NC,L]
 
-#Index SPA pages
-RewriteRule    ^login/?$            /index.html     [NC,L]
-RewriteRule    ^create/?$           /index.html     [NC,L]
-RewriteRule    ^transaction/?$      /index.html     [NC,L]
-RewriteRule    ^logout/?$           /index.html     [NC,L]
-
-#Protect sensitive files
-<filesMatch ".(htaccess|htpasswd|ini|phps|fla|log|sh)$">
+# Protect sensitive files
+<filesMatch ".(htaccess|ini|conf)$">
 Order Allow,Deny
 Deny from all
 </filesMatch>
 
-#Error Documents
-ErrorDocument 400 /?e=400
-ErrorDocument 401 /?e=401
-ErrorDocument 403 /?e=403
-ErrorDocument 404 /?e=404
-ErrorDocument 405 /?e=405
-ErrorDocument 408 /?e=408
-ErrorDocument 414 /?e=414
-ErrorDocument 500 /?e=500
-ErrorDocument 502 /?e=502
-ErrorDocument 504 /?e=504
-ErrorDocument 508 /?e=508
+# Error Documents
+ErrorDocument 403 /index.php
+ErrorDocument 404 /index.php
+ErrorDocument 500 /index.php
+ErrorDocument 502 /index.php
+ErrorDocument 504 /index.php

@@ -6,7 +6,7 @@ import {CreateTransaction} from "./views/CreateTransaction.js";
 import {ListTransactions} from "./views/ListTransactions.js";
 import {Login} from "./views/Login.js";
 import {Logout} from "./views/Logout.js";
-import {NotFoundView} from "./views/NotFoundView.js";
+import {ErrorView} from "./views/ErrorView.js";
 import {ViewTransaction} from "./views/ViewTransaction.js";
 
 const transactions = new Transactions();
@@ -54,8 +54,11 @@ const router = async () => {
     );
 
     if (!match) {
+        window.statusCode = 404;
+    }
+    if (window.statusCode >= 400) {
         match = {
-            route: {path: "/404", view: NotFoundView},
+            route: {path: "/error", view: ErrorView},
             result: [location.pathname],
         };
     }
