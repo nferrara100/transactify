@@ -14,6 +14,10 @@ run:
 deploy:
 	rsync -avz --delete --files-from <(git ls-files) . $(USERNAME)@$(HOST):$(PROJECT_DIR)
 
+configure:
+	scp expensify.conf $(USERNAME)@$(HOST):/etc/apache2/sites-available/expensify.conf
+	$(SSH_HOST) "sudo service apache2 restart"
+
 ssh:
 	$(SSH_HOST)
 
