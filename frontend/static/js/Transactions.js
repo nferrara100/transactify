@@ -29,7 +29,7 @@ export class Transactions {
 
     fetch() {
         if (cookieExists("authToken")) {
-            this.fetchPromise = fetch("/api/transactions.php")
+            this.fetchPromise = fetch("/api/transaction.php")
                 .then((response) => response.json())
                 .then((data) => {
                     for (const transaction of data.transactions) {
