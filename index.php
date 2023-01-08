@@ -17,7 +17,7 @@
             </div>
         </div>
         <script>
-            window.statusCode = <?php echo json_encode($_SERVER['REDIRECT_STATUS']); ?>;
+            window.statusCode = <?php echo json_encode($_SERVER['REDIRECT_STATUS'] ?? null); ?>;
         </script>
         <script type="module" src="/frontend/static/js/index.js"></script>
     </body>
