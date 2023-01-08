@@ -30,7 +30,7 @@ export class CreateTransaction extends BaseFormView {
     }
 
     async onSubmitResult(data) {
-        if (data.status === 200) {
+        if (data.status === 201) {
             this.navigateTo("/");
         } else {
             this.triggerError();

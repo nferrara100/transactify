@@ -62,7 +62,7 @@ class TransactionsEndpoint extends ProxyEndpoint
                 "transactions" => $json_response["transactionList"]
             )
         );
-        http_response_code(200);
+        http_response_code(201);
     }
 }
 
