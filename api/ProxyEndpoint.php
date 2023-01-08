@@ -11,10 +11,10 @@ class ProxyEndpoint extends Endpoint
     {
         $url = $this->endpoint . "?" . http_build_query($parameters);
         $options = array(
-        CURLOPT_URL => $url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_CUSTOMREQUEST => $method,
-        CURLOPT_COOKIEFILE => "",
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_COOKIEFILE => "",
         );
 
         $ch = curl_init();
