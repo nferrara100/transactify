@@ -17,7 +17,7 @@ export class CreateTransaction extends BaseFormView {
             <h1>Record Transaction</h1>
             <form action="${this.endpoint}" method="POST" id="${this.formId}">
                 <label for="created">Date</label>
-                <input type="date" name="created" id="created" autofocus />
+                <input type="date" name="created" id="created" />
                 <label for="merchant">Merchant</label>
                 <input type="text" name="merchant" id="merchant" />
                 <label for="amount">Amount ($)</label>
@@ -26,6 +26,7 @@ export class CreateTransaction extends BaseFormView {
                 <div class="response"></div>
             </form>
         `);
+        document.getElementById("created").valueAsDate = new Date();
         super.handleHtml();
     }
 
