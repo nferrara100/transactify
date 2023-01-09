@@ -31,6 +31,7 @@ export class CreateTransaction extends BaseFormView {
 
     async onSubmitResult(data) {
         if (data.status === 201) {
+            this.dismissModal();
             this.navigateTo("/");
         } else {
             this.triggerError();
