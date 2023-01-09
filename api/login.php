@@ -42,13 +42,13 @@ class LoginEndpoint extends ProxyEndpoint
 
         $this->check_for_misc_errors($json_response["jsonCode"]);
 
+        http_response_code(200);
         # Return something so that there is always a valid json response
         echo json_encode(
             array(
                 "status" => "success"
             )
         );
-        http_response_code(200);
     }
 }
 
