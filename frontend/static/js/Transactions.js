@@ -35,6 +35,9 @@ export class Transactions {
                     for (const transaction of data.transactions) {
                         this.set(transaction);
                     }
+                })
+                .catch((error) => {
+                    alert("Could not load transactions. Please try again later.");
                 });
         }
     }
