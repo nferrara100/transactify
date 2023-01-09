@@ -5,12 +5,12 @@ export class ViewTransaction extends BaseView {
     constructor(params) {
         super(params);
         this.background = new ListTransactions();
-        this.id = params.id;
+        this.key = params.key;
         this.setTitle("View Transaction");
     }
 
     async handleHtml() {
-        this.transaction = await this.transactions.get(this.id);
+        this.transaction = await this.transactions.get(this.key);
         this.fillModal(`
             <h1>View Transaction</h1>
             <table>

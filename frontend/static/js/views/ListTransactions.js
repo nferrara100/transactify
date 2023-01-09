@@ -42,9 +42,10 @@ export class ListTransactions extends BaseView {
     async loadTransactions() {
         const transactions = await this.transactions.list();
         const tableBody = document.getElementById("transactionTableBody");
-        for (const transaction of Object.values(transactions)) {
+        for (let i = 0; i < transactions.length; i++) {
+            const transaction = transactions[i];
             const tr = document.createElement("tr");
-            tr.setAttribute("key", transaction.transactionID);
+            tr.setAttribute("key", i);
             const date = document.createElement("td");
             date.innerHTML = transaction.created;
             const merchant = document.createElement("td");
@@ -76,9 +77,9 @@ export class ListTransactions extends BaseView {
                     // If the node is an element (and not text or something else)
                     if (node.nodeType === Node.ELEMENT_NODE) {
                         node.addEventListener("click", (event) => {
-                            const transactionID =
+                            const transactionKey =
                                 event.currentTarget.getAttribute("key");
-                            this.navigateTo("/transaction/" + transactionID);
+                            this.navigateTo("/transaction/" + transactionKey);
                         });
                     }
                 });
