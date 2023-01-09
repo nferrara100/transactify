@@ -8,6 +8,9 @@ export class ListTransactions extends BaseView {
     }
 
     async handleHtml() {
+        if (!this.transactions.shouldRender()) {
+            return;
+        }
         const logoutButton = new LogoutButton(this.navigateTo, this.transaction);
         this.fillPage(`
             ${logoutButton.getHtml()}

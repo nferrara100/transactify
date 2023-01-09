@@ -3,6 +3,8 @@ import {cookieExists} from "./cookies.js";
 export class Transactions {
     constructor() {
         this.transactions = [];
+        this.revision = 1;
+        this.rendered = 0;
         this.fetch();
     }
 
@@ -21,6 +23,16 @@ export class Transactions {
 
     wipe() {
         this.transactions = [];
+        this.revision = 0;
+        this.rendered = 0;
+    }
+
+    shouldRender() {
+        if (this.rendered < this.revision) {
+            this.rendered++;
+            return true;
+        }
+        return false;
     }
 
     set(transaction) {
@@ -32,6 +44,7 @@ export class Transactions {
             i++;
         }
         this.transactions.splice(i, 0, transaction);
+        this.revision++;
     }
 
     fetch() {
