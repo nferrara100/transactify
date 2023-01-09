@@ -28,19 +28,13 @@ export class BaseView {
         document.querySelector("#modal-insert").innerHTML = html;
         document
             .querySelector(".close")
-            .addEventListener("click", () => this.dismissModal());
+            .addEventListener("click", () => this.navigateTo("/"));
         window.onclick = (event) => {
             if (event.target == document.getElementById("modal")) {
-                this.dismissModal();
+                this.navigateTo("/");
             }
         };
         document.querySelector(".modal-background").classList.add("block");
-    }
-
-    dismissModal() {
-        document.querySelector("#modal-insert").innerHTML = "";
-        document.querySelector(".modal-background").classList.remove("block");
-        this.navigateTo("/");
     }
 
     fillPage(html) {

@@ -8,6 +8,7 @@ import {Login} from "./views/Login.js";
 import {Logout} from "./views/Logout.js";
 import {ErrorView} from "./views/ErrorView.js";
 import {ViewTransaction} from "./views/ViewTransaction.js";
+import {clearModal} from "./modal.js";
 
 const transactions = new Transactions();
 
@@ -63,6 +64,7 @@ const router = async () => {
         };
     }
 
+    clearModal();
     const view = new match.route.view(getParams(match));
     view.show(navigateTo, transactions);
 };
