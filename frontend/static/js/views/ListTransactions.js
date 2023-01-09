@@ -8,41 +8,40 @@ export class ListTransactions extends BaseView {
     }
 
     async handleHtml() {
-        if (!document.querySelector("#transactionTable")) {
-            const logoutButton = new LogoutButton(this.navigateTo, this.transaction);
-            this.fillPage(`
-                ${logoutButton.getHtml()}
-                <div id="transactionTable">
-                    <h1>Transactions</h1>
-                    <a href="/create" class="button" ajax-link>Create Transaction</a>
-                    <br /><br />
+        const logoutButton = new LogoutButton(this.navigateTo, this.transaction);
+        this.fillPage(`
+            ${logoutButton.getHtml()}
+            <div id="transactionTable">
+                <h1>Transactions</h1>
+                <a href="/create" class="button" ajax-link>Create Transaction</a>
+                <br /><br />
 
-                    <div class="loading-ring">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                    <table id="transactions" class="hidden">
-                        <thead>
-                            <tr>
-                                <th>Transaction Date</th>
-                                <th>Merchant</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="transactionTableBody"></tbody>
-                    </table>
+                <div class="loading-ring">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
-            `);
-            this.setObserver();
-            await this.loadTransactions();
-        }
+                <table id="transactions" class="hidden">
+                    <thead>
+                        <tr>
+                            <th>Transaction Date</th>
+                            <th>Merchant</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="transactionTableBody"></tbody>
+                </table>
+            </div>
+        `);
+        this.setObserver();
+        await this.loadTransactions();
     }
 
     async loadTransactions() {
         const transactions = await this.transactions.list();
+        const tableBody = document.getElementById("transactionTableBody");
         for (const transaction of Object.values(transactions)) {
             const tr = document.createElement("tr");
             tr.setAttribute("key", transaction.transactionID);
@@ -61,7 +60,7 @@ export class ListTransactions extends BaseView {
             tr.appendChild(date);
             tr.appendChild(merchant);
             tr.appendChild(amount);
-            document.getElementById("transactionTableBody").appendChild(tr);
+            tableBody.appendChild(tr);
         }
         document.querySelectorAll(".loading-ring").forEach((element) => {
             element.classList.add("hidden");
@@ -86,7 +85,7 @@ export class ListTransactions extends BaseView {
             });
         });
 
-        const tableBody = document.querySelector("#transactionTableBody");
+        const tableBody = document.getElementById("transactionTableBody");
         observer.observe(tableBody, {
             childList: true,
         });
