@@ -16,7 +16,7 @@ export class ListTransactions extends BaseView {
             ${logoutButton.getHtml()}
             <div id="transactionTable">
                 <h1>Transactions</h1>
-                <a href="/create" class="button" ajax-link>Create Transaction</a>
+                <a href="/create" class="button" ajax-link>+ Create Transaction</a>
                 <br /><br />
 
                 <div class="loading-ring">
@@ -28,7 +28,7 @@ export class ListTransactions extends BaseView {
                 <table id="transactions" class="hidden">
                     <thead>
                         <tr>
-                            <th>Transaction Date</th>
+                            <th>Date</th>
                             <th>Merchant</th>
                             <th>Amount</th>
                         </tr>

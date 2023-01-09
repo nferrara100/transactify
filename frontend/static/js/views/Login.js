@@ -13,15 +13,17 @@ export class Login extends BaseFormView {
 
     async handleHtml() {
         this.fillPage(`
-            <h1>Login</h1>
-            <form action="${this.endpoint}" method="POST" id="${this.formId}">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" autofocus />
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" />
-                <button type="submit">Login</button>
-                <div class="response"></div>
-            </form>
+            <div class="login">
+                <h1>Login</h1>
+                <form action="${this.endpoint}" method="POST" id="${this.formId}">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" autofocus />
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" />
+                    <button type="submit">Login</button>
+                    <div class="response"></div>
+                </form>
+            </div>
         `);
 
         if (cookieExists("authToken")) {

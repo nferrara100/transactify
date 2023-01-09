@@ -5,11 +5,12 @@
     --almost-white: #fefefe;
     --background-grey: #aaaaaa;
     --border-grey: #888;
+    --default-fonts: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 body {
     color: var(--text-color);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: var(--default-fonts);
     font-size: 1em;
     line-height: 1.5;
 }
@@ -24,6 +25,7 @@ button,
     font-size: 1em;
     padding: 0.5em 1em;
     text-decoration: none;
+    float: right;
 }
 
 .hidden {
@@ -104,8 +106,10 @@ table td {
     margin: 2% auto 2% auto;
     padding: 20px;
     border: 1px solid var(--border-grey);
-    width: 80%;
+    /* width: 285px; */
+    width: 70%;
     border-radius: 15px;
+    overflow: hidden;
 }
 
 .close {
@@ -129,4 +133,25 @@ table td {
 
 #transactionTableBody {
     cursor: pointer;
+}
+
+input {
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    font-size: 1em;
+    padding: 0.5em 1em;
+    font-family: var(--default-fonts);
+    display: block;
+    margin-bottom: 1em;
+    margin-top: 0.2em;
+    width: 250px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.login {
+    width: 285px;
+    margin: auto;
 }
