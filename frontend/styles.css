@@ -7,6 +7,7 @@
     --dimmed: rgba(0, 0, 0, 0.4);
     --almost-white: #fefefe;
     --background-grey: #aaaaaa;
+    --even-grey: #f3f3f3;
     --border-grey: #888;
     --default-fonts: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -70,9 +71,13 @@ table th {
     overflow-wrap: break-word;
 }
 table td {
-    border-bottom: 1px solid var(--text-color);
+    border-bottom: 1px solid var(--background-grey);
     padding: 0.5em 1em;
     overflow-wrap: break-word;
+}
+
+#transactionTableBody tr:nth-child(even) {
+    background-color: var(--even-grey);
 }
 
 #transactionTableBody tr:hover {
@@ -234,4 +239,9 @@ label {
 #page {
     max-width: 1500px;
     margin: auto;
+}
+
+.amount {
+    text-align: right;
+    padding-right: 3%;
 }

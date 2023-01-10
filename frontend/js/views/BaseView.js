@@ -10,7 +10,7 @@ export class BaseView {
     background;
 
     setTitle(title) {
-        document.title = title + " - Expensify Take-Home Challenge";
+        document.title = title + " - Transactify Expense Management";
     }
 
     async show(navigateTo, transactions) {

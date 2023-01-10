@@ -34,7 +34,7 @@ export class ListTransactions extends BaseView {
                     <tr>
                         <th>Date</th>
                         <th>Merchant</th>
-                        <th>Amount</th>
+                        <th class="amount">Amount</th>
                     </tr>
                 </thead>
                 <tbody id="transactionTableBody"></tbody>
@@ -57,6 +57,7 @@ export class ListTransactions extends BaseView {
             const merchant = document.createElement("td");
             merchant.innerHTML = transaction.merchant;
             const amount = document.createElement("td");
+            amount.classList.add("amount");
             amount.innerHTML = formatCurrency(transaction.amount, transaction.currency);
             tr.appendChild(date);
             tr.appendChild(merchant);

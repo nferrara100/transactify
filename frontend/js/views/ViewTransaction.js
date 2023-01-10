@@ -55,7 +55,7 @@ export class ViewTransaction extends BaseView {
                 <td>${this.transaction.comment}</td>
             </tr>
             <tr>
-                <td>Created</td>
+                <td>Date</td>
                 <td>${new Date(this.transaction.created).toLocaleDateString()}</td>
             </tr>
             ${
