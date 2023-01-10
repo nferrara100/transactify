@@ -48,6 +48,10 @@ button:focus,
     background-color: #000;
 }
 
+.bottom-button {
+    margin-top: 20px;
+}
+
 .hidden {
     display: none;
 }

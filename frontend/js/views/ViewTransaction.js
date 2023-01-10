@@ -17,6 +17,7 @@ export class ViewTransaction extends BaseView {
             <table>
                 ${this.getDetails()}
             </table>
+            <a href="/" class="button bottom-button" ajax-link>Close</a>
         `);
     }
 
