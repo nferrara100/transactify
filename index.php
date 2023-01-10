@@ -4,8 +4,8 @@
     <head>
         <meta charset="UTF-8" />
         <title>Expensify Take-Home Challenge</title>
-        <link rel="stylesheet" type="text/css" href="/frontend/static/styles.css" />
-        <link rel="icon" href="/frontend/static/icon.svg" type="image/svg+xml" />
+        <link rel="stylesheet" type="text/css" href="/frontend/styles.css" />
+        <link rel="icon" href="/frontend/icon.svg" type="image/svg+xml" />
     </head>
 
     <body>
@@ -19,7 +19,7 @@
         <script>
             window.statusCode = <?php echo json_encode($_SERVER['REDIRECT_STATUS'] ?? null); ?>;
         </script>
-        <script type="module" src="/frontend/static/js/index.js"></script>
+        <script type="module" src="/frontend/js/index.js"></script>
     </body>
 
 </html>
