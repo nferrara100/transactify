@@ -12,8 +12,10 @@
         <div id="page"></div>
         <div id="modal" class="modal-background">
             <div class="modal-foreground">
-                <hr>
-                <span class="close">&times;</span>
+                <div class="modal-top">
+                    <hr>
+                    <span class="close">&times;</span>
+                </div>
                 <div id="modal-insert"></div>
             </div>
         </div>

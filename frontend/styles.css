@@ -153,20 +153,22 @@ table td {
     max-width: 365px;
 }
 
+.modal-top {
+    display: block;
+    overflow: auto;
+}
+
 hr {
     border: 0;
     height: 5px;
     width: 80%;
     float: left;
     background-image: linear-gradient(90deg, var(--bright-orange), transparent);
-    margin-right: 20%;
 }
 
 hr.invert {
     float: right;
     background-image: linear-gradient(270deg, var(--bright-orange), transparent);
-    margin-right: 0;
-    margin-left: 20%;
 }
 
 #bottom-hr {
@@ -176,8 +178,10 @@ hr.invert {
 .close {
     color: var(--background-grey);
     float: right;
-    font-size: 28px;
     font-weight: bold;
+    transform: scale(1.5);
+    font-size: 1.2em;
+    line-height: normal;
 }
 
 .close:hover,
