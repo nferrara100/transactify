@@ -50,16 +50,6 @@ export class ViewTransaction extends BaseView {
                 <td>Card Name</td>
                 <td>${this.transaction.cardName}</td>
             </tr>
-            ${
-                this.transaction.cardNumber
-                    ? `
-            <tr>
-                <td>Card Number</td>
-                <td>${this.transaction.cardNumber}</td>
-            </tr>
-                `
-                    : ""
-            }
             <tr>
                 <td>Category</td>
                 <td>${this.transaction.category}</td>
