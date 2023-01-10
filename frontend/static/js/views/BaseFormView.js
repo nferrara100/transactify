@@ -19,9 +19,15 @@ export class BaseFormView extends BaseView {
         event.preventDefault();
         this.submitButton.disabled = true;
 
+        const formData = new FormData(this.form);
+        const amount = formData.get("amount");
+        if (amount) {
+            const cents = Math.round((+amount + Number.EPSILON) * 100);
+            formData.set("amount", cents);
+        }
         fetch(this.endpoint, {
             method: "POST",
-            body: new FormData(this.form),
+            body: formData,
         })
             .then(this.invokeOnSubmitResult.bind(this))
             .catch((error) => this.triggerError(error));

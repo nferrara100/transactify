@@ -17,11 +17,11 @@ export class CreateTransaction extends BaseFormView {
             <h1>Create Transaction</h1>
             <form action="${this.endpoint}" method="POST" id="${this.formId}">
                 <label for="created">Date</label>
-                <input type="date" name="created" id="created" />
+                <input type="date" name="created" id="created" required/>
                 <label for="merchant">Merchant</label>
-                <input type="text" name="merchant" id="merchant" />
-                <label for="amount">Amount ($)</label>
-                <input type="number" name="amount" id="amount" step="any" />
+                <input type="text" name="merchant" id="merchant" placeholder="Small Pharaoh's Falafel" required/>
+                <label for="amount">Amount (USD)</label>
+                <input type="number" placeholder="132.78" name="amount" id="amount" step=".01" required/>
                 <button type="submit">Save</button>
                 <div class="response"></div>
             </form>
