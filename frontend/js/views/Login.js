@@ -14,12 +14,13 @@ export class Login extends BaseFormView {
     async handleHtml() {
         this.fillPage(`
             <div class="login">
+                <hr class="invert">
                 <h1>Login</h1>
                 <form action="${this.endpoint}" method="POST" id="${this.formId}">
                     <label for="username">Username</label>
-                    <input type="text" name="username" id="username" autofocus />
+                    <input type="text" name="username" id="username" autofocus required/>
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password" />
+                    <input type="password" name="password" id="password" required />
                     <button type="submit">Login</button>
                     <div class="response"></div>
                 </form>

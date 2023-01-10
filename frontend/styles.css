@@ -1,6 +1,9 @@
 :root {
-    --spin-color: #ff5023;
+    --bright-orange: #ff5023;
+    --medium-orange: #ff9812;
+    --light-orange: #f1edea;
     --text-color: #333;
+    --dimmed-text-color: rgb(82, 82, 82);
     --dimmed: rgba(0, 0, 0, 0.4);
     --almost-white: #fefefe;
     --background-grey: #aaaaaa;
@@ -17,8 +20,7 @@ body {
 
 button,
 .button {
-    background-color: var(--text-color);
-    border: 1px solid var(--text-color);
+    background-color: var(--bright-orange);
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
@@ -26,6 +28,24 @@ button,
     padding: 0.5em 1em;
     text-decoration: none;
     float: right;
+    transition: 0.3s;
+}
+
+button:hover,
+button:focus,
+.button:hover,
+.button:focus {
+    background-color: var(--medium-orange);
+}
+
+#logout-button {
+    background-color: var(--text-color);
+    margin-left: 12px;
+}
+
+#logout-button:hover,
+#logout-button:focus {
+    background-color: #000;
 }
 
 .hidden {
@@ -51,6 +71,14 @@ table td {
     overflow-wrap: break-word;
 }
 
+#transactionTableBody tr:hover {
+    background-color: var(--light-orange);
+}
+
+#transactionTableBody {
+    cursor: pointer;
+}
+
 /* Loading icon */
 .loading-ring {
     position: absolute;
@@ -64,10 +92,10 @@ table td {
     position: absolute;
     width: 5em;
     height: 5em;
-    border: 1em solid var(--spin-color);
+    border: 1em solid var(--bright-orange);
     border-radius: 50%;
     animation: loading-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: var(--spin-color) transparent transparent transparent;
+    border-color: var(--bright-orange) transparent transparent transparent;
 }
 .loading-ring div:nth-child(1) {
     animation-delay: -0.45s;
@@ -104,12 +132,29 @@ table td {
 .modal-foreground {
     background-color: var(--almost-white);
     margin: 2% auto 2% auto;
-    padding: 20px;
+    padding: 15px 20px 20px 20px;
     border: 1px solid var(--border-grey);
-    /* width: 285px; */
+    /* width: 335px; */
     width: 70%;
     border-radius: 15px;
     overflow: hidden;
+}
+
+hr {
+    border: 0;
+    height: 5px;
+    width: 80%;
+    float: left;
+    background-image: linear-gradient(90deg, var(--bright-orange), transparent);
+}
+
+hr.invert {
+    float: right;
+    background-image: linear-gradient(270deg, var(--bright-orange), transparent);
+}
+
+#bottom-hr {
+    margin: 25px 0 25px 0;
 }
 
 .close {
@@ -121,7 +166,7 @@ table td {
 
 .close:hover,
 .close:focus {
-    color: #000;
+    color: var(--bright-orange);
     text-decoration: none;
     cursor: pointer;
 }
@@ -130,10 +175,6 @@ table td {
     display: block;
 }
 /* End CSS for the modal */
-
-#transactionTableBody {
-    cursor: pointer;
-}
 
 input {
     border: 1px solid var(--text-color);
@@ -144,7 +185,7 @@ input {
     display: block;
     margin-bottom: 1em;
     margin-top: 0.2em;
-    width: 250px;
+    width: 300px;
 }
 
 label {
@@ -152,11 +193,37 @@ label {
 }
 
 .login {
-    width: 285px;
+    width: 335px;
     margin: auto;
 }
 
 .icon {
     display: inline-block;
     transform: scale(1.5);
+}
+
+.logo {
+    width: 4rem;
+    height: 4rem;
+}
+
+.title {
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.title-text {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 1.25em;
+    font-weight: italic;
+    color: var(--dimmed-text-color);
+}
+
+#page {
+    max-width: 1500px;
+    margin: auto;
 }

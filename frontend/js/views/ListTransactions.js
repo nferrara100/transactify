@@ -15,29 +15,31 @@ export class ListTransactions extends BaseView {
         const logoutButton = new LogoutButton(this.navigateTo, this.transaction);
         this.fillPage(`
             ${logoutButton.getHtml()}
-            <div id="transactionTable">
-                <h1>Transactions</h1>
-                <a href="/create" class="button" ajax-link>+ Create Transaction</a>
-                <br /><br />
-
-                <div class="loading-ring">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <table id="transactions" class="hidden">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Merchant</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="transactionTableBody"></tbody>
-                </table>
+            <div class="title">
+            <img src = "/frontend/icon.svg" alt="Logo" class="logo"/>
+            <span class="title-text">TRANSACTIFY</span>
+            <span class="subtitle">Manage your transactions. Easily.</span>
             </div>
+            <a href="/create" class="button" ajax-link>+ Create Transaction</a>
+
+            <div class="loading-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <table id="transactions" class="hidden">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Merchant</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionTableBody"></tbody>
+            </table>
+            <hr id="bottom-hr" class="invert hidden" />
         `);
         this.setObserver();
         await this.loadTransactions();
@@ -65,6 +67,7 @@ export class ListTransactions extends BaseView {
             element.classList.add("hidden");
         });
         document.getElementById("transactions").classList.remove("hidden");
+        document.getElementById("bottom-hr").classList.remove("hidden");
     }
 
     setObserver() {
