@@ -12,8 +12,10 @@ export class ViewTransaction extends BaseView {
 
     async handleHtml() {
         this.transaction = await this.transactions.get(this.key);
+        const date = new Date(this.transaction.created).toLocaleDateString();
         this.fillModal(`
-            <h1>View Transaction</h1>
+            <h1>${this.transaction.merchant}</h1>
+            <h2>(${date})</h2>
             <table>
                 ${this.getDetails()}
             </table>
@@ -30,10 +32,16 @@ export class ViewTransaction extends BaseView {
                     this.transaction.currency,
                 )}</td>
             </tr>
+            ${
+                this.transaction.bank
+                    ? `
             <tr>
                 <td>Bank</td>
                 <td>${this.transaction.bank}</td>
             </tr>
+                `
+                    : ""
+            }
             <tr>
                 <td>Billable</td>
                 <td>${toCheckbox(this.transaction.billable)}</td>
@@ -42,40 +50,54 @@ export class ViewTransaction extends BaseView {
                 <td>Card Name</td>
                 <td>${this.transaction.cardName}</td>
             </tr>
+            ${
+                this.transaction.cardNumber
+                    ? `
             <tr>
                 <td>Card Number</td>
                 <td>${this.transaction.cardNumber}</td>
             </tr>
-            <tr>
-                <td>Category</td>
-                <td>${this.transaction.category}</td>
-            </tr>
-            <tr>
-                <td>Comment</td>
-                <td>${this.transaction.comment}</td>
-            </tr>
-            <tr>
-                <td>Date</td>
-                <td>${new Date(this.transaction.created).toLocaleDateString()}</td>
-            </tr>
-            ${
-                this.transaction.currency !== "USD"
-                    ? `
-                <tr>
-                    <td>Converted Amount</td>
-                    <td>${formatCurrency(this.transaction.convertedAmount, "USD")}</td>
-                </tr>
-                <tr>
-                    <td>Currency Conversion Rate</td>
-                    <td>${this.transaction.currencyConversionRate}</td>
-                </tr>
                 `
                     : ""
             }
             <tr>
+                <td>Category</td>
+                <td>${this.transaction.category}</td>
+            </tr>
+            ${
+                this.transaction.comment
+                    ? `
+            <tr>
+                <td>Comment</td>
+                <td>${this.transaction.comment}</td>
+            </tr>
+                `
+                    : ""
+            }
+            ${
+                this.transaction.currency !== "USD"
+                    ? `
+            <tr>
+                <td>Converted Amount</td>
+                <td>${formatCurrency(this.transaction.convertedAmount, "USD")}</td>
+            </tr>
+            <tr>
+                <td>Currency Conversion Rate</td>
+                <td>${this.transaction.currencyConversionRate}</td>
+            </tr>
+                `
+                    : ""
+            }
+            ${
+                this.transaction.details
+                    ? `
+            <tr>
                 <td>Details</td>
                 <td>${this.transaction.details}</td>
             </tr>
+                `
+                    : ""
+            }
             <tr>
                 <td>Managed Card</td>
                 <td>${toCheckbox(this.transaction.managedCard)}</td>
@@ -85,10 +107,6 @@ export class ViewTransaction extends BaseView {
                 <td>${this.transaction.mcc}</td>
             </tr>
             <tr>
-                <td>Merchant</td>
-                <td>${this.transaction.merchant}</td>
-            </tr>
-            <tr>
                 <td>Receipt State</td>
                 <td>${this.transaction.receiptState}</td>
             </tr>
@@ -96,10 +114,16 @@ export class ViewTransaction extends BaseView {
                 <td>Reimbursable</td>
                 <td>${toCheckbox(this.transaction.reimbursable)}</td>
             </tr>
+            ${
+                this.transaction.tag
+                    ? `
             <tr>
                 <td>Tag</td>
                 <td>${this.transaction.tag}</td>
             </tr>
+                `
+                    : ""
+            }
             <tr>
                 <td>Unverified</td>
                 <td>${toCheckbox(this.transaction.unverified)}</td>
