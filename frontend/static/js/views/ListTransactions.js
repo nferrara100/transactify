@@ -1,3 +1,4 @@
+import {formatCurrency} from "../helpers.js";
 import {LogoutButton} from "../LogoutButton.js";
 import {BaseView} from "./BaseView.js";
 
@@ -50,17 +51,11 @@ export class ListTransactions extends BaseView {
             const tr = document.createElement("tr");
             tr.setAttribute("key", i);
             const date = document.createElement("td");
-            date.innerHTML = transaction.created;
+            date.innerHTML = new Date(transaction.created).toLocaleDateString();
             const merchant = document.createElement("td");
             merchant.innerHTML = transaction.merchant;
             const amount = document.createElement("td");
-            const formattedAmount = (transaction.amount / 100).toLocaleString(
-                undefined,
-                {
-                    minimumFractionDigits: 2,
-                },
-            );
-            amount.innerHTML = formattedAmount + " " + transaction.currency;
+            amount.innerHTML = formatCurrency(transaction.amount, transaction.currency);
             tr.appendChild(date);
             tr.appendChild(merchant);
             tr.appendChild(amount);

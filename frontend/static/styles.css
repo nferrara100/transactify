@@ -155,3 +155,8 @@ label {
     width: 285px;
     margin: auto;
 }
+
+.icon {
+    display: inline-block;
+    transform: scale(1.5);
+}

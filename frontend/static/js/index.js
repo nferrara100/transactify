@@ -8,7 +8,7 @@ import {Login} from "./views/Login.js";
 import {Logout} from "./views/Logout.js";
 import {ErrorView} from "./views/ErrorView.js";
 import {ViewTransaction} from "./views/ViewTransaction.js";
-import {clearModal} from "./modal.js";
+import {clearModal} from "./helpers.js";
 
 const transactions = new Transactions();
 
