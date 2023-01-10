@@ -23,7 +23,7 @@ export class Transactions {
 
     wipe() {
         this.transactions = [];
-        this.revision = 0;
+        this.revision = 1;
         this.rendered = 0;
     }
 
