@@ -14,7 +14,7 @@ export class CreateTransaction extends BaseFormView {
 
     async handleHtml() {
         this.fillModal(`
-            <h1>Record Transaction</h1>
+            <h1>Create Transaction</h1>
             <form action="${this.endpoint}" method="POST" id="${this.formId}">
                 <label for="created">Date</label>
                 <input type="date" name="created" id="created" />
