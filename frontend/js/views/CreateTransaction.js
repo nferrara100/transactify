@@ -13,7 +13,8 @@ export class CreateTransaction extends BaseFormView {
     endpoint = "/api/transaction.php";
 
     async handleHtml() {
-        this.fillModal(`
+        this.fillModal(
+            `
             <h1>Create Transaction</h1>
             <form action="${this.endpoint}" method="POST" id="${this.formId}">
                 <label for="created">Date</label>
@@ -25,7 +26,9 @@ export class CreateTransaction extends BaseFormView {
                 <button type="submit">Save</button>
                 <div class="response"></div>
             </form>
-        `);
+        `,
+            true,
+        );
         document.getElementById("created").valueAsDate = new Date();
         super.handleHtml();
     }

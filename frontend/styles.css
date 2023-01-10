@@ -134,10 +134,14 @@ table td {
     margin: 2% auto 2% auto;
     padding: 15px 20px 20px 20px;
     border: 1px solid var(--border-grey);
-    /* width: 335px; */
+    max-width: 900px;
     width: 70%;
     border-radius: 15px;
     overflow: hidden;
+}
+
+.small-modal {
+    max-width: 365px;
 }
 
 hr {
@@ -185,7 +189,7 @@ input {
     display: block;
     margin-bottom: 1em;
     margin-top: 0.2em;
-    width: 300px;
+    width: 330px;
 }
 
 label {
@@ -193,7 +197,7 @@ label {
 }
 
 .login {
-    width: 335px;
+    width: 365px;
     margin: auto;
 }
 

@@ -24,7 +24,7 @@ export class BaseView {
         return this.fillPage("");
     }
 
-    fillModal(html) {
+    fillModal(html, small) {
         document.querySelector("#modal-insert").innerHTML = html;
         document
             .querySelector(".close")
@@ -34,6 +34,12 @@ export class BaseView {
                 this.navigateTo("/");
             }
         };
+        const foreground = document.querySelector(".modal-foreground");
+        if (small) {
+            foreground.classList.add("small-modal");
+        } else {
+            foreground.classList.remove("small-modal");
+        }
         document.querySelector(".modal-background").classList.add("block");
     }
 
