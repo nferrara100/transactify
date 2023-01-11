@@ -13,8 +13,6 @@ class Endpoint
             $this->get();
         } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->post();
-        } else if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            $this->options();
         } else {
             $this->notAllowed();
         }
@@ -28,11 +26,6 @@ class Endpoint
     protected function post()
     {
         $this->notAllowed();
-    }
-
-    protected function options()
-    {
-        http_response_code(200);
     }
 
     protected function notAllowed()
