@@ -4,18 +4,9 @@ require_once 'Endpoint.php';
 
 class TransactionsEndpoint extends Endpoint
 {
-    protected function sanitizeTransactions($transactionList)
-    {
-        $transactionList = array_map(function ($transaction) {
-            unset($transaction["cardNumber"]);
-            return $transaction;
-        }, $transactionList);
-        return $transactionList;
-    }
-
     protected function get()
     {
-        $this->requireAuthentication();
+        requireAuthentication();
 
         $onwardParameters = array(
             "command" => "Get",
@@ -29,8 +20,8 @@ class TransactionsEndpoint extends Endpoint
             $json_response = $this->fetch("GET", $onwardParameters);
         }
 
-        $this->check_for_misc_errors($json_response["jsonCode"]);
-        $transactionList = $this->sanitizeTransactions($json_response["transactionList"]);
+        check_for_misc_errors($json_response["jsonCode"]);
+        $transactionList = sanitizeTransactions($json_response["transactionList"]);
 
         http_response_code(200);
         echo json_encode(
@@ -42,14 +33,14 @@ class TransactionsEndpoint extends Endpoint
 
     protected function post()
     {
-        $this->requireAuthentication();
+        requireAuthentication();
 
         $requiredParameters = array(
             'created',
             'amount',
             'merchant',
         );
-        $this->requirePOSTParameters($requiredParameters);
+        requirePOSTParameters($requiredParameters);
 
         $onwardParameters = array(
             "command" => "CreateTransaction",
@@ -65,8 +56,8 @@ class TransactionsEndpoint extends Endpoint
             $json_response = $this->fetch("POST", $onwardParameters);
         }
 
-        $this->check_for_misc_errors($json_response["jsonCode"]);
-        $transactionList = $this->sanitizeTransactions($json_response["transactionList"]);
+        check_for_misc_errors($json_response["jsonCode"]);
+        $transactionList = sanitizeTransactions($json_response["transactionList"]);
 
         http_response_code(201);
         echo json_encode(

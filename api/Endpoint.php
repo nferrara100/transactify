@@ -1,6 +1,7 @@
 <?php
 
 require_once 'config.php';
+require_once 'util.php';
 
 class Endpoint
 {
@@ -35,36 +36,6 @@ class Endpoint
         http_response_code(405);
     }
 
-    protected function requireAuthentication()
-    {
-        if (!isset($_COOKIE["authToken"])) {
-            http_response_code(401);
-            echo json_encode(
-                array(
-                    "error" => "Unauthorized",
-                    "message" => "You must be logged in to access this resource."
-                )
-            );
-            exit();
-        }
-    }
-
-    protected function requirePOSTParameters($parameters)
-    {
-        foreach ($parameters as $parameter) {
-            if (!isset($_POST[$parameter])) {
-                http_response_code(400);
-                echo json_encode(
-                    array(
-                        "error" => "Bad Request",
-                        "message" => "The parameter $parameter is required."
-                    )
-                );
-                exit();
-            }
-        }
-    }
-
     protected function fetch($method, $parameters)
     {
         $url = $this->proxyEndpoint . "?" . http_build_query($parameters);
@@ -91,7 +62,7 @@ class Endpoint
             exit();
         }
 
-        $this->updateLogin($this->getCurlCookie($ch, "authToken"));
+        updateLogin(getCurlCookie($ch, "authToken"));
         $httpStatusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
@@ -121,7 +92,6 @@ class Endpoint
             exit();
         }
 
-        // Decode the response
         $json_response = json_decode($response, true);
 
         $jsonCode = filter_var($json_response["jsonCode"], FILTER_VALIDATE_INT);
@@ -138,56 +108,6 @@ class Endpoint
             exit();
         }
 
-        // Return the response
         return $json_response;
     }
-
-    protected function check_for_misc_errors($jsonCode)
-    {
-        // Catch all other unexpected responses
-        // This is a separate method so that it does not override checks specific for
-        // each particular endpoint
-        if ($jsonCode !== 200) {
-            http_response_code(502);
-            echo json_encode(
-                array(
-                    "error" => "Internal Server Error",
-                    "message" => "A required API on another server returned an unexpected status code.",
-                    "api_status_code" => $jsonCode
-                )
-            );
-            exit();
-        }
-    }
-
-    protected function getCurlCookie($ch, $cookieName)
-    {
-        // Get the cookie list from the most recent cURL response
-        $cookieData = curl_getinfo($ch, CURLINFO_COOKIELIST);
-
-        // Loop through the cookie list to find the cookie with the specified name
-        foreach ($cookieData as $cookie) {
-            // Split the cookie string into its component parts (name, value, etc.)
-            $parts = explode("\t", $cookie);
-
-            // Check if the cookie name matches the specified name
-            if ($parts[5] == $cookieName) {
-                // Return the value of the cookie
-                return $parts[6];
-            }
-        }
-
-        // If the cookie was not found, return null
-        return null;
-    }
-
-    protected function updateLogin($authToken)
-    {
-        if (!$authToken) {
-            return;
-        }
-        $expiry = time() + $GLOBALS['config']['auth_cookie']["expiry"];
-        setcookie("authToken", $authToken, $expiry, "/");
-    }
-
 }

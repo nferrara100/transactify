@@ -1,6 +1,7 @@
 <?php
 require_once 'config.php';
 require_once 'Endpoint.php';
+require_once 'util.php';
 
 class LoginEndpoint extends Endpoint
 {
@@ -10,7 +11,7 @@ class LoginEndpoint extends Endpoint
             'username',
             'password',
         );
-        $this->requirePOSTParameters($requiredParameters);
+        requirePOSTParameters($requiredParameters);
 
         $onwardParameters = array(
             "command" => "Authenticate",
@@ -40,7 +41,7 @@ class LoginEndpoint extends Endpoint
             exit();
         }
 
-        $this->check_for_misc_errors($json_response["jsonCode"]);
+        check_for_misc_errors($json_response["jsonCode"]);
 
         http_response_code(200);
         # Return something so that there is always a valid json response
