@@ -44,12 +44,11 @@ export class ListTransactions extends BaseView {
     }
 
     async loadTransactions() {
-        const transactions = await this.transactions.list();
         const tableBody = document.getElementById("transactionTableBody");
-        for (let i = 0; i < transactions.length; i++) {
-            const transaction = transactions[i];
+        const transactions = await this.transactions.sorted("created", true);
+        for (const transaction of transactions) {
             const tr = document.createElement("tr");
-            tr.setAttribute("key", i);
+            tr.setAttribute("key", transaction.transactionID);
             const date = document.createElement("td");
             date.innerHTML = new Date(transaction.created).toLocaleDateString();
             const merchant = document.createElement("td");
