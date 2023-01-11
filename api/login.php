@@ -23,7 +23,7 @@ class LoginEndpoint extends Endpoint
         if ($GLOBALS['config']['localTest']) {
             $response = file_get_contents("../fixtures/authenticate_success.json");
             $json_response = json_decode($response, true);
-            $this->updateLogin($json_response["authToken"]);
+            updateLogin($json_response["authToken"]);
         } else {
             $json_response = $this->fetch("POST", $onwardParameters);
         }
