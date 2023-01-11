@@ -10,6 +10,7 @@
     --even-grey: #f3f3f3;
     --border-grey: #888;
     --default-fonts: Verdana, Geneva, Tahoma, sans-serif;
+    --hover-transition: 0.3s;
 }
 
 body {
@@ -29,7 +30,7 @@ button,
     padding: 0.5em 1em;
     text-decoration: none;
     float: right;
-    transition: 0.3s;
+    transition: var(--hover-transition);
 }
 
 button:hover,
@@ -46,7 +47,7 @@ button:focus,
 
 #logout-button:hover,
 #logout-button:focus {
-    background-color: #000;
+    background-color: var(--dimmed-text-color);
 }
 
 .bottom-button {
@@ -182,11 +183,12 @@ hr.invert {
     transform: scale(1.5);
     font-size: 1.2em;
     line-height: normal;
+    transition: var(--hover-transition);
 }
 
 .close:hover,
 .close:focus {
-    color: var(--bright-orange);
+    color: var(--text-color);
     text-decoration: none;
     cursor: pointer;
 }
