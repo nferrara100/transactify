@@ -1,4 +1,4 @@
-import {cookieExists} from "../cookies.js";
+import {cookieExists} from "../util.js";
 import {BaseFormView} from "./BaseFormView.js";
 
 export class Login extends BaseFormView {

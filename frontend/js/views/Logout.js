@@ -1,4 +1,4 @@
-import {deleteCookie} from "../cookies.js";
+import {deleteCookie} from "../util.js";
 import {BaseView} from "./BaseView.js";
 
 export class Logout extends BaseView {

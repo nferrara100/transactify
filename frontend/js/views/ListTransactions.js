@@ -1,4 +1,4 @@
-import {formatCurrency} from "../helpers.js";
+import {formatCurrency} from "../util.js";
 import {LogoutButton} from "../LogoutButton.js";
 import {BaseView} from "./BaseView.js";
 

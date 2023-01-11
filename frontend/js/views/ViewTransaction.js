@@ -1,6 +1,6 @@
 import {BaseView} from "./BaseView.js";
 import {ListTransactions} from "./ListTransactions.js";
-import {formatCurrency, toCheckbox} from "../helpers.js";
+import {formatCurrency, toCheckbox} from "../util.js";
 
 export class ViewTransaction extends BaseView {
     constructor(params) {

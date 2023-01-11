@@ -1,4 +1,4 @@
-import {cookieExists} from "./cookies.js";
+import {cookieExists} from "./util.js";
 
 export class Transactions {
     constructor() {
