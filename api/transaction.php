@@ -1,8 +1,8 @@
 <?php
 require_once 'config.php';
-require_once 'ProxyEndpoint.php';
+require_once 'Endpoint.php';
 
-class TransactionsEndpoint extends ProxyEndpoint
+class TransactionsEndpoint extends Endpoint
 {
     protected function sanitizeTransactions($transactionList)
     {
@@ -77,5 +77,5 @@ class TransactionsEndpoint extends ProxyEndpoint
     }
 }
 
-$endpoint = new TransactionsEndpoint();
-$endpoint->handle();
+$transactionsEndpoint = new TransactionsEndpoint();
+$transactionsEndpoint->handle();

@@ -1,8 +1,8 @@
 <?php
 require_once 'config.php';
-require_once 'ProxyEndpoint.php';
+require_once 'Endpoint.php';
 
-class LoginEndpoint extends ProxyEndpoint
+class LoginEndpoint extends Endpoint
 {
     protected function post()
     {
@@ -52,5 +52,5 @@ class LoginEndpoint extends ProxyEndpoint
     }
 }
 
-$endpoint = new LoginEndpoint();
-$endpoint->handle();
+$loginEndpoint = new LoginEndpoint();
+$loginEndpoint->handle();
