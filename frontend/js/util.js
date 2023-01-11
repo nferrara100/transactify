@@ -1,6 +1,5 @@
 export const clearModal = () => {
-    document.querySelector("#modal-insert").innerHTML = "";
-    document.querySelector(".modal-background").classList.remove("block");
+    document.querySelector("#modal").innerHTML = "";
 };
 
 export const formatCurrency = (amount, currency) => {

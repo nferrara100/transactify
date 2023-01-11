@@ -128,7 +128,7 @@ table td {
 
 /* CSS for the modal */
 .modal-background {
-    display: none;
+    display: block;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -191,10 +191,6 @@ hr.invert {
     color: var(--text-color);
     text-decoration: none;
     cursor: pointer;
-}
-
-.block {
-    display: block;
 }
 /* End CSS for the modal */
 

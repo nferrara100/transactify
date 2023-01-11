@@ -10,15 +10,7 @@
 
     <body>
         <div id="page"></div>
-        <div id="modal" class="modal-background">
-            <div class="modal-foreground">
-                <div class="modal-top">
-                    <hr>
-                    <span class="close">&times;</span>
-                </div>
-                <div id="modal-insert"></div>
-            </div>
-        </div>
+        <div id="modal"></div>
         <script>
             window.statusCode = <?php echo json_encode($_SERVER['REDIRECT_STATUS'] ?? null); ?>;
         </script>

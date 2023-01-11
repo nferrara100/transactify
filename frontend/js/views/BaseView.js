@@ -23,21 +23,18 @@ export class BaseView {
     }
 
     fillModal(html, small) {
-        document.querySelector("#modal-insert").innerHTML = html;
+        document.querySelector("#modal").innerHTML = `
+            <div class="modal-background">
+                <div class="modal-foreground ${small ? "small-modal" : ""}">
+                    <div class="modal-top">
+                        <hr>
+                        <span id="modal-close" class="close">&times;</span>
+                    </div>
+                    <div id="modal-insert">${html}</div>
+                </div>
+            </div>`;
         document
-            .querySelector(".close")
+            .querySelector("#modal-close")
             .addEventListener("click", () => this.navigateTo("/"));
-        window.onclick = (event) => {
-            if (event.target == document.getElementById("modal")) {
-                this.navigateTo("/");
-            }
-        };
-        const foreground = document.querySelector(".modal-foreground");
-        if (small) {
-            foreground.classList.add("small-modal");
-        } else {
-            foreground.classList.remove("small-modal");
-        }
-        document.querySelector(".modal-background").classList.add("block");
     }
 }
