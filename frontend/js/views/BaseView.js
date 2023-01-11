@@ -1,3 +1,5 @@
+import {fillPage} from "../util.js";
+
 export class BaseView {
     constructor(params) {
         this.params = params;
@@ -9,10 +11,6 @@ export class BaseView {
 
     background;
 
-    setTitle(title) {
-        document.title = title + " - Transactify Expense Management";
-    }
-
     async show(navigateTo, transactions) {
         this.navigateTo = navigateTo;
         this.transactions = transactions;
@@ -21,7 +19,7 @@ export class BaseView {
     }
 
     async handleHtml() {
-        return this.fillPage("");
+        return fillPage("");
     }
 
     fillModal(html, small) {
@@ -41,9 +39,5 @@ export class BaseView {
             foreground.classList.remove("small-modal");
         }
         document.querySelector(".modal-background").classList.add("block");
-    }
-
-    fillPage(html) {
-        document.querySelector("#page").innerHTML = html;
     }
 }

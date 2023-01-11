@@ -1,3 +1,4 @@
+import {setTitle} from "../util.js";
 import {BaseFormView} from "./BaseFormView.js";
 import {ListTransactions} from "./ListTransactions.js";
 
@@ -5,7 +6,7 @@ export class CreateTransaction extends BaseFormView {
     constructor(params) {
         super(params);
         this.background = new ListTransactions();
-        this.setTitle("Create Transaction");
+        setTitle("Create Transaction");
     }
 
     formId = "create-form";

@@ -30,3 +30,11 @@ export function cookieExists(cookieName) {
 export function deleteCookie(cookieName) {
     document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 }
+
+export const setTitle = (title) => {
+    document.title = title + " - Transactify Expense Management";
+};
+
+export const fillPage = (html) => {
+    document.querySelector("#page").innerHTML = html;
+};

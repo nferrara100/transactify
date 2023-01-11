@@ -1,12 +1,13 @@
+import {setTitle} from "../util.js";
 import {BaseView} from "./BaseView.js";
 
 export class ErrorView extends BaseView {
     constructor(params) {
         super(params);
         if (window.statusCode === 404) {
-            this.setTitle("Page Not Found");
+            setTitle("Page Not Found");
         } else {
-            this.setTitle("An Error Occurred");
+            setTitle("An Error Occurred");
         }
     }
 

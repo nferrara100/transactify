@@ -1,20 +1,18 @@
-import {formatCurrency} from "../util.js";
-import {LogoutButton} from "../LogoutButton.js";
+import {fillPage, formatCurrency, setTitle} from "../util.js";
 import {BaseView} from "./BaseView.js";
 
 export class ListTransactions extends BaseView {
     constructor(params) {
         super(params);
-        this.setTitle("Home");
+        setTitle("Home");
     }
 
     async handleHtml() {
         if (!this.transactions.shouldRender()) {
             return;
         }
-        const logoutButton = new LogoutButton(this.navigateTo, this.transaction);
-        this.fillPage(`
-            ${logoutButton.getHtml()}
+        fillPage(`
+            <a id="logout-button" class="button" ajax-link href="/logout">Logout</a>
             <div class="title">
             <img src = "/frontend/icon.svg" alt="Logo" class="logo"/>
             <span class="title-text">TRANSACTIFY</span>

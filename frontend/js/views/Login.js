@@ -1,10 +1,10 @@
-import {cookieExists} from "../util.js";
+import {cookieExists, fillPage, setTitle} from "../util.js";
 import {BaseFormView} from "./BaseFormView.js";
 
 export class Login extends BaseFormView {
     constructor(params) {
         super(params);
-        this.setTitle("Login");
+        setTitle("Login");
     }
 
     formId = "#login-form";
@@ -12,7 +12,7 @@ export class Login extends BaseFormView {
     endpoint = "/api/login.php";
 
     async handleHtml() {
-        this.fillPage(`
+        fillPage(`
             <div class="login">
                 <hr class="invert">
                 <h1>Login</h1>
