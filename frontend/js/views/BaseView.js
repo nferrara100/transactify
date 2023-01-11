@@ -1,10 +1,6 @@
 import {fillPage} from "../util.js";
 
 export class BaseView {
-    constructor(params) {
-        this.params = params;
-    }
-
     navigateTo;
 
     transactions;
