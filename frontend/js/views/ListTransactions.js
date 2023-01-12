@@ -30,22 +30,41 @@ export class ListTransactions extends BaseView {
             <table id="transactions" class="hidden">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Merchant</th>
-                        <th class="amount">Amount</th>
+                        <th class="created sortable-header" data-sort-dir="asc">Date</th>
+                        <th class="merchant sortable-header">Merchant</th>
+                        <th class="amount sortable-header">Amount</th>
                     </tr>
                 </thead>
                 <tbody id="transactionTableBody"></tbody>
             </table>
             <hr id="bottom-hr" class="invert hidden" />
         `);
-        this.setObserver();
+        document.querySelectorAll(".sortable-header").forEach((element) => {
+            element.addEventListener("click", (event) => this.onHeaderClick(event));
+        });
+
         await this.loadTransactions();
     }
 
+    onHeaderClick(event) {
+        const sortKey = event.currentTarget.classList[0];
+        const sortDir =
+            event.currentTarget.getAttribute("data-sort-dir") === "asc"
+                ? "desc"
+                : "asc";
+        document.querySelectorAll(".sortable-header").forEach((element) => {
+            element.removeAttribute("data-sort-dir");
+        });
+        event.currentTarget.setAttribute("data-sort-dir", sortDir);
+        this.transactions.orderBy(sortKey, sortDir);
+        this.loadTransactions();
+    }
+
     async loadTransactions() {
+        this.setObserver();
         const tableBody = document.getElementById("transactionTableBody");
-        const transactions = await this.transactions.sorted("created", true);
+        tableBody.innerHTML = "";
+        const transactions = await this.transactions.list();
         for (const transaction of transactions) {
             const tr = document.createElement("tr");
             tr.setAttribute("key", transaction.transactionID);

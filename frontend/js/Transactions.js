@@ -4,6 +4,8 @@ export class Transactions {
     constructor() {
         this.transactions = new Map();
         this.rendered = false;
+        this.sortKey = "created";
+        this.sortDir = "asc";
         this.fetch();
     }
 
@@ -27,14 +29,23 @@ export class Transactions {
         this.rendered = false;
     }
 
-    async sorted(key, reverse = false) {
+    orderBy(sortKey, sortDir) {
+        if (this.sortKey === sortKey && this.sortDir === sortDir) {
+            return;
+        }
+        this.rendered = false;
+        this.sortKey = sortKey;
+        this.sortDir = sortDir;
+    }
+
+    async list() {
         await Promise.race([this.fetchPromise]);
         this.rendered = true;
         return Array.from(this.transactions.values()).sort((a, b) => {
-            if (reverse) {
-                return b[key].localeCompare(a[key]);
+            if (this.sortDir === "asc") {
+                return b[this.sortKey] < a[this.sortKey] ? -1 : 1;
             }
-            return a[key].localeCompare(b[key]);
+            return a[this.sortKey] > b[this.sortKey] ? 1 : -1;
         });
     }
 

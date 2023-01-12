@@ -260,3 +260,27 @@ h2 {
     margin-left: 15px;
     font-size: 1.25em;
 }
+
+.sortable-header {
+    cursor: pointer;
+}
+
+.sortable-header::after {
+    content: "";
+    display: inline-block;
+    margin-left: 0.5em;
+    border-right: 0.5em solid transparent;
+    border-left: 0.5em solid transparent;
+}
+
+.sortable-header[data-sort-dir="asc"]::after {
+    border-bottom: 0.5em solid;
+}
+
+.sortable-header[data-sort-dir="desc"]::after {
+    border-top: 0.5em solid;
+}
+
+thead {
+    user-select: none;
+}
