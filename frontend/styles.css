@@ -31,6 +31,7 @@ button,
     text-decoration: none;
     float: right;
     transition: var(--hover-transition);
+    margin-left: 12px;
 }
 
 button:hover,
@@ -40,13 +41,12 @@ button:focus,
     background-color: var(--medium-orange);
 }
 
-#logout-button {
+.secondary-button {
     background-color: var(--text-color);
-    margin-left: 12px;
 }
 
-#logout-button:hover,
-#logout-button:focus {
+.secondary-button:hover,
+.secondary-button:focus {
     background-color: var(--dimmed-text-color);
 }
 
