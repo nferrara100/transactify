@@ -30,6 +30,20 @@ export function deleteCookie(cookieName) {
     document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 }
 
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+export function logoutOnSessionExpiration(logout) {
+    const cookieExpiration = getCookie("authTokenExpiry");
+    const expirationTime = new Date(cookieExpiration * 1000);
+    const currentTime = new Date().getTime();
+    const timeLeft = expirationTime - currentTime;
+    setTimeout(logout, timeLeft);
+}
+
 export const setTitle = (title) => {
     document.title = title + " - Transactify Expense Management";
 };

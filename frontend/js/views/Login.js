@@ -1,4 +1,4 @@
-import {cookieExists, fillPage, setTitle} from "../util.js";
+import {cookieExists, fillPage, logoutOnSessionExpiration, setTitle} from "../util.js";
 import {BaseFormView} from "./BaseFormView.js";
 
 export class Login extends BaseFormView {
@@ -37,6 +37,7 @@ export class Login extends BaseFormView {
         const json = await data.json();
         if (data.status === 200) {
             this.transactions.fetch();
+            logoutOnSessionExpiration(() => this.navigateTo("/logout"));
             this.navigateTo("/");
         } else if (data.status === 401) {
             this.triggerError(

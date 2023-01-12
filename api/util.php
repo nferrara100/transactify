@@ -76,6 +76,7 @@ function updateLogin($authToken)
     }
     $expiry = time() + $GLOBALS['config']['auth_cookie']["expiry"];
     setcookie("authToken", $authToken, $expiry, "/");
+    setcookie("authTokenExpiry", $expiry, $expiry, "/");
 }
 
 function sanitizeTransactions($transactionList)

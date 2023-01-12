@@ -1,10 +1,20 @@
-import {fillPage, formatCurrency, setTitle} from "../util.js";
+import {
+    fillPage,
+    formatCurrency,
+    setTitle,
+    logoutOnSessionExpiration,
+} from "../util.js";
 import {BaseView} from "./BaseView.js";
 
 export class ListTransactions extends BaseView {
     constructor(params) {
         super(params);
         setTitle("Home");
+        logoutOnSessionExpiration(this.logout.bind(this));
+    }
+
+    logout() {
+        this.navigateTo("/logout");
     }
 
     async handleHtml() {

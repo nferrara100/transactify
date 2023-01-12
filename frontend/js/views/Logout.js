@@ -4,6 +4,7 @@ import {BaseView} from "./BaseView.js";
 export class Logout extends BaseView {
     handleHtml() {
         deleteCookie("authToken");
+        deleteCookie("authTokenExpiry");
         this.transactions.wipe();
         this.navigateTo("/login");
     }

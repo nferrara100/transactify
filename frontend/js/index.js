@@ -83,5 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
         navigateTo("/login");
     } else {
         router();
+        logoutOnSessionExpiration(() => navigateTo("/logout"));
     }
 });
