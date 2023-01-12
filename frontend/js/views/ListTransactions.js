@@ -84,7 +84,7 @@ export class ListTransactions extends BaseView {
             merchant.innerHTML = transaction.merchant;
             const amount = document.createElement("td");
             amount.classList.add("amount");
-            amount.innerHTML = formatCurrency(transaction.amount, transaction.currency);
+            amount.innerHTML = formatCurrency(transaction.convertedAmount, "USD");
             tr.appendChild(date);
             tr.appendChild(merchant);
             tr.appendChild(amount);
