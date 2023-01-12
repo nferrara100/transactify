@@ -1,7 +1,7 @@
 "use strict";
 
 import {Transactions} from "./Transactions.js";
-import {cookieExists} from "./util.js";
+import {cookieExists, logoutOnSessionExpiration} from "./util.js";
 import {CreateTransaction} from "./views/CreateTransaction.js";
 import {ListTransactions} from "./views/ListTransactions.js";
 import {Login} from "./views/Login.js";
