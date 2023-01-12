@@ -30,7 +30,7 @@ export class ListTransactions extends BaseView {
             <table id="transactions" class="hidden">
                 <thead>
                     <tr>
-                        <th class="created sortable-header" data-sort-dir="asc">Date</th>
+                        <th class="created sortable-header" data-sort-dir="desc">Date</th>
                         <th class="merchant sortable-header">Merchant</th>
                         <th class="amount sortable-header">Amount</th>
                     </tr>
