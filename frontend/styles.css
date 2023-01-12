@@ -273,12 +273,23 @@ h2 {
     border-left: 0.5em solid transparent;
 }
 
+.sortable-header:hover::after {
+    color: var(--bright-orange);
+    transition: var(--hover-transition);
+}
+
 .sortable-header[data-sort-dir="asc"]::after {
     border-bottom: 0.5em solid;
 }
 
 .sortable-header[data-sort-dir="desc"]::after {
     border-top: 0.5em solid;
+}
+
+/* select sortable headers without data-sort-dir on hover */
+.sortable-header:hover:not([data-sort-dir])::after {
+    border-bottom: 0.5em solid;
+    color: var(--background-grey);
 }
 
 thead {
