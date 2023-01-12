@@ -3,8 +3,7 @@ import {cookieExists} from "./util.js";
 export class Transactions {
     constructor() {
         this.transactions = new Map();
-        this.revision = 1;
-        this.rendered = 0;
+        this.rendered = false;
         this.fetch();
     }
 
@@ -20,20 +19,17 @@ export class Transactions {
     }
 
     shouldRender() {
-        if (this.rendered < this.revision) {
-            this.rendered++;
-            return true;
-        }
-        return false;
+        return !this.rendered;
     }
 
     set(transaction) {
         this.transactions.set(transaction.transactionID, transaction);
-        this.revision++;
+        this.rendered = false;
     }
 
     async sorted(key, reverse = false) {
         await Promise.race([this.fetchPromise]);
+        this.rendered = true;
         return Array.from(this.transactions.values()).sort((a, b) => {
             if (reverse) {
                 return b[key].localeCompare(a[key]);
