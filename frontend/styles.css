@@ -172,7 +172,7 @@ table td {
 
 .modal-top {
     display: block;
-    overflow: auto;
+    overflow: hidden;
 }
 
 hr {
