@@ -29,6 +29,11 @@ export class Transactions {
         this.rendered = false;
     }
 
+    search(query) {
+        this.rendered = false;
+        this.query = query;
+    }
+
     orderBy(sortKey, sortDir) {
         if (this.sortKey === sortKey && this.sortDir === sortDir) {
             return;
@@ -41,7 +46,15 @@ export class Transactions {
     async list() {
         await Promise.race([this.fetchPromise]);
         this.rendered = true;
-        return Array.from(this.transactions.values()).sort((a, b) => {
+        let transactionArray = Array.from(this.transactions.values());
+        if (this.query) {
+            transactionArray = transactionArray.filter((transaction) => {
+                return transaction.merchant
+                    .toLowerCase()
+                    .includes(this.query.toLowerCase());
+            });
+        }
+        return transactionArray.sort((a, b) => {
             if (typeof a[this.sortKey] === "number") {
                 if (this.sortDir === "asc") {
                     return a[this.sortKey] - b[this.sortKey];

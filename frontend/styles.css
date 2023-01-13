@@ -11,6 +11,7 @@
     --border-grey: #888;
     --default-fonts: Verdana, Geneva, Tahoma, sans-serif;
     --hover-transition: 0.3s;
+    --search-grey: #e6e6e6;
 }
 
 body {
@@ -34,6 +35,11 @@ button,
     margin-left: 12px;
 }
 
+button {
+    border: 0;
+    line-height: 1.5;
+}
+
 button:hover,
 button:focus,
 .button:hover,
@@ -52,6 +58,16 @@ button:focus,
 
 .bottom-button {
     margin-top: 20px;
+}
+
+::selection {
+    background: var(--medium-orange);
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--medium-orange);
+    border: 0;
 }
 
 .hidden {
@@ -294,4 +310,28 @@ h2 {
 
 thead {
     user-select: none;
+}
+
+#search-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--search-grey);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding-right: 10px;
+}
+
+#search-input {
+    flex: 1;
+    margin: 10px;
+    border: none;
+    font-size: 16px;
+    padding: 0.5em 1em;
+    line-height: 1.5;
+}
+
+.no-transactions {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 1em;
 }

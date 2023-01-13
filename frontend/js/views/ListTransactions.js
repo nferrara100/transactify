@@ -30,30 +30,56 @@ export class ListTransactions extends BaseView {
         <a class="button secondary-button" ajax-link href="/logout">Logout</a>
         <a href="/create" class="button" ajax-link>+ Create Transaction</a>
 
-            <div class="loading-ring">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+        <div class="loading-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
 
-            <table id="transactions" class="hidden">
-                <thead>
-                    <tr>
-                        <th class="created sortable-header" data-sort-dir="desc">Date</th>
-                        <th class="merchant sortable-header">Merchant</th>
-                        <th class="amount sortable-header">Amount</th>
-                    </tr>
-                </thead>
-                <tbody id="transactionTableBody"></tbody>
-            </table>
-            <hr id="bottom-hr" class="invert hidden" />
+        <table id="transactions" class="hidden">
+            <div id="search-container">
+                <form id="search-form">
+                    <input type="search" placeholder="Search by merchant" id="search-input">
+                    <button type="submit" id="search-button">
+                        Search
+                    </button>
+                </form>
+            </div>
+            <thead>
+                <tr>
+                    <th class="created sortable-header" data-sort-dir="desc">Date</th>
+                    <th class="merchant sortable-header">Merchant</th>
+                    <th class="amount sortable-header">Amount</th>
+                </tr>
+            </thead>
+            <tbody id="transactionTableBody"></tbody>
+        </table>
+        <hr id="bottom-hr" class="invert hidden" />
         `);
+        document.getElementById("search-input").addEventListener("keyup", (event) => {
+            if (event.code === "Enter") {
+                this.onSearch.bind(this)(event);
+            }
+        });
+        document.getElementById("search-button").addEventListener("click", (event) => {
+            this.onSearch.bind(this)(event);
+        });
+
+        document
+            .getElementById("search-form")
+            .addEventListener("submit", (event) => this.onSearch(event));
         document.querySelectorAll(".sortable-header").forEach((element) => {
             element.addEventListener("click", (event) => this.onHeaderClick(event));
         });
 
         await this.loadTransactions();
+    }
+
+    onSearch(event) {
+        const searchInput = document.getElementById("search-input");
+        this.transactions.search(searchInput.value);
+        this.loadTransactions();
     }
 
     onHeaderClick(event) {
@@ -90,6 +116,13 @@ export class ListTransactions extends BaseView {
             tr.appendChild(amount);
             tableBody.appendChild(tr);
         }
+        if (transactions.length === 0) {
+            tableBody.innerHTML = `
+            <td colspan="3">
+                <div class="no-transactions">No transactions found</div>
+            </td>
+            `;
+        }
         document.querySelectorAll(".loading-ring").forEach((element) => {
             element.classList.add("hidden");
         });
@@ -107,7 +140,9 @@ export class ListTransactions extends BaseView {
                         node.addEventListener("click", (event) => {
                             const transactionKey =
                                 event.currentTarget.getAttribute("key");
-                            this.navigateTo("/transaction/" + transactionKey);
+                            if (transactionKey) {
+                                this.navigateTo("/transaction/" + transactionKey);
+                            }
                         });
                     }
                 });
