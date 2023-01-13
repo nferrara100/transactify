@@ -136,9 +136,11 @@ export class ListTransactions extends BaseView {
         }
         if (transactions.length === 0) {
             tableBody.innerHTML = `
-            <td colspan="3">
-                <div class="no-transactions">No transactions found</div>
-            </td>
+            <tr class="no-transactions">
+                <td colspan="3">
+                    <div>No transactions found</div>
+                </td>
+            </tr>
             `;
         }
         document.querySelectorAll(".loading-ring").forEach((element) => {

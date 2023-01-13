@@ -97,11 +97,11 @@ table td {
     background-color: var(--even-grey);
 }
 
-#transactionTableBody tr:hover {
+#transactionTableBody tr:hover:not(.no-transactions) {
     background-color: var(--light-orange);
 }
 
-#transactionTableBody {
+#transactionTableBody tr:not(.no-transactions) {
     cursor: pointer;
 }
 
