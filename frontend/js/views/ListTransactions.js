@@ -96,25 +96,29 @@ export class ListTransactions extends BaseView {
         this.loadTransactions();
     }
 
+    getTr(transaction) {
+        const tr = document.createElement("tr");
+        tr.setAttribute("key", transaction.transactionID);
+        tr.innerHTML = `
+            <td class="created">${new Date(
+                transaction.created,
+            ).toLocaleDateString()}</td>
+            <td class="merchant">${transaction.merchant}</td>
+            <td class="amount">${formatCurrency(
+                transaction.convertedAmount,
+                "USD",
+            )}</td>
+        `;
+        return tr;
+    }
+
     async loadTransactions() {
         this.setObserver();
         const tableBody = document.getElementById("transactionTableBody");
         tableBody.innerHTML = "";
         const transactions = await this.transactions.list();
         for (const transaction of transactions) {
-            const tr = document.createElement("tr");
-            tr.setAttribute("key", transaction.transactionID);
-            const date = document.createElement("td");
-            date.innerHTML = new Date(transaction.created).toLocaleDateString();
-            const merchant = document.createElement("td");
-            merchant.innerHTML = transaction.merchant;
-            const amount = document.createElement("td");
-            amount.classList.add("amount");
-            amount.innerHTML = formatCurrency(transaction.convertedAmount, "USD");
-            tr.appendChild(date);
-            tr.appendChild(merchant);
-            tr.appendChild(amount);
-            tableBody.appendChild(tr);
+            tableBody.appendChild(this.getTr(transaction));
         }
         if (transactions.length === 0) {
             tableBody.innerHTML = `
