@@ -12,7 +12,7 @@
         <div id="page"></div>
         <div id="modal"></div>
         <script>
-            window.statusCode = <?php echo json_encode($_SERVER['REDIRECT_STATUS'] ?? null); ?>;
+            window.ajaxStatus = <?php echo json_encode($_SERVER['REDIRECT_STATUS'] ?? null); ?>;
         </script>
         <script type="module" src="/frontend/js/index.js"></script>
     </body>

@@ -36,9 +36,9 @@ const router = async (url) => {
         });
     }
     if (!match || !url) {
-        window.statusCode = 404;
+        window.ajaxStatus = 404;
     }
-    if (window.statusCode >= 400) {
+    if (window.ajaxStatus >= 400) {
         match = {path: "/error", view: ErrorView};
     }
 
