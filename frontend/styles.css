@@ -10,7 +10,7 @@
     --even-grey: #f3f3f3;
     --border-grey: #888;
     --default-fonts: Verdana, Geneva, Tahoma, sans-serif;
-    --hover-transition: 0.3s;
+    --hover-transition: all 0.3s ease-in-out;
     --search-grey: #e6e6e6;
 }
 
@@ -349,10 +349,20 @@ thead {
     justify-content: center;
     position: fixed;
     right: 20px;
-    transition: all 0.3s ease-in-out;
+    transition: var(--hover-transition);
     width: 50px;
+    animation: fadeIn 0.5s;
 }
 
 #scroll-top:hover {
     background-color: var(--medium-orange);
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
