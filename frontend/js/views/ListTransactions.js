@@ -1,8 +1,8 @@
 import {
     fillPage,
     formatCurrency,
-    setTitle,
     logoutOnSessionExpiration,
+    setTitle,
 } from "../util.js";
 import {BaseView} from "./BaseView.js";
 
@@ -76,7 +76,7 @@ export class ListTransactions extends BaseView {
         await this.loadTransactions();
     }
 
-    onSearch(event) {
+    onSearch() {
         const searchInput = document.getElementById("search-input");
         this.transactions.search(searchInput.value);
         this.loadTransactions();

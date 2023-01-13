@@ -86,7 +86,7 @@ export class Transactions {
                         this.set(transaction);
                     });
                 })
-                .catch((error) => {
+                .catch(() => {
                     alert("Could not load transactions. Please try again later.");
                 });
         }

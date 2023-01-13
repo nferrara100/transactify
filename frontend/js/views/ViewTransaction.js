@@ -1,6 +1,6 @@
+import {formatCurrency, setTitle, toCheckbox} from "../util.js";
 import {BaseView} from "./BaseView.js";
 import {ListTransactions} from "./ListTransactions.js";
-import {formatCurrency, setTitle, toCheckbox} from "../util.js";
 
 export class ViewTransaction extends BaseView {
     async handleHtml() {

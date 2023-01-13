@@ -1,6 +1,6 @@
-import {setTitle} from "../util.js";
 import {BaseFormView} from "./BaseFormView.js";
 import {ListTransactions} from "./ListTransactions.js";
+import {setTitle} from "../util.js";
 
 export class CreateTransaction extends BaseFormView {
     formId = "create-form";

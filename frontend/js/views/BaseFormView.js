@@ -26,8 +26,8 @@ export class BaseFormView extends BaseView {
             formData.set("amount", cents);
         }
         fetch(this.endpoint, {
-            method: "POST",
             body: formData,
+            method: "POST",
         })
             .then(this.invokeOnSubmitResult.bind(this))
             .catch((error) => this.triggerError(error));
@@ -44,7 +44,7 @@ export class BaseFormView extends BaseView {
         await this.onSubmitResult(data);
     }
 
-    async onSubmitResult(data) {
+    async onSubmitResult() {
         throw new Error("Not Implemented");
     }
 }

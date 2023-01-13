@@ -1,14 +1,13 @@
 "use strict";
 
+import {clearModal, cookieExists, logoutOnSessionExpiration} from "./util.js";
 import {Transactions} from "./Transactions.js";
-import {cookieExists, logoutOnSessionExpiration} from "./util.js";
 import {CreateTransaction} from "./views/CreateTransaction.js";
+import {ErrorView} from "./views/ErrorView.js";
 import {ListTransactions} from "./views/ListTransactions.js";
 import {Login} from "./views/Login.js";
 import {Logout} from "./views/Logout.js";
-import {ErrorView} from "./views/ErrorView.js";
 import {ViewTransaction} from "./views/ViewTransaction.js";
-import {clearModal} from "./util.js";
 
 const transactions = new Transactions();
 
