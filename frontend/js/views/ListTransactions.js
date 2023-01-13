@@ -55,8 +55,22 @@ export class ListTransactions extends BaseView {
             </thead>
             <tbody id="transactionTableBody"></tbody>
         </table>
+        <button id="scroll-top">&#8593;</button>
         <hr id="bottom-hr" class="invert hidden" />
         `);
+
+        const scrollTopButton = document.getElementById("scroll-top");
+        window.onscroll = function () {
+            if (document.documentElement.scrollTop > 150) {
+                scrollTopButton.style.display = "flex";
+            } else {
+                scrollTopButton.style.display = "none";
+            }
+        };
+        scrollTopButton.addEventListener("click", function () {
+            window.scrollTo({top: 0, behavior: "smooth"});
+        });
+
         document.getElementById("search-input").addEventListener("keyup", (event) => {
             if (event.code === "Enter") {
                 this.onSearch.bind(this)(event);

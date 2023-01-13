@@ -335,3 +335,24 @@ thead {
     font-size: 1.5em;
     margin: 1em;
 }
+
+#scroll-top {
+    align-items: center;
+    background-color: var(--bright-orange);
+    border-radius: 50%;
+    bottom: 20px;
+    color: white;
+    cursor: pointer;
+    display: none;
+    font-size: 1.5rem;
+    height: 50px;
+    justify-content: center;
+    position: fixed;
+    right: 20px;
+    transition: all 0.3s ease-in-out;
+    width: 50px;
+}
+
+#scroll-top:hover {
+    background-color: var(--medium-orange);
+}
