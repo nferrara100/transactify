@@ -51,3 +51,12 @@ export const setTitle = (title) => {
 export const fillPage = (html) => {
     document.querySelector("#page").innerHTML = html;
 };
+
+export const fillSmallPage = (html) => {
+    fillPage(`
+    <div class="small-page">
+        <hr class="invert">
+        ${html}
+    </div>
+    `);
+};

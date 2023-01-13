@@ -9,7 +9,7 @@ export class Login extends BaseFormView {
     async handleHtml() {
         setTitle("Login");
         fillPage(`
-            <div class="login">
+            <div class="small-page">
                 <hr class="invert">
                 <h1>Login</h1>
                 <form action="${this.endpoint}" method="POST" id="${this.formId}">
