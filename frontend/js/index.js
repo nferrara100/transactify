@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", (e) => {
         if (e.target.matches("[ajax-link]")) {
             e.preventDefault();
-            navigateTo(e.target.href);
+            navigateTo(e.target.getAttribute("href"));
         }
     });
 
