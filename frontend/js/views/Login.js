@@ -2,16 +2,12 @@ import {cookieExists, fillPage, logoutOnSessionExpiration, setTitle} from "../ut
 import {BaseFormView} from "./BaseFormView.js";
 
 export class Login extends BaseFormView {
-    constructor(params) {
-        super(params);
-        setTitle("Login");
-    }
-
     formId = "#login-form";
 
     endpoint = "/api/login.php";
 
     async handleHtml() {
+        setTitle("Login");
         fillPage(`
             <div class="login">
                 <hr class="invert">

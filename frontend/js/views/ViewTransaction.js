@@ -3,15 +3,15 @@ import {ListTransactions} from "./ListTransactions.js";
 import {formatCurrency, setTitle, toCheckbox} from "../util.js";
 
 export class ViewTransaction extends BaseView {
-    constructor(params) {
-        super(params);
-        this.background = new ListTransactions();
-        this.key = params.key;
-        setTitle("View Transaction");
-    }
-
     async handleHtml() {
-        this.transaction = await this.transactions.get(this.key);
+        this.background = new ListTransactions();
+        setTitle("View Transaction");
+        const key = window.location.pathname.split("/").pop();
+        this.transaction = await this.transactions.get(key);
+        if (!this.transaction) {
+            this.navigateTo();
+            return;
+        }
         const date = new Date(this.transaction.created).toLocaleDateString();
         this.fillModal(`
             <h1>${this.transaction.merchant}</h1>

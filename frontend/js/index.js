@@ -12,60 +12,39 @@ import {clearModal} from "./util.js";
 
 const transactions = new Transactions();
 
-const pathToRegex = (path) =>
-    new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
-
-const getParams = (match) => {
-    const values = match.result.slice(1);
-    const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map(
-        (result) => result[1],
-    );
-
-    return Object.fromEntries(
-        keys.map((key, i) => {
-            return [key, values[i]];
-        }),
-    );
-};
-
 const navigateTo = (url) => {
     history.pushState(null, null, url);
-    router();
+    router(url);
 };
 
-const router = async () => {
-    const routes = [
-        {path: "/", view: ListTransactions},
-        {path: "/login", view: Login},
-        {path: "/create", view: CreateTransaction},
-        {path: "/transaction/:key", view: ViewTransaction},
-        {path: "/logout", view: Logout},
-    ];
-
-    // Test each route for potential match
-    const potentialMatches = routes.map((route) => {
-        return {
-            route: route,
-            result: location.pathname.match(pathToRegex(route.path)),
-        };
-    });
-
-    let match = potentialMatches.find(
-        (potentialMatch) => potentialMatch.result !== null,
-    );
-
-    if (!match) {
+const router = async (url) => {
+    let match = null;
+    if (url) {
+        const routes = [
+            {path: "/", view: ListTransactions},
+            {path: "/login", view: Login},
+            {path: "/create", view: CreateTransaction},
+            {path: "/transaction/*", view: ViewTransaction},
+            {path: "/logout", view: Logout},
+        ];
+        match = routes.find((route) => {
+            if (route.path.at(-1) === "*") {
+                const path = route.path.slice(0, -1);
+                return url.startsWith(path);
+            } else {
+                return route.path === url;
+            }
+        });
+    }
+    if (!match || !url) {
         window.statusCode = 404;
     }
     if (window.statusCode >= 400) {
-        match = {
-            route: {path: "/error", view: ErrorView},
-            result: [location.pathname],
-        };
+        match = {path: "/error", view: ErrorView};
     }
 
     clearModal();
-    const view = new match.route.view(getParams(match));
+    const view = new match.view();
     view.show(navigateTo, transactions);
 };
 
@@ -82,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!cookieExists("authToken")) {
         navigateTo("/login");
     } else {
-        router();
+        router(location.pathname);
         logoutOnSessionExpiration(() => navigateTo("/logout"));
     }
 });

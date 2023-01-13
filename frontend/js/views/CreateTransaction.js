@@ -3,17 +3,14 @@ import {BaseFormView} from "./BaseFormView.js";
 import {ListTransactions} from "./ListTransactions.js";
 
 export class CreateTransaction extends BaseFormView {
-    constructor(params) {
-        super(params);
-        this.background = new ListTransactions();
-        setTitle("Create Transaction");
-    }
-
     formId = "create-form";
 
     endpoint = "/api/transaction.php";
 
     async handleHtml() {
+        this.background = new ListTransactions();
+        setTitle("Create Transaction");
+
         this.fillModal(
             `
             <h1>Create Transaction</h1>

@@ -10,8 +10,8 @@ export class BaseView {
     async show(navigateTo, transactions) {
         this.navigateTo = navigateTo;
         this.transactions = transactions;
+        this.handleHtml();
         this.background?.show(navigateTo, transactions);
-        await this.handleHtml();
     }
 
     async handleHtml() {
