@@ -236,9 +236,10 @@ label {
     transform: scale(1.5);
 }
 
-.logo {
+#logo {
     width: 4rem;
     height: 4rem;
+    cursor: pointer;
 }
 
 .title {

@@ -23,7 +23,7 @@ export class ListTransactions extends BaseView {
         }
         fillPage(`
         <div class="title">
-        <img src = "/frontend/icon.svg" alt="Logo" class="logo"/>
+        <img src = "/frontend/icon.svg" alt="Logo" id="logo"/>
         <span class="title-text">TRANSACTIFY</span>
         <span class="subtitle">Manage your transactions. Easily.</span>
         </div>
@@ -79,6 +79,9 @@ export class ListTransactions extends BaseView {
         document.getElementById("search-button").addEventListener("click", (event) => {
             this.onSearch.bind(this)(event);
         });
+        document.getElementById("logo").addEventListener("click", (event) => {
+            this.onSearch.bind(this)(null, "");
+        });
         document.querySelectorAll(".sortable-header").forEach((element) => {
             element.addEventListener("click", (event) => this.onHeaderClick(event));
         });
@@ -86,9 +89,15 @@ export class ListTransactions extends BaseView {
         await this.loadTransactions();
     }
 
-    onSearch() {
+    onSearch(event, providedQuery) {
+        let query = providedQuery;
         const searchInput = document.getElementById("search-input");
-        this.transactions.search(searchInput.value);
+        if (providedQuery === undefined) {
+            query = searchInput.value;
+        } else {
+            searchInput.value = providedQuery;
+        }
+        this.transactions.search(query);
         this.loadTransactions();
     }
 
