@@ -51,9 +51,9 @@ export class ListTransactions extends BaseView {
             <table>
                 <thead>
                     <tr>
-                        <th class="created sortable-header" data-sort-dir="desc">Date</th>
-                        <th class="merchant sortable-header">Merchant</th>
-                        <th class="amount sortable-header">Amount</th>
+                        <th class="created sortable-header" data-sort-dir="desc">Date<br /></th>
+                        <th class="merchant sortable-header">Merchant<br /></th>
+                        <th class="amount sortable-header">Amount<br /></th>
                     </tr>
                 </thead>
                 <tbody id="transactionTableBody"></tbody>

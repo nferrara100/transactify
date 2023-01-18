@@ -66,8 +66,7 @@ button:focus,
 
 input:focus {
     outline: none;
-    box-shadow: 0 0 0 3px var(--medium-orange);
-    border: 0;
+    border: 3px solid var(--medium-orange);
 }
 
 .hidden {
@@ -215,6 +214,7 @@ input {
     margin-bottom: 1em;
     margin-top: 0.2em;
     width: 330px;
+    background-color: white; /* Prevent iPhone background shading */
 }
 
 label {
@@ -256,6 +256,10 @@ label {
 #page {
     max-width: 1500px;
     margin: auto;
+}
+
+.created {
+    padding-left: 3%;
 }
 
 .amount {
@@ -303,6 +307,10 @@ h2 {
 .sortable-header:hover:not([data-sort-dir])::after {
     border-bottom: 0.5em solid;
     color: var(--background-grey);
+}
+
+.sortable-header br {
+    display: none;
 }
 
 thead {
@@ -395,5 +403,12 @@ nav {
     }
     input {
         width: 300px;
+    }
+    .small-page {
+        width: 335px;
+        margin: auto;
+    }
+    .sortable-header br {
+        display: inline;
     }
 }
