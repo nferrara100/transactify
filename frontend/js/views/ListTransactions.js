@@ -37,24 +37,24 @@ export class ListTransactions extends BaseView {
             <div></div>
         </div>
 
-        <table id="transactions" class="hidden">
+        <div id="transactions" class="hidden">
             <div id="search-container">
-                <form id="search-form">
-                    <input type="search" placeholder="Search by merchant" id="search-input">
-                    <button type="submit" id="search-button">
-                        Search
-                    </button>
-                </form>
+                <input type="search" placeholder="Search by merchant" id="search-input">
+                <button type="submit" id="search-button">
+                    Search
+                </button>
             </div>
-            <thead>
-                <tr>
-                    <th class="created sortable-header" data-sort-dir="desc">Date</th>
-                    <th class="merchant sortable-header">Merchant</th>
-                    <th class="amount sortable-header">Amount</th>
-                </tr>
-            </thead>
-            <tbody id="transactionTableBody"></tbody>
-        </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="created sortable-header" data-sort-dir="desc">Date</th>
+                        <th class="merchant sortable-header">Merchant</th>
+                        <th class="amount sortable-header">Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionTableBody"></tbody>
+            </table>
+        </div>
         <button id="scroll-top">&#8593;</button>
         <hr id="bottom-hr" class="invert hidden" />
         `);
@@ -79,10 +79,6 @@ export class ListTransactions extends BaseView {
         document.getElementById("search-button").addEventListener("click", (event) => {
             this.onSearch.bind(this)(event);
         });
-
-        document
-            .getElementById("search-form")
-            .addEventListener("submit", (event) => this.onSearch(event));
         document.querySelectorAll(".sortable-header").forEach((element) => {
             element.addEventListener("click", (event) => this.onHeaderClick(event));
         });
