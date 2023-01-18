@@ -22,13 +22,17 @@ export class ListTransactions extends BaseView {
             return;
         }
         fillPage(`
-        <div class="title">
-        <img src = "/frontend/icon.svg" alt="Logo" id="logo"/>
-        <span class="title-text">TRANSACTIFY</span>
-        <span class="subtitle">Manage your transactions. Easily.</span>
-        </div>
-        <a class="button secondary-button" ajax-link href="/logout">Logout</a>
-        <a href="/create" class="button" ajax-link>+ Create Transaction</a>
+        <nav>
+            <div class="title">
+            <img src = "/frontend/icon.svg" alt="Logo" id="logo"/>
+            <span class="title-text">TRANSACTIFY</span>
+            <span class="subtitle">Manage your transactions. Easily.</span>
+            </div>
+            <div class="nav-buttons">
+                <a class="button secondary-button" ajax-link href="/logout">Logout</a>
+                <a href="/create" class="button" ajax-link>+ Create Transaction</a>
+            </div>
+        </nav>
 
         <div class="loading-ring">
             <div></div>

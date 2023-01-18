@@ -170,15 +170,10 @@ table td {
     max-width: 365px;
 }
 
-.modal-top {
-    display: block;
-    overflow: hidden;
-}
-
 hr {
     border: 0;
     height: 5px;
-    width: 80%;
+    width: calc(90% - 20px); /* save room for close button if applicable */
     float: left;
     background-image: linear-gradient(90deg, var(--bright-orange), transparent);
 }
@@ -244,7 +239,7 @@ label {
 
 .title {
     display: inline-block;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .title-text {
@@ -255,6 +250,7 @@ label {
 .subtitle {
     font-size: 1.25em;
     color: var(--dimmed-text-color);
+    white-space: nowrap;
 }
 
 #page {
@@ -365,5 +361,39 @@ thead {
     }
     100% {
         opacity: 1;
+    }
+}
+
+nav {
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.nav-buttons {
+    display: inline;
+}
+
+@media (max-width: 1100px) {
+    .nav-buttons {
+        display: block;
+        margin: auto;
+        overflow: hidden;
+    }
+
+    .nav-buttons .button {
+        float: left;
+    }
+
+    .nav-buttons .button:first-child {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 550px) {
+    .modal-foreground {
+        width: calc(100% - 48px);
+    }
+    input {
+        width: 300px;
     }
 }

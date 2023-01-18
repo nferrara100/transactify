@@ -6,6 +6,9 @@
         <title>Expensify Take-Home Challenge</title>
         <link rel="stylesheet" type="text/css" href="/frontend/styles.css" />
         <link rel="icon" href="/frontend/icon.svg" type="image/svg+xml" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Nicholas Ferrara's submission for the
+        Expensify Take Home Challenge.">
     </head>
 
     <body>

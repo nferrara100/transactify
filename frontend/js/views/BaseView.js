@@ -22,13 +22,12 @@ export class BaseView {
         document.querySelector("#modal").innerHTML = `
             <div class="modal-background">
                 <div class="modal-foreground ${small ? "small-modal" : ""}">
-                    <div class="modal-top">
-                        <hr>
-                        <span id="modal-close" class="close">&times;</span>
-                    </div>
+                    <hr>
+                    <span id="modal-close" class="close">&times;</span>
                     <div id="modal-insert">${html}</div>
                 </div>
-            </div>`;
+            </div>
+        `;
         document
             .querySelector("#modal-close")
             .addEventListener("click", () => this.navigateTo("/"));
