@@ -41,13 +41,13 @@ export class ListTransactions extends BaseView {
             <div></div>
         </div>
 
+        <div id="search-container">
+            <input type="search" placeholder="Search by merchant" id="search-input">
+            <button type="submit" id="search-button">
+                Search
+            </button>
+        </div>
         <div id="transactions" class="hidden">
-            <div id="search-container">
-                <input type="search" placeholder="Search by merchant" id="search-input">
-                <button type="submit" id="search-button">
-                    Search
-                </button>
-            </div>
             <table>
                 <thead>
                     <tr>
