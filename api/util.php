@@ -87,3 +87,18 @@ function sanitizeTransactions($transactionList)
     }, $transactionList);
     return $transactionList;
 }
+
+function preloadDirectory($dir, $root)
+{
+    $files = scandir($dir);
+    foreach ($files as $file) {
+        if (is_dir($dir . '/' . $file)) {
+            if ($file != "." && $file != "..") {
+                preloadDirectory($dir . '/' . $file, $root);
+            }
+        } else {
+            $path = str_replace($root, '', $dir);
+            echo '<link rel="modulepreload" href="' . $path . '/' . $file . '" as="script">' . PHP_EOL;
+        }
+    }
+}

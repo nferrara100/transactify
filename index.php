@@ -10,6 +10,12 @@
         <meta name="description" content="Nicholas Ferrara's submission for the
         Expensify Take Home Challenge.">
         <link rel="preload" href="/frontend/icon.svg" as="image" type="image/svg+xml" />
+        <?php
+        require_once 'api/util.php';
+        $root = dirname(__FILE__);
+        $directory = $root . "/frontend/js";
+        preloadDirectory($directory, $root);
+        ?>
     </head>
 
     <body>
