@@ -46,6 +46,10 @@ export class Transactions {
 
     async list(startPage = 0) {
         await Promise.race([this.fetchPromise]);
+        const start = startPage * this.chunkSize;
+        if (start > this.transactions.size) {
+            return [];
+        }
         this.rendered = true;
         let transactionArray = Array.from(this.transactions.values());
         if (this.query) {
@@ -69,7 +73,6 @@ export class Transactions {
             }
             return String(b[this.sortKey]).localeCompare(String(a[this.sortKey]));
         });
-        const start = startPage * this.chunkSize;
         return sorted.slice(start, start + this.chunkSize);
     }
 
