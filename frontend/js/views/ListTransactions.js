@@ -139,10 +139,7 @@ export class ListTransactions extends BaseView {
         this.setObserver();
         const tableBody = document.getElementById("transactionTableBody");
         tableBody.innerHTML = "";
-        const transactions = await this.transactions.list();
-        for (const transaction of transactions) {
-            tableBody.appendChild(this.getTr(transaction));
-        }
+        await this.appendTransactions();
         if (transactions.length === 0) {
             tableBody.innerHTML = `
             <tr class="no-transactions">
@@ -157,6 +154,27 @@ export class ListTransactions extends BaseView {
         });
         document.getElementById("transactions").classList.remove("hidden");
         document.getElementById("bottom-hr").classList.remove("hidden");
+
+        let page = 1;
+        const handleInfiniteScroll = () => {
+            const currentPosition = window.innerHeight + window.pageYOffset;
+            const distanceToBottom = document.body.scrollHeight - currentPosition;
+            const endOfPageOffset = 500;
+            const shouldLoad = distanceToBottom < endOfPageOffset;
+            if (shouldLoad) {
+                this.appendTransactions(page);
+                page++;
+            }
+        };
+        window.addEventListener("scroll", handleInfiniteScroll);
+    }
+
+    async appendTransactions(page = 0) {
+        const tableBody = document.getElementById("transactionTableBody");
+        const transactions = await this.transactions.list(page);
+        for (const transaction of transactions) {
+            tableBody.appendChild(this.getTr(transaction));
+        }
     }
 
     setObserver() {
