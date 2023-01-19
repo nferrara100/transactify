@@ -7,6 +7,10 @@ export class Login extends BaseFormView {
     endpoint = "/api/login.php";
 
     async handleHtml() {
+        if (cookieExists("authToken")) {
+            this.navigateTo("/");
+            return;
+        }
         setTitle("Login");
         fillPage(`
             <div class="small-page">
@@ -22,10 +26,6 @@ export class Login extends BaseFormView {
                 </form>
             </div>
         `);
-
-        if (cookieExists("authToken")) {
-            this.navigateTo("/");
-        }
         await super.handleHtml();
     }
 
