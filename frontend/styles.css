@@ -9,7 +9,6 @@
     --background-grey: #aaaaaa;
     --even-grey: #f3f3f3;
     --search-grey: #e6e6e6;
-    --almost-white: #fefefe;
     --default-fonts: Verdana, Geneva, Tahoma, sans-serif;
     --hover-transition: all 0.3s ease-in-out;
 }
@@ -251,7 +250,7 @@ thead {
 }
 
 .modal-foreground {
-    background-color: var(--almost-white);
+    background-color: #fff;
     border-radius: 15px;
     border: 1px solid var(--border-grey);
     margin: 2% auto 2% auto;
