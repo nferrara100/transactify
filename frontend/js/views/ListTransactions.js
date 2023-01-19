@@ -139,7 +139,7 @@ export class ListTransactions extends BaseView {
         this.setObserver();
         const tableBody = document.getElementById("transactionTableBody");
         tableBody.innerHTML = "";
-        await this.appendTransactions();
+        const transactions = await this.appendTransactions();
         if (transactions.length === 0) {
             tableBody.innerHTML = `
             <tr class="no-transactions">
@@ -175,6 +175,7 @@ export class ListTransactions extends BaseView {
         for (const transaction of transactions) {
             tableBody.appendChild(this.getTr(transaction));
         }
+        return transactions;
     }
 
     setObserver() {
