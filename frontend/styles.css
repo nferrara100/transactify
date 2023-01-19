@@ -67,6 +67,7 @@ button,
     float: right;
     transition: var(--hover-transition);
     margin-left: 12px;
+    font-family: var(--default-fonts);
 }
 
 button {
