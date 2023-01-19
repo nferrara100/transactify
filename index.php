@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Nicholas Ferrara's submission for the
         Expensify Take Home Challenge.">
+        <link rel="preload" href="/frontend/icon.svg" as="image" type="image/svg+xml" />
     </head>
 
     <body>
