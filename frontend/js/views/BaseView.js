@@ -22,8 +22,10 @@ export class BaseView {
         document.querySelector("#modal").innerHTML = `
             <div class="modal-background">
                 <div class="modal-foreground ${small ? "small-modal" : ""}">
-                    <hr>
-                    <span id="modal-close" class="close">&times;</span>
+                    <div class="modal-top-bar">
+                        <hr>
+                        <span id="modal-close" class="close">&times;</span>
+                    </div>
                     <div id="modal-insert">${html}</div>
                 </div>
             </div>

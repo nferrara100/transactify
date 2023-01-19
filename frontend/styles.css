@@ -176,7 +176,6 @@ table td {
     border-top: 0.5em solid;
 }
 
-/* select sortable headers without data-sort-dir on hover */
 .sortable-header:hover:not([data-sort-dir])::after {
     border-bottom: 0.5em solid;
     color: var(--background-grey);
@@ -262,6 +261,11 @@ thead {
 
 .small-modal {
     max-width: 365px;
+}
+
+.modal-top-bar {
+    display: block;
+    overflow: hidden;
 }
 
 .close {
