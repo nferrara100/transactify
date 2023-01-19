@@ -75,11 +75,15 @@ button {
 }
 
 button:hover,
-button:focus,
 button:disabled,
-.button:hover,
-.button:focus {
+.button:hover {
     background-color: var(--medium-orange);
+}
+
+button:focus,
+.button:focus {
+    border: 2px solid var(--text-color);
+    outline: none;
 }
 
 .secondary-button {
