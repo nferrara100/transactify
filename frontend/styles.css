@@ -76,6 +76,7 @@ button {
 
 button:hover,
 button:focus,
+button:disabled,
 .button:hover,
 .button:focus {
     background-color: var(--medium-orange);
