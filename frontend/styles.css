@@ -175,11 +175,7 @@ table td {
     content: "";
     display: inline-block;
     margin-left: 0.5em;
-}
-
-.sortable-header:hover::after {
     color: var(--bright-highlight);
-    transition: var(--hover-transition);
 }
 
 .sortable-header[data-sort-dir="asc"]::after {
@@ -190,9 +186,14 @@ table td {
     border-top: 0.5em solid;
 }
 
-.sortable-header:hover:not([data-sort-dir])::after {
+.sortable-header:not([data-sort-dir])::after {
     border-bottom: 0.5em solid;
     color: var(--background-grey);
+}
+
+.sortable-header:hover::after {
+    transition: var(--hover-transition);
+    color: var(--medium-highlight);
 }
 
 .sortable-header br {
