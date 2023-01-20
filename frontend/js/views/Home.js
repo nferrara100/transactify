@@ -64,7 +64,11 @@ export class Home extends BaseView {
             return;
         }
         fillPage(html);
+        this.addEventListeners();
+        await this.loadTransactions();
+    }
 
+    addEventListeners() {
         const scrollTopButton = document.getElementById("scroll-top");
         window.onscroll = function () {
             if (document.documentElement.scrollTop > 150) {
@@ -91,8 +95,6 @@ export class Home extends BaseView {
         document.querySelectorAll(".sortable-header").forEach((element) => {
             element.addEventListener("click", (event) => this.onHeaderClick(event));
         });
-
-        await this.loadTransactions();
     }
 
     onSearch(event, providedQuery) {
