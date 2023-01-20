@@ -1,5 +1,5 @@
-import {fillSmallPage} from "../util.js";
 import {BaseView} from "./BaseView.js";
+import {fillSmallPage} from "../util.js";
 
 export class ErrorView extends BaseView {
     async handleHtml() {

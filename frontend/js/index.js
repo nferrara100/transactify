@@ -1,12 +1,12 @@
 "use strict";
 
 import {clearModal, cookieExists, logoutOnSessionExpiration} from "./util.js";
-import {Transactions} from "./Transactions.js";
 import {CreateTransaction} from "./views/CreateTransaction.js";
 import {ErrorView} from "./views/ErrorView.js";
 import {Home} from "./views/Home.js";
 import {Login} from "./views/Login.js";
 import {Logout} from "./views/Logout.js";
+import {Transactions} from "./Transactions.js";
 import {ViewTransaction} from "./views/ViewTransaction.js";
 
 const transactions = new Transactions();
@@ -27,11 +27,11 @@ const router = async (url) => {
             {path: "/", view: Home},
             {path: "/login", view: Login},
             {path: "/create", view: CreateTransaction},
-            {path: "/transaction", view: ViewTransaction, data: true},
+            {hasData: true, path: "/transaction", view: ViewTransaction},
             {path: "/logout", view: Logout},
         ];
         match = routes.find((route) => {
-            if (route?.data) {
+            if (route?.hasData) {
                 return url.startsWith(route.path);
             } else {
                 return route.path === url;

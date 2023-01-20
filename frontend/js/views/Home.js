@@ -110,7 +110,7 @@ export class Home extends BaseView {
             }
         };
         scrollTopButton.addEventListener("click", function () {
-            window.scrollTo({top: 0, behavior: "smooth"});
+            window.scrollTo({behavior: "smooth", top: 0});
         });
 
         document.getElementById("search-input").addEventListener("keyup", (event) => {
@@ -197,8 +197,8 @@ export class Home extends BaseView {
 
         const tableBody = document.getElementById("transactionTableBody");
         observer.observe(tableBody, {
-            childList: true,
             attributeFilter: ["transactionId"],
+            childList: true,
         });
     }
 }

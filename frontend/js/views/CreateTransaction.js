@@ -1,6 +1,6 @@
+import {fillModal, setTitle} from "../util.js";
 import {BaseFormView} from "./BaseFormView.js";
 import {Home} from "./Home.js";
-import {fillModal, setTitle} from "../util.js";
 
 export class CreateTransaction extends BaseFormView {
     formId = "create-form";
