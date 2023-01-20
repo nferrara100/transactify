@@ -6,6 +6,48 @@ import {
 } from "../util.js";
 import {BaseView} from "./BaseView.js";
 
+const html = `
+    <nav>
+        <div class="title">
+        <img src = "/frontend/icon.svg" alt="Logo" id="logo"/>
+        <span class="title-text">TRANSACTIFY</span>
+        <span class="subtitle">Manage your transactions. Easily.</span>
+        </div>
+        <div class="nav-buttons">
+            <a class="button secondary-button" ajax-link href="/logout">Logout</a>
+            <a href="/create" class="button" ajax-link>+ Create Transaction</a>
+        </div>
+    </nav>
+
+    <div class="loading-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div id="search-container">
+        <input type="search" placeholder="Search by merchant" id="search-input">
+        <button type="submit" id="search-button">
+            Search
+        </button>
+    </div>
+    <div id="transactions" class="hidden">
+        <table>
+            <thead>
+                <tr>
+                    <th class="created sortable-header" data-sort-dir="desc">Date<br /></th>
+                    <th class="merchant sortable-header">Merchant<br /></th>
+                    <th class="amount sortable-header">Amount<br /></th>
+                </tr>
+            </thead>
+            <tbody id="transactionTableBody"></tbody>
+        </table>
+    </div>
+    <button id="scroll-top">&#8593;</button>
+    <hr id="bottom-hr" class="invert hidden" />
+`;
+
 export class Home extends BaseView {
     constructor(params) {
         super(params);
@@ -21,47 +63,7 @@ export class Home extends BaseView {
         if (!this.transactions.shouldRender()) {
             return;
         }
-        fillPage(`
-        <nav>
-            <div class="title">
-            <img src = "/frontend/icon.svg" alt="Logo" id="logo"/>
-            <span class="title-text">TRANSACTIFY</span>
-            <span class="subtitle">Manage your transactions. Easily.</span>
-            </div>
-            <div class="nav-buttons">
-                <a class="button secondary-button" ajax-link href="/logout">Logout</a>
-                <a href="/create" class="button" ajax-link>+ Create Transaction</a>
-            </div>
-        </nav>
-
-        <div class="loading-ring">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-
-        <div id="search-container">
-            <input type="search" placeholder="Search by merchant" id="search-input">
-            <button type="submit" id="search-button">
-                Search
-            </button>
-        </div>
-        <div id="transactions" class="hidden">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="created sortable-header" data-sort-dir="desc">Date<br /></th>
-                        <th class="merchant sortable-header">Merchant<br /></th>
-                        <th class="amount sortable-header">Amount<br /></th>
-                    </tr>
-                </thead>
-                <tbody id="transactionTableBody"></tbody>
-            </table>
-        </div>
-        <button id="scroll-top">&#8593;</button>
-        <hr id="bottom-hr" class="invert hidden" />
-        `);
+        fillPage(html);
 
         const scrollTopButton = document.getElementById("scroll-top");
         window.onscroll = function () {
