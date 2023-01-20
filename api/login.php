@@ -17,7 +17,7 @@ class LoginEndpoint extends Endpoint
             "command" => "Authenticate",
             "partnerName" => $GLOBALS['config']['partnerName'],
             "partnerPassword" => $GLOBALS['config']['partnerPassword'],
-            "partnerUserID" => filter_input(INPUT_POST, 'username', FILTER_SANITIZE_EMAIL),
+            "partnerUserID" => $_POST["email"],
             "partnerUserSecret" => $_POST["password"],
         );
         if ($GLOBALS['config']['localTest']) {
