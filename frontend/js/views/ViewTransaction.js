@@ -9,7 +9,7 @@ export class ViewTransaction extends BaseView {
         const key = window.location.pathname.split("/").pop();
         this.transaction = await this.transactions.get(key);
         if (!this.transaction) {
-            this.navigateTo();
+            this.navigateTo(null);
             return;
         }
         const date = new Date(this.transaction.created).toLocaleDateString();

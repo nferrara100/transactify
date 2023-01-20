@@ -12,8 +12,12 @@ import {ViewTransaction} from "./views/ViewTransaction.js";
 const transactions = new Transactions();
 
 const navigateTo = (url) => {
-    history.pushState(null, null, url);
-    router(url);
+    if (url === null) {
+        router();
+    } else {
+        history.pushState(null, null, url);
+        router(url);
+    }
 };
 
 const router = async (url) => {
