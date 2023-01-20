@@ -52,11 +52,30 @@ export const fillPage = (html) => {
     document.querySelector("#page").innerHTML = html;
 };
 
-export const fillSmallPage = (html) => {
+export const fillSmallPage = (html, title) => {
     fillPage(`
     <div class="small-page">
         <hr class="invert">
+        <h1>${title}</h1>
         ${html}
     </div>
     `);
+    setTitle(title);
+};
+
+export const fillModal = (navigateTo, html, small) => {
+    document.querySelector("#modal").innerHTML = `
+            <div class="modal-background">
+                <div class="modal-foreground ${small ? "small-modal" : ""}">
+                    <div class="modal-top-bar">
+                        <hr>
+                        <span id="modal-close" class="close">&times;</span>
+                    </div>
+                    <div id="modal-insert">${html}</div>
+                </div>
+            </div>
+        `;
+    document
+        .querySelector("#modal-close")
+        .addEventListener("click", () => navigateTo("/"));
 };

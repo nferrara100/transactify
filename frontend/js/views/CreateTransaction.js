@@ -1,6 +1,6 @@
 import {BaseFormView} from "./BaseFormView.js";
 import {ListTransactions} from "./ListTransactions.js";
-import {setTitle} from "../util.js";
+import {fillModal, setTitle} from "../util.js";
 
 export class CreateTransaction extends BaseFormView {
     formId = "create-form";
@@ -11,7 +11,8 @@ export class CreateTransaction extends BaseFormView {
         this.background = new ListTransactions();
         setTitle("Create Transaction");
 
-        this.fillModal(
+        fillModal(
+            this.navigateTo,
             `
             <h1>Create Transaction</h1>
             <form action="${this.endpoint}" method="POST" id="${this.formId}">
@@ -28,7 +29,7 @@ export class CreateTransaction extends BaseFormView {
             true,
         );
         document.getElementById("created").valueAsDate = new Date();
-        super.handleHtml();
+        this.prepareInteractivity();
     }
 
     async onSubmitResult(data) {

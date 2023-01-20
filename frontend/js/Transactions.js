@@ -46,11 +46,13 @@ export class Transactions {
 
     async list(startPage = 0) {
         await Promise.race([this.fetchPromise]);
+        this.rendered = true;
+
         const start = startPage * this.chunkSize;
         if (start > this.transactions.size) {
             return [];
         }
-        this.rendered = true;
+
         let transactionArray = Array.from(this.transactions.values());
         if (this.query) {
             transactionArray = transactionArray.filter((transaction) => {
@@ -59,6 +61,7 @@ export class Transactions {
                     .includes(this.query.toLowerCase());
             });
         }
+
         const sorted = transactionArray.sort((a, b) => {
             if (typeof a[this.sortKey] === "number") {
                 if (this.sortDir === "asc") {
@@ -73,6 +76,7 @@ export class Transactions {
             }
             return String(b[this.sortKey]).localeCompare(String(a[this.sortKey]));
         });
+
         return sorted.slice(start, start + this.chunkSize);
     }
 

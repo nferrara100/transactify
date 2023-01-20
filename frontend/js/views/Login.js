@@ -1,4 +1,4 @@
-import {cookieExists, fillPage, logoutOnSessionExpiration, setTitle} from "../util.js";
+import {cookieExists, fillSmallPage, logoutOnSessionExpiration} from "../util.js";
 import {BaseFormView} from "./BaseFormView.js";
 
 export class Login extends BaseFormView {
@@ -11,22 +11,20 @@ export class Login extends BaseFormView {
             this.navigateTo("/");
             return;
         }
-        setTitle("Login");
-        fillPage(`
-            <div class="small-page">
-                <hr class="invert">
-                <h1>Login</h1>
-                <form action="${this.endpoint}" method="POST" id="${this.formId}">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" autofocus required/>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" required />
-                    <button type="submit">Login</button>
-                    <div class="response"></div>
-                </form>
-            </div>
-        `);
-        await super.handleHtml();
+        fillSmallPage(
+            `
+            <form action="${this.endpoint}" method="POST" id="${this.formId}">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" autofocus required/>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required />
+                <button type="submit">Login</button>
+                <div class="response"></div>
+            </form>
+        `,
+            "Login",
+        );
+        this.prepareInteractivity();
     }
 
     async onSubmitResult(data) {

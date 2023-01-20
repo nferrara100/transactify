@@ -1,15 +1,7 @@
 import {BaseView} from "./BaseView.js";
 
 export class BaseFormView extends BaseView {
-    form;
-
-    formId;
-
-    submitButton;
-
-    endpoint;
-
-    async handleHtml() {
+    prepareInteractivity() {
         this.form = document.getElementById(this.formId);
         this.submitButton = this.form.querySelector('button[type="submit"]');
         this.form.addEventListener("submit", this.onSubmit.bind(this));
@@ -30,7 +22,7 @@ export class BaseFormView extends BaseView {
             method: "POST",
         })
             .then(this.invokeOnSubmitResult.bind(this))
-            .catch((error) => this.triggerError());
+            .catch(() => this.triggerError());
     }
 
     triggerError(message) {

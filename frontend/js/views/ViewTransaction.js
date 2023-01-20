@@ -1,26 +1,29 @@
-import {formatCurrency, setTitle, toCheckbox} from "../util.js";
+import {fillModal, formatCurrency, setTitle, toCheckbox} from "../util.js";
 import {BaseView} from "./BaseView.js";
 import {ListTransactions} from "./ListTransactions.js";
 
 export class ViewTransaction extends BaseView {
     async handleHtml() {
-        this.background = new ListTransactions();
-        setTitle("View Transaction");
         const key = window.location.pathname.split("/").pop();
         this.transaction = await this.transactions.get(key);
         if (!this.transaction) {
             this.navigateTo(null);
             return;
         }
+        this.background = new ListTransactions();
+        setTitle("View Transaction");
         const date = new Date(this.transaction.created).toLocaleDateString();
-        this.fillModal(`
+        fillModal(
+            this.navigateTo,
+            `
             <h1>${this.transaction.merchant}</h1>
             <h2>(${date})</h2>
             <table>
                 ${this.getDetails()}
             </table>
             <a href="/" class="button bottom-button" ajax-link>Close</a>
-        `);
+        `,
+        );
     }
 
     getDetails() {
