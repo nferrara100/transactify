@@ -37,7 +37,7 @@ export class Login extends BaseFormView {
             this.navigateTo("/");
         } else if (data.status === 401) {
             this.triggerError(
-                "We couldn't recognize that username and password combination. Please try again.",
+                "Unknown username and password combination. Please try again.",
             );
         } else if (json.cloudflare_error) {
             this.triggerError(
