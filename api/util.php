@@ -102,10 +102,30 @@ function updateLogin($authToken)
 
 function sanitizeTransactions($transactionList)
 {
-    $transactionList = array_map(function ($transaction) {
-        unset($transaction["cardNumber"]);
-        return $transaction;
-    }, $transactionList);
+    $forwardedFields = array(
+        "amount",
+        "bank",
+        "billable",
+        "cardName",
+        "category",
+        "comment",
+        "created",
+        "currency",
+        "details",
+        "managedCard",
+        "mcc",
+        "merchant",
+        "receiptState",
+        "reimbursable",
+        "tag",
+        "transactionID",
+        "unverified",
+        "convertedAmount",
+        "currencyConversionRate"
+    );
+    foreach ($transactionList as &$transaction) {
+        $transaction = array_intersect_key($transaction, array_flip($forwardedFields));
+    }
     return $transactionList;
 }
 

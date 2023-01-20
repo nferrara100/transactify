@@ -7,6 +7,8 @@ import {
 } from "../util.js";
 import {BaseView} from "./BaseView.js";
 
+// This HTML is included here as a performance optimization in the absence of a bundler.
+// Re-examine if one is implemented in the future.
 const html = `
     <nav>
         <div class="title">
