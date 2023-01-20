@@ -4,14 +4,14 @@ import {Home} from "./Home.js";
 
 export class ViewTransaction extends BaseView {
     async handleHtml() {
+        this.background = new Home();
+        setTitle("View Transaction");
         const key = window.location.pathname.split("/").pop();
         this.transaction = await this.transactions.get(key);
         if (!this.transaction) {
             this.navigateTo(null);
             return;
         }
-        this.background = new Home();
-        setTitle("View Transaction");
         const date = new Date(this.transaction.created).toLocaleDateString();
         fillModal(
             this.navigateTo,
