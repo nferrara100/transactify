@@ -14,7 +14,8 @@ export class Transactions {
         return this.transactions.get(id);
     }
 
-    wipe() {
+    async wipe() {
+        await Promise.race([this.fetchPromise]);
         this.transactions = new Map();
     }
 
