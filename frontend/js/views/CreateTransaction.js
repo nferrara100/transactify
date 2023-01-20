@@ -1,5 +1,5 @@
 import {BaseFormView} from "./BaseFormView.js";
-import {ListTransactions} from "./ListTransactions.js";
+import {Home} from "./Home.js";
 import {fillModal, setTitle} from "../util.js";
 
 export class CreateTransaction extends BaseFormView {
@@ -8,7 +8,7 @@ export class CreateTransaction extends BaseFormView {
     endpoint = "/api/transaction.php";
 
     async handleHtml() {
-        this.background = new ListTransactions();
+        this.background = new Home();
         setTitle("Create Transaction");
 
         fillModal(

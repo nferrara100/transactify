@@ -4,7 +4,7 @@ import {clearModal, cookieExists, logoutOnSessionExpiration} from "./util.js";
 import {Transactions} from "./Transactions.js";
 import {CreateTransaction} from "./views/CreateTransaction.js";
 import {ErrorView} from "./views/ErrorView.js";
-import {ListTransactions} from "./views/ListTransactions.js";
+import {Home} from "./views/Home.js";
 import {Login} from "./views/Login.js";
 import {Logout} from "./views/Logout.js";
 import {ViewTransaction} from "./views/ViewTransaction.js";
@@ -24,7 +24,7 @@ const router = async (url) => {
     let match = null;
     if (url) {
         const routes = [
-            {path: "/", view: ListTransactions},
+            {path: "/", view: Home},
             {path: "/login", view: Login},
             {path: "/create", view: CreateTransaction},
             {path: "/transaction", view: ViewTransaction, data: true},

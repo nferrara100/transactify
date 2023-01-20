@@ -1,6 +1,6 @@
 import {fillModal, formatCurrency, setTitle, toCheckbox} from "../util.js";
 import {BaseView} from "./BaseView.js";
-import {ListTransactions} from "./ListTransactions.js";
+import {Home} from "./Home.js";
 
 export class ViewTransaction extends BaseView {
     async handleHtml() {
@@ -10,7 +10,7 @@ export class ViewTransaction extends BaseView {
             this.navigateTo(null);
             return;
         }
-        this.background = new ListTransactions();
+        this.background = new Home();
         setTitle("View Transaction");
         const date = new Date(this.transaction.created).toLocaleDateString();
         fillModal(

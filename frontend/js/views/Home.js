@@ -6,7 +6,7 @@ import {
 } from "../util.js";
 import {BaseView} from "./BaseView.js";
 
-export class ListTransactions extends BaseView {
+export class Home extends BaseView {
     constructor(params) {
         super(params);
         setTitle("Home");
