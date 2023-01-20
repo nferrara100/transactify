@@ -125,6 +125,15 @@ label {
     font-weight: bold;
 }
 
+.response {
+    clear: both;
+    padding-top: 1em;
+}
+
+.response p {
+    margin: 0;
+}
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
