@@ -1,5 +1,26 @@
 <?php
 
+function csrfVerification()
+{
+    $csrfError = false;
+    if (!isset($_POST["csrfToken"]) || !isset($_SESSION["csrfToken"])) {
+        $csrfError = true;
+
+    } else if ($_POST["csrfToken"] !== $_SESSION["csrfToken"]) {
+        $csrfError = true;
+    }
+    if ($csrfError) {
+        http_response_code(400);
+        echo json_encode(
+            array(
+                "error" => "CSRF Verification Failed",
+                "message" => "The provided CSRF token could not be verified."
+            )
+        );
+        exit();
+    }
+}
+
 function requireAuthentication()
 {
     if (!isset($_COOKIE["authToken"])) {

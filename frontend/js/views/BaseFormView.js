@@ -12,6 +12,7 @@ export class BaseFormView extends BaseView {
         this.submitButton.disabled = true;
 
         const formData = new FormData(this.form);
+        formData.set("csrfToken", window.csrfToken);
         const amount = formData.get("amount");
         if (amount) {
             const cents = Math.round((+amount + Number.EPSILON) * 100);

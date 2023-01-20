@@ -3,6 +3,8 @@
 require_once 'config.php';
 require_once 'util.php';
 
+session_start();
+
 class Endpoint
 {
     protected $proxyEndpoint = "https://www.expensify.com/api";
@@ -15,6 +17,7 @@ class Endpoint
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $this->get();
         } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            csrfVerification();
             $this->post();
         } else {
             $this->notAllowed();
