@@ -29,7 +29,6 @@
 body {
     color: var(--text-color);
     font-family: var(--default-fonts);
-    font-size: 1em;
     line-height: 1.5;
 }
 
@@ -49,7 +48,7 @@ h2 {
 }
 
 h2 {
-    font-size: 1.25em;
+    font-size: 1.25rem;
     font-weight: normal;
     margin-left: 15px;
 }
@@ -62,7 +61,7 @@ button,
     cursor: pointer;
     float: right;
     font-family: var(--default-fonts);
-    font-size: 1em;
+    font-size: 1rem;
     margin-left: 12px;
     padding: 0.5em 1em;
     text-decoration: none;
@@ -109,7 +108,7 @@ input {
     border: 1px solid var(--text-color);
     display: block;
     font-family: var(--default-fonts);
-    font-size: 1em;
+    font-size: 1rem;
     margin-bottom: 1em;
     margin-top: 0.2em;
     padding: 0.5em 1em;
@@ -335,7 +334,7 @@ hr.invert {
 }
 
 .title-text {
-    font-size: 2.5em;
+    font-size: 2.5rem;
     font-weight: bold;
 }
 
@@ -366,14 +365,13 @@ nav {
 #search-input {
     border: none;
     flex: 1;
-    font-size: 16px;
     line-height: 1.5;
     margin: 10px;
     padding: 0.5em 1em;
 }
 
 .no-transactions {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     margin: 1em;
     text-align: center;
 }
