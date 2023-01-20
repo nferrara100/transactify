@@ -9,9 +9,9 @@ import {BaseView} from "./BaseView.js";
 const html = `
     <nav>
         <div class="title">
-        <img src = "/frontend/icon.svg" alt="Logo" id="logo"/>
-        <span class="title-text">TRANSACTIFY</span>
-        <span class="subtitle">Manage your transactions. Easily.</span>
+            <img src="/frontend/icon.svg" alt="Logo" id="logo" />
+            <span class="title-text">TRANSACTIFY</span>
+            <span class="subtitle">Manage your transactions. Easily.</span>
         </div>
         <div class="nav-buttons">
             <a class="button secondary-button" ajax-link href="/logout">Logout</a>
@@ -27,10 +27,8 @@ const html = `
     </div>
 
     <div id="search-container">
-        <input type="search" placeholder="Search by merchant" id="search-input">
-        <button type="submit" id="search-button">
-            Search
-        </button>
+        <input type="search" placeholder="Search by merchant" id="search-input" />
+        <button type="submit" id="search-button">Search</button>
     </div>
     <div id="transactions" class="hidden">
         <table>
