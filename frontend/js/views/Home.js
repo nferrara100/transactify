@@ -52,6 +52,7 @@ const html = `
 export class Home extends BaseView {
     constructor(params) {
         super(params);
+        this.isBackground = (params && params[0]) ?? false;
         setTitle("Home");
         logoutOnSessionExpiration(this.logout.bind(this));
     }
@@ -61,7 +62,7 @@ export class Home extends BaseView {
     }
 
     async handleHtml() {
-        if (!this.transactions.shouldRender()) {
+        if (this.isBackground === true) {
             return;
         }
         fillPage(html);

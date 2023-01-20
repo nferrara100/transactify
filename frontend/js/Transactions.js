@@ -3,7 +3,6 @@ import {cookieExists} from "./util.js";
 export class Transactions {
     constructor() {
         this.transactions = new Map();
-        this.rendered = false;
         this.sortKey = "created";
         this.sortDir = "desc";
         this.chunkSize = 100;
@@ -17,36 +16,23 @@ export class Transactions {
 
     wipe() {
         this.transactions = new Map();
-        this.revision = 1;
-        this.rendered = 0;
-    }
-
-    shouldRender() {
-        return !this.rendered;
     }
 
     set(transaction) {
         this.transactions.set(transaction.transactionID, transaction);
-        this.rendered = false;
     }
 
     search(query) {
-        this.rendered = false;
         this.query = query;
     }
 
     orderBy(sortKey, sortDir) {
-        if (this.sortKey === sortKey && this.sortDir === sortDir) {
-            return;
-        }
-        this.rendered = false;
         this.sortKey = sortKey;
         this.sortDir = sortDir;
     }
 
     async list(startPage = 0) {
         await Promise.race([this.fetchPromise]);
-        this.rendered = true;
 
         const start = startPage * this.chunkSize;
         if (start > this.transactions.size) {

@@ -4,7 +4,7 @@ import {Home} from "./Home.js";
 
 export class ViewTransaction extends BaseView {
     async handleHtml() {
-        this.background = new Home();
+        this.background = new Home(true);
         setTitle("View Transaction");
         const key = window.location.pathname.split("/").pop();
         this.transaction = await this.transactions.get(key);
