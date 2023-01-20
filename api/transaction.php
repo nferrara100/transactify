@@ -44,10 +44,10 @@ class TransactionsEndpoint extends Endpoint
 
         $onwardParameters = array(
             "command" => "CreateTransaction",
-            "authToken" => $_COOKIE["authToken"],
-            "created" => $_POST["created"],
-            "amount" => $_POST["amount"],
-            "merchant" => $_POST["merchant"],
+            "authToken" => strip_tags($_COOKIE["authToken"]),
+            "created" => strip_tags($_POST["created"]),
+            "amount" => strip_tags($_POST["amount"]),
+            "merchant" => strip_tags($_POST["merchant"]),
         );
         if ($GLOBALS['config']['localTest']) {
             $response = file_get_contents("../fixtures/create_transaction_success.json");

@@ -17,8 +17,8 @@ class LoginEndpoint extends Endpoint
             "command" => "Authenticate",
             "partnerName" => $GLOBALS['config']['partnerName'],
             "partnerPassword" => $GLOBALS['config']['partnerPassword'],
-            "partnerUserID" => $_POST["email"],
-            "partnerUserSecret" => $_POST["password"],
+            "partnerUserID" => strip_tags($_POST["username"]),
+            "partnerUserSecret" => strip_tags($_POST["password"]),
         );
         if ($GLOBALS['config']['localTest']) {
             $response = file_get_contents("../fixtures/authenticate_success.json");
