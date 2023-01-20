@@ -23,18 +23,18 @@ const router = async (url) => {
             {path: "/", view: ListTransactions},
             {path: "/login", view: Login},
             {path: "/create", view: CreateTransaction},
-            {path: "/transaction/*", view: ViewTransaction},
+            {path: "/transaction", view: ViewTransaction, data: true},
             {path: "/logout", view: Logout},
         ];
         match = routes.find((route) => {
-            if (route.path.at(-1) === "*") {
-                const path = route.path.slice(0, -1);
-                return url.startsWith(path);
+            if (route?.data) {
+                return url.startsWith(route.path);
             } else {
                 return route.path === url;
             }
         });
     }
+
     if (!match || !url) {
         window.ajaxStatus = 404;
     }
