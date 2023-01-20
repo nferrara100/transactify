@@ -30,7 +30,7 @@ export class BaseFormView extends BaseView {
             method: "POST",
         })
             .then(this.invokeOnSubmitResult.bind(this))
-            .catch((error) => this.triggerError(error));
+            .catch((error) => this.triggerError());
     }
 
     triggerError(message) {
