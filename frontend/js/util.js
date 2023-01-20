@@ -79,3 +79,11 @@ export const fillModal = (navigateTo, html, small) => {
         .querySelector("#modal-close")
         .addEventListener("click", () => navigateTo("/"));
 };
+
+export const displayLoadingComplete = () => {
+    document.querySelectorAll(".loading-ring").forEach((element) => {
+        element.classList.add("hidden");
+    });
+    document.getElementById("transactions").classList.remove("hidden");
+    document.getElementById("bottom-hr").classList.remove("hidden");
+};

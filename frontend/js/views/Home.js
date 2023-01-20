@@ -1,4 +1,5 @@
 import {
+    displayLoadingComplete,
     fillPage,
     formatCurrency,
     logoutOnSessionExpiration,
@@ -63,7 +64,40 @@ export class Home extends BaseView {
         }
         fillPage(html);
         this.addEventListeners();
+        this.setObserver();
         await this.loadTransactions();
+        displayLoadingComplete();
+        this.infiniteScroll();
+    }
+
+    async loadTransactions() {
+        const tableBody = document.getElementById("transactionTableBody");
+        tableBody.innerHTML = "";
+        const transactions = await this.appendTransactions();
+        if (transactions.length === 0) {
+            tableBody.innerHTML = `
+            <tr class="no-transactions">
+                <td colspan="3">
+                    <div>No transactions found</div>
+                </td>
+            </tr>
+            `;
+        }
+    }
+
+    infiniteScroll() {
+        let page = 1;
+        const handleInfiniteScroll = () => {
+            const currentPosition = window.innerHeight + window.pageYOffset;
+            const distanceToBottom = document.body.scrollHeight - currentPosition;
+            const endOfPageOffset = 500;
+            const shouldLoad = distanceToBottom < endOfPageOffset;
+            if (shouldLoad) {
+                this.appendTransactions(page);
+                page++;
+            }
+        };
+        window.addEventListener("scroll", handleInfiniteScroll);
     }
 
     addEventListeners() {
@@ -121,9 +155,20 @@ export class Home extends BaseView {
         this.loadTransactions();
     }
 
+    async appendTransactions(page = 0) {
+        const tableBody = document.getElementById("transactionTableBody");
+        const transactions = await this.transactions.list(page);
+        let newHtml = "";
+        for (const transaction of transactions) {
+            newHtml += this.createTr(transaction);
+        }
+        tableBody.insertAdjacentHTML("beforeend", newHtml);
+        return transactions;
+    }
+
     createTr(transaction) {
         return `
-            <tr key="${transaction.transactionID}">
+            <tr transactionId="${transaction.transactionID}">
                 <td class="created">${new Date(
                     transaction.created,
                 ).toLocaleDateString()}</td>
@@ -136,66 +181,16 @@ export class Home extends BaseView {
         `;
     }
 
-    async loadTransactions() {
-        this.setObserver();
-        const tableBody = document.getElementById("transactionTableBody");
-        tableBody.innerHTML = "";
-        const transactions = await this.appendTransactions();
-        if (transactions.length === 0) {
-            tableBody.innerHTML = `
-            <tr class="no-transactions">
-                <td colspan="3">
-                    <div>No transactions found</div>
-                </td>
-            </tr>
-            `;
-        }
-        document.querySelectorAll(".loading-ring").forEach((element) => {
-            element.classList.add("hidden");
-        });
-        document.getElementById("transactions").classList.remove("hidden");
-        document.getElementById("bottom-hr").classList.remove("hidden");
-
-        let page = 1;
-        const handleInfiniteScroll = () => {
-            const currentPosition = window.innerHeight + window.pageYOffset;
-            const distanceToBottom = document.body.scrollHeight - currentPosition;
-            const endOfPageOffset = 500;
-            const shouldLoad = distanceToBottom < endOfPageOffset;
-            if (shouldLoad) {
-                this.appendTransactions(page);
-                page++;
-            }
-        };
-        window.addEventListener("scroll", handleInfiniteScroll);
-    }
-
-    async appendTransactions(page = 0) {
-        const tableBody = document.getElementById("transactionTableBody");
-        const transactions = await this.transactions.list(page);
-        let newHtml = "";
-        for (const transaction of transactions) {
-            newHtml += this.createTr(transaction);
-        }
-        tableBody.insertAdjacentHTML("beforeend", newHtml);
-        return transactions;
-    }
-
     setObserver() {
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
                 const addedNodes = mutation.addedNodes;
                 addedNodes.forEach((node) => {
-                    // If the node is an element (and not text or something else)
-                    if (node.nodeType === Node.ELEMENT_NODE) {
-                        node.addEventListener("click", (event) => {
-                            const transactionKey =
-                                event.currentTarget.getAttribute("key");
-                            if (transactionKey) {
-                                this.navigateTo("/transaction/" + transactionKey);
-                            }
-                        });
-                    }
+                    node.addEventListener("click", (event) => {
+                        const transactionId =
+                            event.currentTarget.getAttribute("transactionId");
+                        this.navigateTo("/transaction/" + transactionId);
+                    });
                 });
             });
         });
@@ -203,6 +198,7 @@ export class Home extends BaseView {
         const tableBody = document.getElementById("transactionTableBody");
         observer.observe(tableBody, {
             childList: true,
+            attributeFilter: ["transactionId"],
         });
     }
 }
