@@ -121,20 +121,19 @@ export class Home extends BaseView {
         this.loadTransactions();
     }
 
-    getTr(transaction) {
-        const tr = document.createElement("tr");
-        tr.setAttribute("key", transaction.transactionID);
-        tr.innerHTML = `
-            <td class="created">${new Date(
-                transaction.created,
-            ).toLocaleDateString()}</td>
-            <td class="merchant">${transaction.merchant}</td>
-            <td class="amount">${formatCurrency(
-                transaction.convertedAmount,
-                "USD",
-            )}</td>
+    createTr(transaction) {
+        return `
+            <tr key="${transaction.transactionID}">
+                <td class="created">${new Date(
+                    transaction.created,
+                ).toLocaleDateString()}</td>
+                <td class="merchant">${transaction.merchant}</td>
+                <td class="amount">${formatCurrency(
+                    transaction.convertedAmount,
+                    "USD",
+                )}</td>
+            </tr>
         `;
-        return tr;
     }
 
     async loadTransactions() {
@@ -174,9 +173,11 @@ export class Home extends BaseView {
     async appendTransactions(page = 0) {
         const tableBody = document.getElementById("transactionTableBody");
         const transactions = await this.transactions.list(page);
+        let newHtml = "";
         for (const transaction of transactions) {
-            tableBody.appendChild(this.getTr(transaction));
+            newHtml += this.createTr(transaction);
         }
+        tableBody.insertAdjacentHTML("beforeend", newHtml);
         return transactions;
     }
 
