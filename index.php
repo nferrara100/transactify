@@ -10,7 +10,6 @@ $_SESSION['csrfToken'] = bin2hex(random_bytes(32));
         <link rel="icon" href="/frontend/icon.svg" type="image/svg+xml" />
         <link rel="stylesheet" type="text/css" href="/frontend/styles.css" />
         <meta charset="UTF-8" />
-        <meta http-equiv="content-language" content=”en-us”>
         <meta name=" description" content="Nicholas Ferrara's submission for the
         Expensify Take Home Challenge.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
