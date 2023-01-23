@@ -44,6 +44,8 @@ export class Login extends BaseFormView {
             this.triggerError(
                 "It's not presently possible to access the Expensify API because of a Cloudflare error. Please try again later.",
             );
+        } else if (json.csrfError) {
+            this.triggerError(`Please <a href="">refresh the page</a> and try again.`);
         } else {
             this.triggerError();
         }

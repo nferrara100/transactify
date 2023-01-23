@@ -1,9 +1,10 @@
 <?php
-
 require_once 'config.php';
 require_once 'util.php';
 
-session_start();
+// Refresh the session so it does not expire while the user is active or logged in
+session_set_cookie_params($GLOBALS['config']["session_duration"]);
+session_start(['gc_maxlifetime' => $GLOBALS['config']["session_duration"]]);
 
 /**
  *  The main endpoint class that all other endpoints extend

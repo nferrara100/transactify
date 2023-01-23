@@ -17,7 +17,8 @@ function csrfVerification()
         echo json_encode(
             array(
                 "error" => "CSRF Verification Failed",
-                "message" => "The provided CSRF token could not be verified."
+                "message" => "The provided CSRF token could not be verified.",
+                "csrfError" => true
             )
         );
         exit();
