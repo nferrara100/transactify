@@ -1,16 +1,16 @@
 :root {
+    --background-grey: #aaaaaa;
+    --border-grey: #888;
     --bright-highlight: #ff5023;
-    --medium-highlight: #ff9811;
-    --light-highlight: #f1edea;
-    --text-color: #333;
+    --default-fonts: Verdana, Geneva, Tahoma, sans-serif;
     --dimmed-text-color: rgb(82, 82, 82);
     --dimmed: rgba(0, 0, 0, 0.4);
-    --border-grey: #888;
-    --background-grey: #aaaaaa;
     --even-grey: #f3f3f3;
-    --search-grey: #e6e6e6;
-    --default-fonts: Verdana, Geneva, Tahoma, sans-serif;
     --hover-transition: all 0.3s ease-in-out;
+    --light-highlight: #f1edea;
+    --medium-highlight: #ff9811;
+    --search-grey: #e6e6e6;
+    --text-color: #333;
 }
 
 @keyframes fadeIn {
