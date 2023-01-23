@@ -2,6 +2,9 @@ import {fillModal, formatCurrency, setTitle, toCheckbox} from "../util.js";
 import {BaseView} from "./BaseView.js";
 import {Home} from "./Home.js";
 
+/*
+ *  View details of a particular transaction
+ */
 export class ViewTransaction extends BaseView {
     async handleHtml() {
         this.background = new Home(true);
@@ -9,6 +12,7 @@ export class ViewTransaction extends BaseView {
         const key = window.location.pathname.split("/").pop();
         this.transaction = await this.transactions.get(key);
         if (!this.transaction) {
+            // Generate a 404 error
             this.navigateTo(null);
             return;
         }
@@ -26,6 +30,9 @@ export class ViewTransaction extends BaseView {
         );
     }
 
+    /*
+     *  Return a string of HTML containing the table body of the transaction details
+     */
     getDetails() {
         return `
             <tr>

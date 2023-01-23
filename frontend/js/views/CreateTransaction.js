@@ -2,6 +2,9 @@ import {fillModal, setTitle} from "../util.js";
 import {BaseFormView} from "./BaseFormView.js";
 import {Home} from "./Home.js";
 
+/*
+ *  The create transaction form view rendered as a modal
+ */
 export class CreateTransaction extends BaseFormView {
     formId = "create-form";
 

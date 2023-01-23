@@ -5,15 +5,20 @@ require_once 'util.php';
 
 session_start();
 
+/**
+ *  The main endpoint class that all other endpoints extend
+ */
 class Endpoint
 {
     protected $proxyEndpoint = "https://www.expensify.com/api";
 
+    /**
+     *  The main entry point for handling a request
+     */
     public function handle()
     {
         header("Content-Type: application/json; charset=UTF-8");
 
-        // Handle the request
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $this->get();
         } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -39,6 +44,9 @@ class Endpoint
         http_response_code(405);
     }
 
+    /**
+     *  Uses CURL to fetch data from the Expensify API and handles generic errors
+     */
     protected function fetch($method, $parameters)
     {
         $url = $this->proxyEndpoint . "?" . http_build_query($parameters);
@@ -53,11 +61,12 @@ class Endpoint
         curl_setopt_array($ch, $options);
         $response = curl_exec($ch);
 
+        // If the response is false then the request failed
         if ($response === false) {
             http_response_code(502);
             echo json_encode(
                 array(
-                    "error" => "Internal Server Error",
+                    "error" => "Bad Gateway",
                     "message" => "An error occurred while connecting to a required API."
                 )
             );

@@ -15,6 +15,7 @@ $_SESSION['csrfToken'] = bin2hex(random_bytes(32));
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preload" href="/frontend/icon.svg" as="image" type="image/svg+xml" />
         <?php
+        // Preload all frontend js files
         require_once 'api/util.php';
         $root = dirname(__FILE__);
         $directory = $root . "/frontend/js";
@@ -26,6 +27,7 @@ $_SESSION['csrfToken'] = bin2hex(random_bytes(32));
         <div id="page"></div>
         <div id="modal"></div>
         <script>
+            // Pass this data from the server to the client
             window.ajaxStatus = <?php echo json_encode($_SERVER['REDIRECT_STATUS'] ?? null); ?>;
             window.csrfToken = "<?php echo $_SESSION['csrfToken']; ?>";
         </script>

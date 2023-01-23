@@ -1,6 +1,9 @@
 import {BaseView} from "./BaseView.js";
 import {fillSmallPage} from "../util.js";
 
+/*
+ *  Display generic error messages
+ */
 export class ErrorView extends BaseView {
     async handleHtml() {
         if (window.ajaxStatus === 404) {
@@ -22,6 +25,7 @@ export class ErrorView extends BaseView {
                 "An Error Occurred",
             );
         }
+        // Reset the status so this doesn't trigger again, unless it occurs again
         window.ajaxStatus = null;
     }
 }

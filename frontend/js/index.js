@@ -1,5 +1,9 @@
 "use strict";
 
+/*
+ *  This is the entry point for JavaScript code.
+ */
+
 import {clearModal, cookieExists, logoutOnSessionExpiration} from "./util.js";
 import {CreateTransaction} from "./views/CreateTransaction.js";
 import {ErrorView} from "./views/ErrorView.js";
@@ -11,6 +15,10 @@ import {ViewTransaction} from "./views/ViewTransaction.js";
 
 const transactions = new Transactions();
 
+/*
+ *  Navigate to a new page without refreshing by using the router
+ *   pass null to generate a 404
+ */
 const navigateTo = (url) => {
     if (url === null) {
         router();
@@ -20,6 +28,9 @@ const navigateTo = (url) => {
     }
 };
 
+/*
+ *  Show the appropriate view based on the URL
+ */
 const router = async (url) => {
     let match = null;
     if (url) {
@@ -40,6 +51,8 @@ const router = async (url) => {
     }
 
     if (!match || !url) {
+        // Set this to window so it can be reset by the error handler same as server
+        // side errors
         window.ajaxStatus = 404;
     }
     if (window.ajaxStatus >= 400) {

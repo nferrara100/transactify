@@ -1,6 +1,9 @@
 import {cookieExists, fillSmallPage, logoutOnSessionExpiration} from "../util.js";
 import {BaseFormView} from "./BaseFormView.js";
 
+/*
+ *  Generates the login form
+ */
 export class Login extends BaseFormView {
     formId = "#login-form";
 

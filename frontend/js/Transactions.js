@@ -1,10 +1,14 @@
 import {cookieExists} from "./util.js";
 
+/*
+ *  The main datastore for transactions, along with helper methods to deal with them
+ */
 export class Transactions {
     constructor() {
         this.transactions = new Map();
         this.sortKey = "created";
         this.sortDir = "desc";
+        // The number of transactions to display at once
         this.chunkSize = 100;
         this.fetch();
     }
@@ -32,6 +36,10 @@ export class Transactions {
         this.sortDir = sortDir;
     }
 
+    /*
+     *  Return an array of sorted transactions, starting at `startPage` * `chunkSize`,
+     *   of size `chunkSize`
+     */
     async list(startPage = 0) {
         await Promise.race([this.fetchPromise]);
 
@@ -67,6 +75,9 @@ export class Transactions {
         return sorted.slice(start, start + this.chunkSize);
     }
 
+    /*
+     *  Fetch transactions from the server
+     */
     fetch() {
         if (cookieExists("authToken")) {
             this.fetchPromise = fetch("/api/transaction.php")

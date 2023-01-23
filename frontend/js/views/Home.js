@@ -22,6 +22,7 @@ const html = `
         </div>
     </nav>
 
+    <!-- Credit: https://github.com/loadingio/css-spinner/ -->
     <div class="loading-ring">
         <div></div>
         <div></div>
@@ -49,6 +50,9 @@ const html = `
     <hr id="bottom-hr" class="invert hidden" />
 `;
 
+/*
+ *  The main homepage once logged in which displays navigation and all transactions
+ */
 export class Home extends BaseView {
     constructor(params) {
         super(params);
@@ -62,6 +66,7 @@ export class Home extends BaseView {
     }
 
     async handleHtml() {
+        // Don't rerender the page has already been rendered
         if (this.isBackground === true) {
             return;
         }
@@ -73,6 +78,9 @@ export class Home extends BaseView {
         this.infiniteScroll();
     }
 
+    /*
+     *  Load the first transactions and display a message if none exist.
+     */
     async loadTransactions() {
         const tableBody = document.getElementById("transactionTableBody");
         tableBody.innerHTML = "";
@@ -88,6 +96,9 @@ export class Home extends BaseView {
         }
     }
 
+    /*
+     *  Create a handler for the infinite scroll that appends subsequent transactions
+     */
     infiniteScroll() {
         let page = 1;
         const handleInfiniteScroll = () => {
@@ -103,6 +114,9 @@ export class Home extends BaseView {
         window.addEventListener("scroll", handleInfiniteScroll);
     }
 
+    /*
+     *  Make everything clickable
+     */
     addEventListeners() {
         const scrollTopButton = document.getElementById("scroll-top");
         window.onscroll = function () {
@@ -132,6 +146,9 @@ export class Home extends BaseView {
         });
     }
 
+    /*
+     *  Event handler to search for the `providedQuery` or the value of the search input
+     */
     onSearch(event, providedQuery) {
         let query = providedQuery;
         const searchInput = document.getElementById("search-input");
@@ -144,6 +161,9 @@ export class Home extends BaseView {
         this.loadTransactions();
     }
 
+    /*
+     *  Reorder the table by the clicked header
+     */
     onHeaderClick(event) {
         const sortKey = event.currentTarget.classList[0];
         const sortDir =
@@ -158,6 +178,9 @@ export class Home extends BaseView {
         this.loadTransactions();
     }
 
+    /*
+     *  Add the next page of transactions to the table without refreshing the page
+     */
     async appendTransactions(page = 0) {
         const tableBody = document.getElementById("transactionTableBody");
         const transactions = await this.transactions.list(page);
@@ -169,6 +192,9 @@ export class Home extends BaseView {
         return transactions;
     }
 
+    /*
+     *  Take a transaction and return the HTML for a table row
+     */
     createTr(transaction) {
         return `
             <tr transactionId="${transaction.transactionID}">
@@ -184,6 +210,9 @@ export class Home extends BaseView {
         `;
     }
 
+    /*
+     *  Make each transaction row clickable so it displays the transaction details
+     */
     setObserver() {
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {

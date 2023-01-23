@@ -2,6 +2,9 @@
 require_once 'config.php';
 require_once 'Endpoint.php';
 
+/**
+ *  Encapsulates all logic specific to transactions
+ */
 class TransactionsEndpoint extends Endpoint
 {
     protected function get()

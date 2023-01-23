@@ -3,6 +3,9 @@ require_once 'config.php';
 require_once 'Endpoint.php';
 require_once 'util.php';
 
+/**
+ *  Encapsulates all logic specific to logging in
+ */
 class LoginEndpoint extends Endpoint
 {
     protected function post()
