@@ -6,13 +6,14 @@ $_SESSION['csrfToken'] = bin2hex(random_bytes(32));
 <html lang="en">
 
     <head>
-        <meta charset="UTF-8" />
         <title>Expensify Take-Home Challenge</title>
-        <link rel="stylesheet" type="text/css" href="/frontend/styles.css" />
         <link rel="icon" href="/frontend/icon.svg" type="image/svg+xml" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Nicholas Ferrara's submission for the
+        <link rel="stylesheet" type="text/css" href="/frontend/styles.css" />
+        <meta charset="UTF-8" />
+        <meta http-equiv="content-language" content=”en-us”>
+        <meta name=" description" content="Nicholas Ferrara's submission for the
         Expensify Take Home Challenge.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preload" href="/frontend/icon.svg" as="image" type="image/svg+xml" />
         <?php
         require_once 'api/util.php';
