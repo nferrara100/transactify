@@ -12,6 +12,10 @@ all: run
 run:
 	php -S localhost:8000 -c php.ini
 
+# Run the application locally without connecting to the live Expensify API
+run-sample:
+	export local_api=sample; php -S localhost:8000 -c php.ini
+
 # Deploy the application to the server
 deploy:
 	rsync -avz --delete --files-from <(git ls-files) . $(USERNAME)@$(HOST):$(PROJECT_DIR)

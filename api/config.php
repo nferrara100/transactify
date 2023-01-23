@@ -7,8 +7,6 @@ $GLOBALS['config'] = array(
         // Actually expires after 2 hours, but shorter here to avoid edge cases
         'expiry' => 60 * 115
     ),
-    // Change to true to test without the live Expensify API
-    'localTest' => false,
 );
 
 
