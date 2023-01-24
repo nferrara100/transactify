@@ -1,16 +1,7 @@
 /*
- *  Return true if cookie `name` exists, false otherwise
- */
-export function cookieExists(cookieName) {
-    return document.cookie.split(";").some(function (item) {
-        return item.trim().indexOf(cookieName + "=") == 0;
-    });
-}
-
-/*
  *  Return value of cookie `name`
  */
-function getCookie(name) {
+export function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(";").shift();

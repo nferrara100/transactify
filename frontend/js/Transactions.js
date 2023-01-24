@@ -1,4 +1,4 @@
-import {cookieExists} from "./util.js";
+import {getCookie} from "./util.js";
 
 /*
  *  The main datastore for transactions, along with helper methods to deal with them
@@ -79,7 +79,7 @@ export class Transactions {
      *  Fetch transactions from the server
      */
     fetch() {
-        if (cookieExists("authToken")) {
+        if (getCookie("authToken")) {
             this.fetchPromise = fetch("/api/transaction.php")
                 .then((response) => response.json())
                 .then((data) => {

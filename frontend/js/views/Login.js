@@ -1,4 +1,4 @@
-import {cookieExists, fillSmallPage, logoutOnSessionExpiration} from "../util.js";
+import {fillSmallPage, getCookie, logoutOnSessionExpiration} from "../util.js";
 import {BaseFormView} from "./BaseFormView.js";
 
 /*
@@ -10,7 +10,7 @@ export class Login extends BaseFormView {
     endpoint = "/api/login.php";
 
     async handleHtml() {
-        if (cookieExists("authToken")) {
+        if (getCookie("authToken")) {
             this.navigateTo("/");
             return;
         }

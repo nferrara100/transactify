@@ -4,7 +4,7 @@
  *  This is the entry point for JavaScript code.
  */
 
-import {clearModal, cookieExists, logoutOnSessionExpiration} from "./util.js";
+import {clearModal, getCookie, logoutOnSessionExpiration} from "./util.js";
 import {CreateTransaction} from "./views/CreateTransaction.js";
 import {ErrorView} from "./views/ErrorView.js";
 import {Home} from "./views/Home.js";
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    if (!cookieExists("authToken")) {
+    if (!getCookie("authToken")) {
         navigateTo("/login");
     } else {
         router(location.pathname);
