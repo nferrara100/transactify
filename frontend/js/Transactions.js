@@ -28,7 +28,7 @@ export class Transactions {
     }
 
     search(query) {
-        this.query = query;
+        this.query = query.trim();
     }
 
     orderBy(sortKey, sortDir) {
