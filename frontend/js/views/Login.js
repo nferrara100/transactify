@@ -10,7 +10,7 @@ export class Login extends BaseFormView {
     endpoint = "/api/login.php";
 
     async handleHtml() {
-        if (getCookie("authToken") && !this.args?.logout) {
+        if (getCookie("authToken") && !this.params?.logout) {
             this.navigateTo("/");
             return;
         }
@@ -18,7 +18,7 @@ export class Login extends BaseFormView {
             `
             <form action="${this.endpoint}" method="POST" id="${this.formId}">
                 <div class="response">${
-                    this.args?.logout ? "You've been logged out." : ""
+                    this.params?.logout ? "You've been logged out." : ""
                 }</div>
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" autofocus required/>

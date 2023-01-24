@@ -39,7 +39,7 @@ export class CreateTransaction extends BaseFormView {
         if (data.status === 201) {
             const json = await data.json();
             this.transactions.set(json.transactions[0]);
-            this.navigateTo("/");
+            this.navigateTo("/", {created: true});
         } else {
             this.triggerError();
         }

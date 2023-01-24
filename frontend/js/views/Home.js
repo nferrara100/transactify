@@ -46,6 +46,7 @@ const html = `
             <tbody id="transactionTableBody"></tbody>
         </table>
     </div>
+    <div class="notificationContainer"></div>
     <button id="scroll-top">&#8593;</button>
     <hr id="bottom-hr" class="invert hidden" />
 `;
@@ -65,8 +66,11 @@ export class Home extends BaseView {
     }
 
     async handleHtml() {
-        // Don't rerender if the page has already been rendered
+        if (this.params?.created) {
+            this.displayNotification("Transaction created successfully");
+        }
         if (document.getElementById("transactionTableBody")) {
+            // Don't rerender if the page has already been rendered
             return;
         }
         fillPage(html);
@@ -75,6 +79,16 @@ export class Home extends BaseView {
         await this.loadTransactions();
         displayLoadingComplete();
         this.infiniteScroll();
+    }
+
+    displayNotification(content) {
+        const container = document.querySelector(".notificationContainer");
+        document.querySelector(
+            ".notificationContainer",
+        ).innerHTML = `<div class="notification">${content}</div>`;
+        setTimeout(() => {
+            container.innerHTML = "";
+        }, 5000);
     }
 
     /*
