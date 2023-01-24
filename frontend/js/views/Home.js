@@ -18,7 +18,7 @@ const html = `
         </div>
         <div class="nav-buttons">
             <a class="button secondary-button" ajax-link href="/logout">Logout</a>
-            <a href="/create" class="button" ajax-link>+ Create Transaction</a>
+            <a href="/add" class="button" ajax-link>+ Add Transaction</a>
         </div>
     </nav>
 

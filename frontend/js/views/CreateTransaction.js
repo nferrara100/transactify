@@ -12,12 +12,12 @@ export class CreateTransaction extends BaseFormView {
 
     async handleHtml() {
         this.background = new Home();
-        setTitle("Create Transaction");
+        setTitle("Add Transaction");
 
         fillModal(
             this.navigateTo,
             `
-            <h1>Create Transaction</h1>
+            <h1>Add Transaction</h1>
             <form action="${this.endpoint}" method="POST" id="${this.formId}">
                 <div class="response"></div>
                 <label for="created">Date</label>
@@ -26,7 +26,7 @@ export class CreateTransaction extends BaseFormView {
                 <input type="text" name="merchant" id="merchant" placeholder="Small Pharaoh's Falafel" required/>
                 <label for="amount">Amount (USD)</label>
                 <input type="number" placeholder="132.78" name="amount" id="amount" step=".01" required/>
-                <button type="submit">Save</button>
+                <button type="submit">Add</button>
             </form>
         `,
             true,

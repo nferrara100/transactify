@@ -37,7 +37,7 @@ const router = async (url, params) => {
         const routes = [
             {path: "/", view: Home},
             {path: "/login", view: Login},
-            {path: "/create", view: CreateTransaction},
+            {path: "/add", view: CreateTransaction},
             {hasData: true, path: "/transaction", view: ViewTransaction},
             {path: "/logout", view: Logout},
         ];

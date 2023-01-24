@@ -2,7 +2,7 @@ RewriteEngine On
 
 # Index SPA pages
 RewriteRule    ^login/?$                 /index.php    [NC,L]
-RewriteRule    ^create/?$                /index.php    [NC,L]
+RewriteRule    ^add/?$                   /index.php    [NC,L]
 RewriteRule    ^transaction/([0-9]+)/?$  /index.php    [NC,L]
 RewriteRule    ^logout/?$                /index.php    [NC,L]
 
