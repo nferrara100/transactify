@@ -84,11 +84,19 @@ export class Home extends BaseView {
         const tableBody = document.getElementById("transactionTableBody");
         tableBody.innerHTML = "";
         const transactions = await this.appendTransactions();
+
+        let emptyText = null;
         if (transactions.length === 0) {
+            emptyText = "No transactions found";
+        }
+        if (this.transactions.hasErrored()) {
+            emptyText = "Could not load transactions. Please try again later.";
+        }
+        if (emptyText) {
             tableBody.innerHTML = `
             <tr class="no-transactions">
                 <td colspan="3">
-                    <div>No transactions found</div>
+                    <div>${emptyText}</div>
                 </td>
             </tr>
             `;
@@ -217,6 +225,12 @@ export class Home extends BaseView {
             mutations.forEach((mutation) => {
                 const addedNodes = mutation.addedNodes;
                 addedNodes.forEach((node) => {
+                    if (!(node instanceof Element)) {
+                        return;
+                    }
+                    if (!node.getAttribute("transactionId")) {
+                        return;
+                    }
                     node.addEventListener("click", (event) => {
                         const transactionId =
                             event.currentTarget.getAttribute("transactionId");

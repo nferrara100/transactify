@@ -93,10 +93,15 @@ export class Transactions {
                     earlyTransactions.forEach((transaction) => {
                         this.set(transaction);
                     });
+                    this.errored = false;
                 })
                 .catch(() => {
-                    alert("Could not load transactions. Please try again later.");
+                    this.errored = true;
                 });
         }
+    }
+
+    hasErrored() {
+        return this.errored;
     }
 }
