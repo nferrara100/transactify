@@ -394,7 +394,7 @@ nav {
     animation: fadeIn 0.5s;
     background-color: var(--bright-highlight);
     border-radius: 50%;
-    bottom: 20px;
+    bottom: 30px;
     color: white;
     cursor: pointer;
     display: none;
@@ -402,7 +402,7 @@ nav {
     height: 50px;
     justify-content: center;
     position: fixed;
-    right: 20px;
+    right: 30px;
     transition: var(--hover-transition);
     width: 50px;
 }
