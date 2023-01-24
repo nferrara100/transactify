@@ -40,7 +40,7 @@ export class BaseFormView extends BaseView {
      */
     triggerError(message) {
         const text = message || "Something went wrong. Please try again.";
-        this.form.querySelector(".response").innerHTML = `<p class='error'>${text}</p>`;
+        this.form.querySelector(".response").innerHTML = text;
         this.submitButton.disabled = false;
     }
 

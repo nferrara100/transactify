@@ -9,6 +9,6 @@ export class Logout extends BaseView {
         deleteCookie("authToken");
         deleteCookie("authTokenExpiry");
         this.transactions.wipe();
-        this.navigateTo("/login");
+        this.navigateTo("/login", {logout: true});
     }
 }

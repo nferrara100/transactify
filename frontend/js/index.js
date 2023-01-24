@@ -19,19 +19,19 @@ const transactions = new Transactions();
  *  Navigate to a new page without refreshing by using the router
  *   pass null to generate a 404
  */
-const navigateTo = (url) => {
+const navigateTo = (url, args) => {
     if (url === null) {
         router();
     } else {
         history.pushState(null, null, url);
-        router(url);
+        router(url, args);
     }
 };
 
 /*
  *  Show the appropriate view based on the URL
  */
-const router = async (url) => {
+const router = async (url, args) => {
     let match = null;
     if (url) {
         const routes = [
@@ -61,7 +61,7 @@ const router = async (url) => {
 
     clearModal();
     const view = new match.view();
-    view.show(navigateTo, transactions);
+    view.show(navigateTo, transactions, args);
 };
 
 window.addEventListener("popstate", router);

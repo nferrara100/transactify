@@ -19,6 +19,7 @@ export class CreateTransaction extends BaseFormView {
             `
             <h1>Create Transaction</h1>
             <form action="${this.endpoint}" method="POST" id="${this.formId}">
+                <div class="response"></div>
                 <label for="created">Date</label>
                 <input type="date" name="created" id="created" required/>
                 <label for="merchant">Merchant</label>
@@ -26,7 +27,6 @@ export class CreateTransaction extends BaseFormView {
                 <label for="amount">Amount (USD)</label>
                 <input type="number" placeholder="132.78" name="amount" id="amount" step=".01" required/>
                 <button type="submit">Save</button>
-                <div class="response"></div>
             </form>
         `,
             true,

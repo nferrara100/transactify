@@ -124,9 +124,11 @@ label {
     font-weight: bold;
 }
 
-.response {
-    clear: both;
-    padding-top: 1em;
+.response:not(:empty) {
+    background: var(--light-highlight);
+    border-radius: 0.5em;
+    margin-bottom: 0.5em;
+    padding: 1em;
 }
 
 .response p {
