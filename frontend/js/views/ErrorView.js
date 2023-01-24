@@ -26,6 +26,6 @@ export class ErrorView extends BaseView {
             );
         }
         // Reset the status so this doesn't trigger again, unless it occurs again
-        window.ajaxStatus = null;
+        window.ajaxStatus = 200;
     }
 }

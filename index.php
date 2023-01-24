@@ -28,7 +28,7 @@ $_SESSION['csrfToken'] = bin2hex(random_bytes(32));
         <div id="modal"></div>
         <script>
             // Pass this data from the server to the client
-            window.ajaxStatus = <?php echo json_encode($_SERVER['REDIRECT_STATUS'] ?? null); ?>;
+            window.ajaxStatus = <?php echo intval($_SERVER['REDIRECT_STATUS'] ?? null); ?>;
             window.csrfToken = "<?php echo $_SESSION['csrfToken']; ?>";
         </script>
         <script type="module" src="/frontend/js/index.js"></script>
