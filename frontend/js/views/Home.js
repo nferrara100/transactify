@@ -56,7 +56,6 @@ const html = `
 export class Home extends BaseView {
     constructor(params) {
         super(params);
-        this.isBackground = (params && params[0]) ?? false;
         setTitle("Home");
         logoutOnSessionExpiration(this.logout.bind(this));
     }
@@ -66,8 +65,8 @@ export class Home extends BaseView {
     }
 
     async handleHtml() {
-        // Don't rerender the page has already been rendered
-        if (this.isBackground === true) {
+        // Don't rerender if the page has already been rendered
+        if (document.getElementById("transactionTableBody")) {
             return;
         }
         fillPage(html);

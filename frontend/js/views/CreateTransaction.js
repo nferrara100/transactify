@@ -11,7 +11,7 @@ export class CreateTransaction extends BaseFormView {
     endpoint = "/api/transaction.php";
 
     async handleHtml() {
-        this.background = new Home(true);
+        this.background = new Home();
         setTitle("Create Transaction");
 
         fillModal(
