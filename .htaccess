@@ -7,7 +7,7 @@ RewriteRule    ^transaction/?$      /index.php    [NC,L]
 RewriteRule    ^logout/?$           /index.php    [NC,L]
 
 # Protect sensitive files
-<filesMatch ".(htaccess|ini|conf)$">
+<filesMatch ".(htaccess|ini|conf|Makefile)$">
 Order Allow,Deny
 Deny from all
 </filesMatch>
