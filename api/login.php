@@ -23,8 +23,8 @@ class LoginEndpoint extends Endpoint
             "partnerUserID" => strip_tags($_POST["username"]),
             "partnerUserSecret" => strip_tags($_POST["password"]),
         );
-        $api = getenv('api');
-        if ($api == "sample") {
+        $local_api = getenv('local_api');
+        if ($local_api == "sample") {
             $response = file_get_contents("../fixtures/authenticate_success.json");
             $json_response = json_decode($response, true);
             updateLogin($json_response["authToken"]);

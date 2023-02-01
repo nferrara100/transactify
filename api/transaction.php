@@ -53,8 +53,8 @@ class TransactionsEndpoint extends Endpoint
             "amount" => strip_tags($_POST["amount"]),
             "merchant" => strip_tags($_POST["merchant"]),
         );
-        $api = getenv('api');
-        if ($api == "sample") {
+        $local_api = getenv('local_api');
+        if ($local_api == "sample") {
             $response = file_get_contents("../fixtures/create_transaction_success.json");
             $json_response = json_decode($response, true);
         } else {
