@@ -6,12 +6,12 @@ $_SESSION['csrfToken'] = bin2hex(random_bytes(32));
 <html lang="en">
 
     <head>
-        <title>Expensify Take-Home Challenge</title>
+        <title>Transactify</title>
         <link rel="icon" href="/frontend/icon.svg" type="image/svg+xml" />
         <link rel="stylesheet" type="text/css" href="/frontend/styles.css" />
         <meta charset="UTF-8" />
-        <meta name=" description" content="Nicholas Ferrara's submission for the
-        Expensify Take Home Challenge.">
+        <meta name=" description" content="A simple PHP and JavaScript demo application
+        without frameworks.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preload" href="/frontend/icon.svg" as="image" type="image/svg+xml" />
         <?php
