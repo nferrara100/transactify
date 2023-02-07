@@ -1,8 +1,8 @@
 <?php
 
 $GLOBALS['config'] = array(
-    'partnerName' => "applicant",
-    'partnerPassword' => "d7c3119c6cdab02d68d9",
+    'partnerName' => "your_partner_name",
+    'partnerPassword' => "your_partner_password",
     'auth_cookie' => array(
         // Actually expires after 2 hours, but shorter here to avoid edge cases
         'expiry' => 6900 // 1 hour 55 minutes
