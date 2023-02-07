@@ -1,7 +1,7 @@
 # Transactify PHP and JavaScript Demo Application
 
-A simple web application that demonstrates displaying and creating data from an external
-API in raw PHP and JavaScript without frameworks. To run locally run `make run` and
+A demo web app without frameworks allowing users to login, create, and search
+transactions which are fetched from an external API. To run locally run `make run` and
 navigate to `localhost:8080`. If you do not have access to the Expensify API you can run
 against sample data by running `make run-sample`. To use the real API you will need to
 set the `partnerName` and `partnerPassword` in `config.php`.
