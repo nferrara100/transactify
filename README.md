@@ -8,3 +8,17 @@ set the `partnerName` and `partnerPassword` in `config.php`.
 
 Some shortcuts were taken to make this demo as simple as possible. For example, the
 login cookie is not secured and code is not transpiled.
+
+## Screenshots
+
+![Login](screenshots/login.jpeg)
+
+The login page
+
+![Home](screenshots/home.png)
+
+The home page
+
+![Add a transaction](screenshots/add.png)
+
+The add a transaction page
